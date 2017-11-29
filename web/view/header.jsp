@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
-
+<!--day la header-->
 <div class="header">
     <div class="Quangcao">
         <a href="#" target="_blank">
