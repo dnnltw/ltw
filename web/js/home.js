@@ -56,23 +56,16 @@ $(document).ready(function() {
 				return null;
 			}
 			$(window).on('load', function() {
-				// $('.carousel-inner').append(createItemFilm(
-				// 	'/9E2y5Q7WlCVNEhP5GiVTjhEhx1o.jpg',
-				// 	createpPathUrl(window.location.href)+"phim-detail.html?movies="+'165472',
-				// 	'abc'
-				// ));
-				// var divitem = createDivAtrr('div', 'class', 'item ').text('khgdddddddfg');
-				// $('.carousel-inner').append(divitem);
-				// console.log('nhung');
 				var page = 1;
 				fetch(createUrl('popular', page))
 				.then((resp) => resp.json())
 				.then( function(data){
 					let all = data.results;
 					$.each(all, function(key, value){
+                                            if(key>=8) exit;
 						$('.selection-item').append(createItemFilm(
 							value.poster_path,
-							createpPathUrl(window.location.href)+"phim-detail.html?movies="+value.id,
+							createpPathUrl(window.location.href)+"?controller=detail_film&movies="+value.id,
 							value.title
 						));
 					});
