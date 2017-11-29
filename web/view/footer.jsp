@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <footer>
-
+    <!--meo meo meo Ngọc đây-->
     <!-- start footer brand -->
     <div class="footer-brand">
 

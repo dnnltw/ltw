@@ -56,7 +56,7 @@
                 <li>
                     <a href="" title="">PHIM</a>
                     <ul class="menu-sub">
-                        <li><a href="" title="">Phim Đang Chiếu</a></li>
+                        <li><a href="/dnnltw/?controller=now_showing" title="">Phim Đang Chiếu</a></li>
                         <li><a href="" title="">Phim Sắp Chiếu</a></li>
                         <li><a href="" title="">CGV ArtHouse</a></li>
                     </ul>
