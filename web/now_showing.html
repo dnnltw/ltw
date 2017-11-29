@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Phim đang chiếu-Phim</title>
+	<link rel="stylesheet" type="text/css" href="css/style_showing.css">
+	<link rel="stylesheet" type="text/css" href="css/now_showing_responsive.css">
+	<link rel="stylesheet" type="text/css" href="css/header01.css">
+	<link rel="stylesheet" type="text/css" href="css/header_responsive.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/slider.css"> -->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="header">
+		<div class="Quangcao">
+			<a href="#" target="_blank">
+				<img class="banner img-responsive" src="img/banner.png" alt="Du hoc cung RMIT">
+			</a>
+		</div>
+		<div class="menu">
+			<ul>
+				<li><a href="#">Đăng Nhập</a></li>
+				<li><a href="#">Đăng Ký</a></li>
+				<li><a href="#" id="lienhe">Liên Hệ</a></li>
+				<li><a href="#" id="tuyendung">Tuyển Dụng</a></li>
+			</ul>
+		</div>
+		<div class="navbar-default">
+			<div class="navbar-header">
+				<a href="#" class="logo">
+					<img src="img/cgvlogo.png" alt="cgv" class="large">
+					<img src="img/cgvlogo-small.png" alt="cgv" class="small">
+				</a>
+				<div class="icon">
+					<button data-target="#item3" class="navbar-toggle icon3" data-toggle="collapse" >
+						<span class="sr-only"></span>
+						<span>EN</span>
+					</button>
+
+					<button data-target="#item2" class="navbar-toggle icon2" data-toggle="collapse" >
+						<span class="sr-only"></span>
+						<span class="glyphicon glyphicon-user"></span>
+					</button>
+
+					<button data-target="#item1" class="navbar-toggle icon1" data-toggle="collapse">
+						<span class="sr-only"></span>
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+					<button data-target="#item" class="navbar-toggle icon0" data-toggle="collapse" >
+						<span class="sr-only"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+			</div>
+			<div class="navbar-collapse collapse menu-top" id="item">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="" title="">PHIM</a>
+						<ul class="menu-sub">
+							<li><a href="" title="">Phim Đang Chiếu</a></li>
+							<li><a href="" title="">Phim Sắp Chiếu</a></li>
+							<li><a href="" title="">CGV ArtHouse</a></li>
+						</ul>
+					</li>
+					<li><a href="" title="">LỊCH CHIẾU</a></li>
+					<li>
+						<a href="" title="">RẠP CGV</a>
+						<ul class="menu-sub">
+							<li><a href="" title="Về Rạp CGV">Về Rạp CGV</a></li>
+							<li><a href="" title="Đặc Trưng CGV">Đặc Trưng CGV</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="" title="">THÀNH VIÊN</a>
+						<ul class="menu-sub">
+							<li><a href="" title="Thành Viên">Thành Viên</a></li>
+							<li><a href="" title="Đăng Ký">Đăng Ký</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div class="search">
+					<div class="search-left">
+						<a href="#">
+							<img src="img/tin-moi-uu-dai.gif">
+						</a>
+						<div class="navbar-collapse collapse" id="">
+							<input type="text" class="search_mini" placeholder="enter the search">
+						</div>
+					</div>
+					<div class="search-right">
+						<p><a href="#"><img src="img/mua-ve_ngay.png" alt="mua-ve-ngay"></a></p>
+					</div>
+				</div>
+			</div>
+			<div class="navbar-collapse collapse" id="item1">
+				<input type="text" class="form-control" placeholder="enter the search">
+			</div>
+		</div>
+	</div>
+	<!-- breadcrumbs -->
+	<div class="breadcrumbs">
+
+		<div class="container">
+			<span class="fa fa-home"></span>
+			<span class="second-level">Phim</span>
+			<span class="second-level">Phim Đang Chiếu</span>
+		</div>
+
+	</div>
+	<!-- end breadcrumbs -->
+	
+	<!-- content -->
+	<div class="content">
+		<div class="container">
+			<section>
+				<h2>Phim đang chiếu</h2>
+				<div class="content-items">
+					<!-- row -->
+					<div class="row film_list">
+
+					</div>
+					<!-- end row -->
+				</div>
+				<ul class="pagination">
+					<li><a>1</a></li>
+					<li><a>2</a></li>
+					<li><a>3</a></li>
+					<li><a>4</a></li>
+					<li><a>5</a></li>
+				</ul>
+			</section>
+		</div>
+	</div>
+
+	<footer>
+
+		<!-- start policy -->
+		<div class="footer-policy">
+			<div class="container">
+				<!-- one row in footer -->
+				<div class="row">
+					<div class="col-md-3 col-footer-res">
+						<!-- one col in footer -->
+						<div class="one-col">
+							<h5>CGV Việt Nam</h5>
+
+							<ul>
+								<li>Giới Thiệu</li>
+								<li>Tiện Ích Online</li>
+								<li>Thẻ quà tặng</li>
+								<li>Tuyển Dụng</li>
+								<li>Liên Hệ Quảng Cáo CGV</li>
+							</ul>
+						</div>
+						<!-- end one col -->
+
+					</div>	
+
+
+					<div class="col-md-3 col-footer-res">
+						<!-- one col in footer -->
+						<div class="one-col">
+							<h5>Điều Khoản Sử Dụng</h5>
+
+							<ul>
+								<li>Điều Khoản Chung</li>
+								<li>Điều Khoản Giao Dịch</li>
+								<li>Chính Sách Thanh Toán</li>
+								<li>Chính Sách Bảo Mật</li>
+								<li>Câu Hỏi Thường Gặp</li>
+							</ul>
+						</div>
+						<!-- end one col -->
+
+					</div>	
+
+					<div class="col-md-3 col-footer-res">
+						<!-- one col in footer -->
+						<div class="one-col">
+							<h5>Kết nối với chúng tôi</h5>
+
+							<ul class="icon-social">
+								<li><img src="img/facebook.png" alt="Facebook"></li>
+								<li><img src="img/youtube.png" alt="Facebook"></li>
+								<li><img src="img/instagram.png" alt="Facebook"></li>
+								<li><img src="img/zalo.png" alt="Facebook"></li>
+							</ul>
+
+							<img src="img/cong-thuong.PNG" alt="Cong thuong">
+						</div>
+						<!-- end one col -->
+
+					</div>	
+
+					<div class="col-md-3 col-footer-res-hotline">
+						<!-- one col in footer -->
+						<div class="one-col">
+							<h5>Chăm sóc khách hàng</h5>
+
+							<ul>
+								<li>Hotline: 1900 6017</li>
+								<li>Giờ làm việc: 8:00 - 22:00 Tất cả các ngày bao gồm cả Lễ Tết</li>
+								<li>Email hỗ trợ: hoidap@cgv.vn</li>
+							</ul>
+						</div>
+						<!-- end one col -->
+
+					</div>	
+				</div>
+				<!-- end one row -->
+
+			</div>
+
+		</div>
+		<!-- end policy -->
+
+		<!-- start address -->
+		<div class="footer-address">
+			<div class="container">
+				<!-- one row in footer -->
+				<div class="row">
+
+					<div class="col-md-2 col-logo-footer-res">
+						<img src="img/logo_cj.png" alt="Logo CJ">
+					</div>
+
+					<!-- start address -->
+					<div class="col-md-10 col-address-footer-res">
+						<!-- one col in footer -->
+						<div class="one-col">
+							<h5>CÔNG TY TNHH CJ CGV VIETNAM</h5>
+
+							<ul>
+								<li>Giấy CNĐKDN: 0303675393, đăng ký lần đầu ngày 31/7/2008, đăng ký thay đổi lần thứ 5 ngày 14/10/2015, cấp bởi Sở KHĐT thành phố Hồ Chí Minh.</li>
+								<li>Địa Chỉ: Tòa nhà CJ, Tầng 10-11, 2Bis-4-6 đường Lê Thánh Tôn, Quận 1, Thành phố Hồ Chí Minh. </li>
+								<li>Hotline: 1900 6017</li>
+								<li>COPYRIGHT 2017 CJ CGV. All RIGHTS RESERVED.</li>
+							</ul>
+						</div>
+						<!-- end one col -->
+
+					</div>	
+					<!-- end address -->
+
+				</div>
+				<!-- end one row -->
+
+			</div>
+
+			<div class="end-footer"></div>
+
+		</div>
+		<!-- end address -->
+	</footer>
+
+	<div id="loading-mask">
+		<p class="loader" id="loading_mask_loader" >
+			<img src="https://www.cgv.vn//skin/frontend/rwd/default/images/ajax-loader.gif" alt="Loading...">
+	</div>
+	<style>
+		.pagination li a {
+			cursor: pointer;
+		}
+		.loader {
+			position: absolute;
+		    top: 45%;
+		    left: 45%;
+		}
+		#loading-mask {
+			left: 0;
+		    width: 100vw;
+		    height: 100vh;
+		    top: 0;
+		    display: none;
+		    position: fixed;
+		    background: rgba(0,0,0,0.5);
+		}
+	</style>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			var baseUrlImg = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2';
+			var baseUrl = 'https://api.themoviedb.org/3/movie/';
+			var api_key = '931e54c126cfca6e31b0c905d36d6614';
+
+
+			function createDiv(code,className) {
+				return $(document.createElement(code)).attr('class',className);
+			}
+			function createDivAtrr(code, attrName, attrValue) {
+				return $(document.createElement(code)).attr(attrName, attrValue);
+			}
+			function createPSpan(p, span) {
+				return $(document.createElement('p')).text(p).append("<span>"+span+"</span>");
+			}
+			function createElementFilm(nameFilm, vote, releasedate, urlImg, urlFilm) {
+
+				var col = createDiv('div','col-md-3 col-res');
+				var wrapper = createDiv('div','content-item-wrapper');
+				var content = createDiv('div','content-item');
+				var btn = $(document.createElement('button')).attr({
+					type: 'button',
+					class: 'btn-mua',
+					title: 'Mua ve'
+				});
+				var span_btn = $(document.createElement('span')).text("Mua ve");
+				var a = createDivAtrr('a','href', urlFilm);
+				var img = createDivAtrr('img','src', baseUrlImg+urlImg);
+
+				var info = createDiv('div','info');
+				var h4 = $(document.createElement('h4'));
+				var ah4 = createDivAtrr('a','href',urlFilm).text(nameFilm);
+				var p1 = createPSpan("Vote: ", vote);
+				var p3 = createPSpan("Khỏi chiếu: ", releasedate);
+
+				h4.append(ah4);
+				info.append(h4, p1, p3);
+				content.append(a, img, info);
+				btn.append(span_btn);
+				wrapper.append(content, btn);
+				col.append(wrapper);
+				return col;
+			}
+			function createUrl(category, page) {
+				return baseUrl+category+"?api_key="+api_key+"&page="+page;
+			}
+			function createpPathUrl(url) {
+				for(var i= url.length-1; i > 0; i--){
+					if( url[i] == '/'){
+						return url.substr(0,i+1);
+					}
+				}
+				return null;
+			}
+			$(window).load(function() {
+				var page = 1;
+
+				fetch(createUrl('popular', page))
+				.then((resp) => resp.json())
+				.then(function(data) {
+					let all = data.results;
+					$.each(all, function (key, value) {
+						$('.film_list').append(createElementFilm(
+							value.title, 
+							value.vote_average, 
+							value.release_date, 
+							value.poster_path, 
+							createpPathUrl(window.location.href)+"phim-detail.html?movies="+value.id
+						));
+					});
+				})
+				.catch(function(error) {
+					console.log(error);
+				});   
+
+				 console.log(window.location.search.substr(1).split('&'));
+				var t = window.location.href;
+				console.log(createpPathUrl(t));
+			});
+
+			function paginationFetch(page) {
+				fetch(createUrl('popular',page))
+				.then((resp) => resp.json())
+				.then(function(data) {
+					let all = data.results;
+					$.each(all, function (key, value) {
+						$('.film_list').append(createElementFilm(value.title, value.vote_average, value.release_date, value.poster_path, createpPathUrl(window.location.href)+"cgv.html?movies="+value.id));
+					});
+					$('#loading-mask').hide();
+
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+			}
+			$('.pagination li a').on('click', function(){
+				$('#loading-mask').show();
+				$('.film_list').empty();
+				paginationFetch($(this).text());
+			});	
+		});
+	</script>
+</body>
+</html>
