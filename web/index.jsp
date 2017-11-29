@@ -24,6 +24,7 @@
         <script src="js/home.js"></script>
     </head>
     <body>
+        <!--day la trong index-->
         <jsp:include page='view/header.jsp' />
         <%
             try {
