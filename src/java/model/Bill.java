@@ -5,25 +5,28 @@
  */
 package model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  *
  * @author NguyenNgoc
  */
-public class Bill {
+public class Bill implements Serializable{
     private int id;
     private Date date;
     private User user;
-    private Client client;
-    private Ticket[] ticket;
+    private ArrayList<Order> order;
 
     public Bill() {
     }
 
-    
-    public int getSizeTicket(){
-        return this.ticket.length;
+    public Bill(int id, Date date, User user, ArrayList<Order> order) {
+        this.id = id;
+        this.date = date;
+        this.user = user;
+        this.order = order;
     }
 
     public int getId() {
@@ -38,8 +41,8 @@ public class Bill {
         return date;
     }
 
-    public  void setDate() {        
-        date = new java.sql.Date(System.currentTimeMillis());
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public User getUser() {
@@ -50,22 +53,12 @@ public class Bill {
         this.user = user;
     }
 
-    public Client getClient() {
-        return client;
+    public ArrayList<Order> getOrder() {
+        return order;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    
-
-    public Ticket[] getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Ticket[] ticket) {
-        this.ticket = ticket;
+    public void setOrder(ArrayList<Order> order) {
+        this.order = order;
     }
     
 }

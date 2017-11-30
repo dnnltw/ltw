@@ -5,42 +5,51 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author NguyenNgoc
  */
-public class Client {
-    private int idCard;
-    private int age;
-    private String name;
-    private String address;
-    private String phoneNumber;
+public class Client implements Serializable{
+    private int id;
+    private String username, password, name, address, mail, phone;
+
+    public Client(int id, String username, String password, String name, String address, String mail, String phone) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.address = address;
+        this.mail = mail;
+        this.phone = phone;
+    }
 
     public Client() {
     }
 
-    public Client(int idCard, int age, String name, String address, String phoneNumber) {
-        this.idCard = idCard;
-        this.age = age;
-        this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
+    public int getId() {
+        return id;
     }
 
-    public int getIdCard() {
-        return idCard;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setIdCard(int idCard) {
-        this.idCard = idCard;
+    public String getUsername() {
+        return username;
     }
 
-    public int getAge() {
-        return age;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -59,14 +68,20 @@ public class Client {
         this.address = address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getMail() {
+        return mail;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
+    public String getPhone() {
+        return phone;
+    }
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
     
 }

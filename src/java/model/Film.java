@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
@@ -12,43 +13,27 @@ import java.util.Date;
  *
  * @author NguyenNgoc
  */
-public class Film {
+public class Film implements Serializable {
+
     private int id;
-    private String name;
-    private String cast;
-    private String des;
-    private String genre;
-    private Date releaseDate;
-    private Time runningTime;
+    private String name, productCountry;
+    private Date realeaseDate;
+    private int runningTime;
+    private float vote;
+    private String des, trailer;
 
-    public String getCast() {
-        return cast;
-    }
-
-    public void setCast(String cast) {
-        this.cast = cast;
-    }
-
-    public Film(int id, String name, String cast, String des, String genre, Date releaseDate, Time runningTime) {
+    public Film(int id, String name, String productCountry, Date realeaseDate, int runningTime, float vote, String des, String trailer) {
         this.id = id;
         this.name = name;
-        this.cast = cast;
-        this.des = des;
-        this.genre = genre;
-        this.releaseDate = releaseDate;
+        this.productCountry = productCountry;
+        this.realeaseDate = realeaseDate;
         this.runningTime = runningTime;
+        this.vote = vote;
+        this.des = des;
+        this.trailer = trailer;
     }
 
     public Film() {
-    }
-
-    public Film(int id, String name, String des, String genre, Date releaseDate, Time runningTime) {
-        this.id = id;
-        this.name = name;
-        this.des = des;
-        this.genre = genre;
-        this.releaseDate = releaseDate;
-        this.runningTime = runningTime;
     }
 
     public int getId() {
@@ -67,6 +52,38 @@ public class Film {
         this.name = name;
     }
 
+    public String getProductCountry() {
+        return productCountry;
+    }
+
+    public void setProductCountry(String productCountry) {
+        this.productCountry = productCountry;
+    }
+
+    public Date getRealeaseDate() {
+        return realeaseDate;
+    }
+
+    public void setRealeaseDate(Date realeaseDate) {
+        this.realeaseDate = realeaseDate;
+    }
+
+    public int getRunningTime() {
+        return runningTime;
+    }
+
+    public void setRunningTime(int runningTime) {
+        this.runningTime = runningTime;
+    }
+
+    public float getVote() {
+        return vote;
+    }
+
+    public void setVote(float vote) {
+        this.vote = vote;
+    }
+
     public String getDes() {
         return des;
     }
@@ -75,28 +92,12 @@ public class Film {
         this.des = des;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getTrailer() {
+        return trailer;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
     }
 
-    public Date getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public Time getRunningTime() {
-        return runningTime;
-    }
-
-    public void setRunningTime(Time runningTime) {
-        this.runningTime = runningTime;
-    }
-    
 }

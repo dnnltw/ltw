@@ -5,16 +5,34 @@
  */
 package model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  *
  * @author NguyenNgoc
  */
-public class Cinema {
-    
+public class Cinema implements Serializable {
+
     private int id;
     private String name;
     private String address;
-    private Room[] rooms;
+    private ArrayList<Room> rooms;
+
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(ArrayList<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public Cinema(int id, String name, String address, ArrayList<Room> rooms) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.rooms = rooms;
+    }
 
     public Cinema() {
     }
@@ -48,6 +66,5 @@ public class Cinema {
     public void setAddress(String address) {
         this.address = address;
     }
-    
-    
+
 }

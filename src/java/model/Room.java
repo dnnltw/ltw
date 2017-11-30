@@ -5,11 +5,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author NguyenNgoc
  */
-public class Room {
+public class Room implements Serializable{
     private int id;
     private String name;
     private String type;
