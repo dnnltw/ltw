@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
-
+<!--day la header-->
 <div class="header">
     <div class="Quangcao">
         <a href="#" target="_blank">
@@ -56,7 +56,7 @@
                 <li>
                     <a href="" title="">PHIM</a>
                     <ul class="menu-sub">
-                        <li><a href="" title="">Phim Đang Chiếu</a></li>
+                        <li><a href="/dnnltw/?controller=now_showing" title="">Phim Đang Chiếu</a></li>
                         <li><a href="" title="">Phim Sắp Chiếu</a></li>
                         <li><a href="" title="">CGV ArtHouse</a></li>
                     </ul>
