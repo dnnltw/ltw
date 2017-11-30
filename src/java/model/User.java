@@ -5,30 +5,26 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author NguyenNgoc
  */
-public class User {
+public class User implements Serializable{
     private int id;
     private String name;
-    private String userName;
+    private String username;
     private String password;
-    private String position;
+    private int position;
 
     public User() {
     }
 
-    public User(int id) {
-        this.id = id;
-    }
-    
-    
-
-    public User(int id, String name, String userName, String password, String position) {
+    public User(int id, String name, String username, String password, int position) {
         this.id = id;
         this.name = name;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.position = position;
     }
@@ -49,12 +45,12 @@ public class User {
         this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -65,12 +61,13 @@ public class User {
         this.password = password;
     }
 
-    public String getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(int position) {
         this.position = position;
     }
     
+
 }

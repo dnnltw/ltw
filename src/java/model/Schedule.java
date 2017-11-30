@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -12,43 +13,27 @@ import java.sql.Time;
  *
  * @author NguyenNgoc
  */
-public class Schedule {
+public class Schedule implements Serializable{
     private int id;
     private Time time;
     private Date date;
     private Room room;
     private Film film;
     private double price;
-    
-    public void in(){
-        System.out.println("ID " + id);
-        System.out.println("time " + time);
-        System.out.println("date " +date);
-        System.out.println("_____________danh sach room___________");
-        
-            room.in();
-    }
+    private Sale sale;
 
-    public Schedule() {
-    }
-
-    public Schedule(int id, Time time, Date date, Room room, Film film, double price) {
+    public Schedule(int id, Time time, Date date, Room room, Film film, double price, Sale sale) {
         this.id = id;
         this.time = time;
         this.date = date;
         this.room = room;
         this.film = film;
         this.price = price;
+        this.sale = sale;
     }
 
-    public Room getRoom() {
-        return room;
+    public Schedule() {
     }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
 
     public int getId() {
         return id;
@@ -74,6 +59,14 @@ public class Schedule {
         this.date = date;
     }
 
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
     public Film getFilm() {
         return film;
     }
@@ -89,5 +82,14 @@ public class Schedule {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
+    }
+    
     
 }

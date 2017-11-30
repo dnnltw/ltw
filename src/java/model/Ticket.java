@@ -5,11 +5,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author NguyenNgoc
  */
-public class Ticket {
+public class Ticket implements Serializable{
     private int id;
     private double price;
     private Schedule schedule;

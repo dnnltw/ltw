@@ -5,11 +5,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author NguyenNgoc
  */
-public class Seat {
+public class Seat implements Serializable{
     private int row;
     private int col;
     private String type;
