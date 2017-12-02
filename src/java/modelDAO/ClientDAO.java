@@ -5,10 +5,12 @@
  */
 package modelDAO;
 
+import model.Client;
+
 /**
  *
  * @author NguyenNgoc
  */
 public interface ClientDAO {
-    
+    public void signin(Client client) throws Exception;
 }
