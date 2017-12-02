@@ -5,6 +5,8 @@
  */
 package modelDAO;
 
+import model.User;
+
 /**
  *
  * @author NguyenNgoc
