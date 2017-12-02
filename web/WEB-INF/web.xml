@@ -8,6 +8,10 @@
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>servlet.HomeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeAdminServlet</servlet-name>
+        <servlet-class>servlet.admin.HomeAdminServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
         <url-pattern>/SigninServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeAdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
