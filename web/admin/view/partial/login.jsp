@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-form-label" for="password">Password</label>
-                    <input type="text" class="form-control" id="password" name="password" placeholder="Password">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
                 <input class="btn btn-success" type="submit" value="Login" />
                 <a href="home" class="btn btn-default">Back to home</a>

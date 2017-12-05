@@ -7,11 +7,16 @@ package servlet.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.User;
+import modelDAO.UserDAOImpl;
 
 /**
  *
@@ -72,7 +77,21 @@ public class HomeAdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        System.out.println(encryption("admin123"));
+        String username = request.getParameter("username");
+        String password = encryption(request.getParameter("password"));
+        System.out.println(password);
+        User user = new User(0, "", username, password, 0);
+        UserDAOImpl userDao = new UserDAOImpl();
+        System.out.println(userDao.checkLoginAdmin(user));
+        if(userDao.checkLoginAdmin(user)){
+            
+            session.setAttribute("admin_login", user);
+            response.sendRedirect("admin?controller=home");
+        }else {
+            response.sendRedirect("admin");
+        }
     }
 
     /**
@@ -85,4 +104,25 @@ public class HomeAdminServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public static String encryption(String str) {
+       byte[] defaultBytes = str.getBytes();
+       try {
+           MessageDigest algorithm = MessageDigest.getInstance("MD5");
+           algorithm.reset();
+           algorithm.update(defaultBytes);
+           byte messageDigest[] = algorithm.digest();
+           StringBuffer hexString = new StringBuffer();
+           for (int i = 0; i < messageDigest.length; i++) {
+              String hex = Integer.toHexString(0xFF & messageDigest[i]);
+              if (hex.length() == 1) {
+                  hexString.append('0');
+              }
+              hexString.append(hex);
+          }
+          str = hexString + "";
+       } catch (NoSuchAlgorithmException e) {
+          e.printStackTrace();
+       }
+       return str;
+    }
 }

@@ -31,12 +31,16 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public boolean checkLoginAdmin(User user) {
         try {
-            String sql = "SELECT * FROM users WHERE username = ? and password = ? ;";
+            String sql = "SELECT * FROM user WHERE username = ? and password = ? ;";
             PreparedStatement pre = con.prepareStatement(sql);
             pre.setString(1, user.getUsername());
             pre.setString(2, user.getPassword());
             ResultSet rs = pre.executeQuery();
-            return rs.next();
+            if (rs.next()){
+                int t = rs.getInt(5);
+                return t >= 1;
+            }
+            return false;
         } catch (SQLException ex) {
             return false;
         }
