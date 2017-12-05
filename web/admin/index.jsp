@@ -18,7 +18,7 @@
 
         <%
             try {
-                if (request.getParameter("controller") != null) {
+                if (request.getParameter("controller") != null && session.getAttribute("admin_login") != null) {
                     String t = "view/partial/" + request.getParameter("controller") + ".jsp";%>
         <jsp:include page='<%=t%>' /> 
         <%      } else { %>
