@@ -10,14 +10,14 @@
 <!--day la header-->
 <div class="header">
     <div class="Quangcao">
-        <a href="#" target="_blank">
+        <a href="home" target="_blank">
             <img class="banner img-responsive" src="img/banner.png" alt="Du hoc cung RMIT">
         </a>
     </div>
     <div class="menu">
         <ul>
-            <li><a href="#">Đăng Nhập</a></li>
-            <li><a href="#">Đăng Ký</a></li>
+            <li><a href="home?controller=login_signin">Đăng Nhập</a></li>
+            <li><a href="home?controller=login_signin">Đăng Ký</a></li>
             <li><a href="#" id="lienhe">Liên Hệ</a></li>
             <li><a href="#" id="tuyendung">Tuyển Dụng</a></li>
         </ul>
@@ -56,7 +56,7 @@
                 <li>
                     <a href="" title="">PHIM</a>
                     <ul class="menu-sub">
-                        <li><a href="/dnnltw/?controller=now_showing" title="">Phim Đang Chiếu</a></li>
+                        <li><a href="home?controller=now_showing" title="">Phim Đang Chiếu</a></li>
                         <li><a href="" title="">Phim Sắp Chiếu</a></li>
                         <li><a href="" title="">CGV ArtHouse</a></li>
                     </ul>
