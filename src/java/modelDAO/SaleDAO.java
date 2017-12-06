@@ -5,10 +5,19 @@
  */
 package modelDAO;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import model.Sale;
+
 /**
  *
  * @author NguyenNgoc
  */
 public interface SaleDAO {
+
+    public boolean addSale(Connection con, Sale sale);
+
+    public ArrayList<Sale> getListSale(Connection con);
     
+    public boolean editSale(Connection con, Sale sale);
 }

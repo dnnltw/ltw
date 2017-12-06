@@ -12,6 +12,14 @@
         <servlet-name>HomeAdminServlet</servlet-name>
         <servlet-class>servlet.admin.HomeAdminServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddSaleServlet</servlet-name>
+        <servlet-class>servlet.admin.AddSaleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSaleServlet</servlet-name>
+        <servlet-class>servlet.admin.EditSaleServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
         <url-pattern>/SigninServlet</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>HomeAdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSaleServlet</servlet-name>
+        <url-pattern>/add_sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSaleServlet</servlet-name>
+        <url-pattern>/edit_sale</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
