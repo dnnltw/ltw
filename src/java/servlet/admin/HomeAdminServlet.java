@@ -5,10 +5,12 @@
  */
 package servlet.admin;
 
+import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.User;
+import modelDAO.SaleDAO;
+import modelDAO.SaleDAOImpl;
+import modelDAO.UserDAO;
 import modelDAO.UserDAOImpl;
 
 /**
@@ -82,11 +87,12 @@ public class HomeAdminServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = encryption(request.getParameter("password"));
         System.out.println(password);
+        Connection con = DBConnection.getConnection();
         User user = new User(0, "", username, password, 0);
-        UserDAOImpl userDao = new UserDAOImpl();
-        System.out.println(userDao.checkLoginAdmin(user));
-        if(userDao.checkLoginAdmin(user)){
-            
+        UserDAO userDao = new UserDAOImpl();
+        if(userDao.checkLoginAdmin(con, user)){
+            SaleDAO dao = new SaleDAOImpl();
+            session.setAttribute("listSale", dao.getListSale(con));
             session.setAttribute("admin_login", user);
             response.sendRedirect("admin?controller=home");
         }else {
