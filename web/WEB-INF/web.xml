@@ -20,6 +20,14 @@
         <servlet-name>EditSaleServlet</servlet-name>
         <servlet-class>servlet.admin.EditSaleServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddNewFilmServlet</servlet-name>
+        <servlet-class>servlet.admin.AddNewFilmServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditFilmServlet</servlet-name>
+        <servlet-class>servlet.EditFilmServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
         <url-pattern>/SigninServlet</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>EditSaleServlet</servlet-name>
         <url-pattern>/edit_sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewFilmServlet</servlet-name>
+        <url-pattern>/add_film</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFilmServlet</servlet-name>
+        <url-pattern>/edit_film</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
