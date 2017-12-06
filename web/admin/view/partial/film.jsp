@@ -67,11 +67,11 @@
                                         <td><%=listFilm.get(i).getRealeaseDate()%></td>
                                         <td><%=listFilm.get(i).getVote()%></td>
                                         <td>
-                                            <a href="" data-toggle="modal" data-target="#edit1">Edit</a> 
+                                            <a href="" data-toggle="modal" data-target="#edit<%=i%>">Edit</a> 
 
                                         </td>
                                         <!-- Modal edit-->
-                                <div class="modal fade" id="edit1" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal fade" id="edit<%=i%>" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
