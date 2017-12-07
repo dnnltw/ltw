@@ -5,6 +5,7 @@
  */
 package modelDAO;
 
+import java.sql.Connection;
 import model.User;
 
 /**
@@ -12,5 +13,5 @@ import model.User;
  * @author NguyenNgoc
  */
 public interface UserDAO {
-    public boolean checkLoginAdmin(User user);
+    public boolean checkLoginAdmin(Connection con, User user);
 }

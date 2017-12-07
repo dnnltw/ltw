@@ -8,28 +8,25 @@ package servlet.admin;
 import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import javax.servlet.RequestDispatcher;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.User;
-import modelDAO.FilmDAO;
-import modelDAO.FilmDAOImpl;
+import model.Sale;
 import modelDAO.SaleDAO;
 import modelDAO.SaleDAOImpl;
-import modelDAO.UserDAO;
-import modelDAO.UserDAOImpl;
 
 /**
  *
- * @author ducvu
+ * @author NguyenNgoc
  */
-public class HomeAdminServlet extends HttpServlet {
+public class EditSaleServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,10 +45,10 @@ public class HomeAdminServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeAdminServlet</title>");            
+            out.println("<title>Servlet EditSaleServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeAdminServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditSaleServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,8 +66,7 @@ public class HomeAdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/index.jsp");
-        dispatcher.forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -84,23 +80,32 @@ public class HomeAdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        System.out.println(encryption("admin123"));
-        String username = request.getParameter("username");
-        String password = encryption(request.getParameter("password"));
-        System.out.println(password);
-        Connection con = DBConnection.getConnection();
-        User user = new User(0, "", username, password, 0);
-        UserDAO userDao = new UserDAOImpl();
-        if(userDao.checkLoginAdmin(con, user)){
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        try {
+//            int select = Integer.parseInt(request.getAttribute("saleSelected").toString());
+//            System.out.println(select);
+            int id = Integer.parseInt(request.getParameter("idEdit"));
+            System.out.println(id);
+            String name = request.getParameter("nameEdit");
+            System.out.println(name);
+            float number = Float.parseFloat(request.getParameter("numberEdit"));
+            String des = request.getParameter("desEdit");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            java.sql.Date sdate = new java.sql.Date(formatter.parse(request.getParameter("sdateEdit")).getTime());
+            java.sql.Date edate = new java.sql.Date(formatter.parse(request.getParameter("edateEdit")).getTime());
+            Sale newSale = new Sale(id, name, sdate, edate, number, des);
+            Connection con = DBConnection.getConnection();
             SaleDAO daoSale = new SaleDAOImpl();
-            FilmDAO daoFilm = new FilmDAOImpl();
-            session.setAttribute("listFilm", daoFilm.getListFilm(con));
-            session.setAttribute("listSale", daoSale.getListSale(con));
-            session.setAttribute("admin_login", user);
-            response.sendRedirect("admin?controller=home");
-        }else {
-            response.sendRedirect("admin");
+            if(daoSale.editSale(con, newSale)){
+                HttpSession session = request.getSession();
+                session.setAttribute("listSale", daoSale.getListSale(con));
+                response.sendRedirect("admin?controller=sale");
+            }else{
+                response.sendRedirect("admin");
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(EditSaleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -114,25 +119,4 @@ public class HomeAdminServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public static String encryption(String str) {
-       byte[] defaultBytes = str.getBytes();
-       try {
-           MessageDigest algorithm = MessageDigest.getInstance("MD5");
-           algorithm.reset();
-           algorithm.update(defaultBytes);
-           byte messageDigest[] = algorithm.digest();
-           StringBuffer hexString = new StringBuffer();
-           for (int i = 0; i < messageDigest.length; i++) {
-              String hex = Integer.toHexString(0xFF & messageDigest[i]);
-              if (hex.length() == 1) {
-                  hexString.append('0');
-              }
-              hexString.append(hex);
-          }
-          str = hexString + "";
-       } catch (NoSuchAlgorithmException e) {
-          e.printStackTrace();
-       }
-       return str;
-    }
 }

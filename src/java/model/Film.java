@@ -6,8 +6,7 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -20,7 +19,38 @@ public class Film implements Serializable {
     private Date realeaseDate;
     private int runningTime;
     private float vote;
-    private String des, trailer;
+    private String des, trailer, poster;
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public Film(String name, String productCountry, Date realeaseDate, int runningTime, float vote, String des, String trailer, String poster) {
+        this.name = name;
+        this.productCountry = productCountry;
+        this.realeaseDate = realeaseDate;
+        this.runningTime = runningTime;
+        this.vote = vote;
+        this.des = des;
+        this.trailer = trailer;
+        this.poster = poster;
+    }
+
+    public Film(int id, String name, String productCountry, Date realeaseDate, int runningTime, float vote, String des, String trailer, String poster) {
+        this.id = id;
+        this.name = name;
+        this.productCountry = productCountry;
+        this.realeaseDate = realeaseDate;
+        this.runningTime = runningTime;
+        this.vote = vote;
+        this.des = des;
+        this.trailer = trailer;
+        this.poster = poster;
+    }
 
     public Film(int id, String name, String productCountry, Date realeaseDate, int runningTime, float vote, String des, String trailer) {
         this.id = id;

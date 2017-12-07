@@ -20,8 +20,6 @@ import static modelDAO.ClientDAOImpl.encryption;
  * @author NguyenNgoc
  */
 public class UserDAOImpl implements UserDAO {
-
-    private Connection con = new DBConnection().getConnection();
     
     /**
      *
@@ -29,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
      * @return
      */
     @Override
-    public boolean checkLoginAdmin(User user) {
+    public boolean checkLoginAdmin(Connection con, User user) {
         try {
             String sql = "SELECT * FROM user WHERE username = ? and password = ? ;";
             PreparedStatement pre = con.prepareStatement(sql);
