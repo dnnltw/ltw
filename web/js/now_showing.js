@@ -67,7 +67,7 @@ $(document).ready(function () {
                                 value.vote_average,
                                 value.release_date,
                                 value.poster_path,
-                                createpPathUrl(window.location.href) + "?controller=detail_film&movies=" + value.id
+                                createpPathUrl(window.location.href) + "home?controller=detail_film&movies=" + value.id
                                 ));
                     });
                 })

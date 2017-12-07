@@ -5,10 +5,18 @@
  */
 package modelDAO;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import model.Schedule;
+
 /**
  *
  * @author NguyenNgoc
  */
 public interface ScheduleDAO {
+    public boolean addSchedule(Connection con, Schedule sale);
+
+    public ArrayList<Schedule> getListSchedule(Connection con);
     
+    public boolean editSchedule(Connection con, Schedule sale);
 }

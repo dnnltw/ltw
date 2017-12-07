@@ -5,10 +5,29 @@
  */
 package modelDAO;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import model.Schedule;
+
 /**
  *
  * @author NguyenNgoc
  */
 public class ScheduleDAOImpl implements ScheduleDAO{
+
+    @Override
+    public boolean addSchedule(Connection con, Schedule sale) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Schedule> getListSchedule(Connection con) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean editSchedule(Connection con, Schedule sale) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

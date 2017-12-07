@@ -29,6 +29,8 @@ import modelDAO.UserDAOImpl;
  */
 public class HomeAdminServlet extends HttpServlet {
 
+    protected Connection con = DBConnection.getConnection();
+    protected UserDAO userDao = new UserDAOImpl();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -67,6 +69,18 @@ public class HomeAdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("controller") != null){
+            String controller = request.getParameter("controller");
+            //schedule 
+            switch(controller){
+                case "schedule":{
+                    
+                }; 
+                default:{
+                    
+                }
+            }
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin/index.jsp");
         dispatcher.forward(request, response);
     }
@@ -87,9 +101,8 @@ public class HomeAdminServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = encryption(request.getParameter("password"));
         System.out.println(password);
-        Connection con = DBConnection.getConnection();
         User user = new User(0, "", username, password, 0);
-        UserDAO userDao = new UserDAOImpl();
+        
         if(userDao.checkLoginAdmin(con, user)){
             SaleDAO dao = new SaleDAOImpl();
             session.setAttribute("listSale", dao.getListSale(con));
