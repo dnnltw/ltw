@@ -4,8 +4,10 @@
     Author     : ducvu
 --%>
 
+<%@page import="model.Client"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="css/thanhvien.css">
+<% Client client = (Client) session.getAttribute("user"); %>
 <div class="main-container">
     <div class="main">
         <div class="container">
@@ -31,50 +33,32 @@
                                 <div class="dashboard-title">
                                     <h1>Sửa thông tin tài khoản</h1>
                                 </div>
-                                <form action="thanhvien-thongtintk_submit" method="get" accept-charset="utf-8" class="form-acc">
+                                <form action="ChangPassServlet" method="POST" accept-charset="utf-8" class="form-acc" name="formChangePass" onsubmit="return checkPass();">
                                     <ul>
                                         <li class="form-left">
                                             <label>Name</label>
                                             <div class="input-box">
-                                                ABC
+                                                <%=client.getName() %>
+                                                <input type="hidden" name="checkpass" value=<%=client.getPassword() %>>
                                             </div>
                                         </li>
                                         <li class="form-right">
-                                            <label>Giới tính</label>
+                                            <label>Địa chỉ</label>
                                             <div class="input-box">
-                                                Nam
+                                                <%=client.getAddress() %>
                                             </div>
                                         </li>
                                         <li class="form-left">
-                                            <label>Ngày sinh</label>
+                                            <label>Email</label>
                                             <div class="input-box">
-                                                00/00/1990
+                                                <%=client.getMail() %>
                                             </div>
                                         </li>
                                         <li class="form-right">
                                             <label>Điện thoại</label>
                                             <span class="star">*</span>
                                             <div class="input-box">
-                                                <input type="text" name="txttel" value="099999999">
-                                            </div>
-                                        </li>
-                                        <li class="form-left">
-                                            <label>Địa chỉ email</label>
-                                            <span class="star">*</span>
-                                            <div class="input-box">
-                                                mail@gamil.com
-                                            </div>
-                                        </li>
-                                        <li class="form-right">
-                                            <label>Online ID</label>
-                                            <div class="input-box">
-                                                mail@gmail.com
-                                            </div>
-                                        </li>
-                                        <li class="form-left">
-                                            <label>Địa chỉ</label>
-                                            <div class="input-box">
-                                                <input type="text" name="txtaddress" value="Ngõ 1 Hà Nội">
+                                                <%=client.getPhone() %>
                                             </div>
                                         </li>
                                         <li class="control">
@@ -85,34 +69,39 @@
                                         <div class="change-pass">
                                             <ul>
                                                 <li class="form-left">
-                                                    <label>Mật khẩu cũ</label>
+                                                    <label>Mật khẩu cũ:</label>
                                                     <span class="star">*</span>
                                                     <div class="input-box">
-                                                        <input type="text" name="txtold_password" value="">
+                                                        <input type="text" name="txtold_password" value="" required="">
                                                     </div>
+                                                    <p id="check_old_password"> </p>
                                                 </li>
                                                 <li class="form-left">
                                                     <label>Mật khẩu mới</label>
                                                     <span class="star">*</span>
                                                     <div class="input-box">
-                                                        <input type="text" name="txtnew_password" value="">
+                                                        <input type="text" name="txtnew_password" value="" required="">
                                                     </div>
+                                                    <p id="check_password"> </p>
                                                 </li>
                                                 <li class="form-right">
                                                     <label>Nhập lại mật khẩu mới</label>
                                                     <span class="star">*</span>
                                                     <div class="input-box">
-                                                        <input type="text" name="txtnew_password_cf" value="">
+                                                        <input type="text" name="txtnew_password_cf" value="" required="">
                                                     </div>
+                                                    <p id="check_password_cf"> </p>
                                                 </li>
 
                                             </ul>
                                         </div>
+                                        
                                         <div class="button-edit">
                                             <button type="submit" title="Mua vé" class="button">
                                                 <span>Lưu lại</span>
                                             </button>
                                         </div>
+
                                     </ul>
                                 </form>
                             </div>
@@ -123,6 +112,7 @@
         </div>
     </div>
 </div>
+
 <script>
     $(document).ready(function () {
         $('.change-pass').hide();
@@ -141,5 +131,42 @@
         if (event.target == pass) {
             pass.style.css = "none";
         }
+    }
+
+    function checkPass() {
+        if( document.formChangePass.checkpass.value != document.formChangePass.txtold_password.value){
+            console.log(" k bang");
+            alert("document.formChangePass.checkpass.value");
+            document.getElementById("check_old_password").innerHTML = "Passwords incorrect";
+            document.getElementById("check_old_password").style.color="red";
+            document.formChangePass.txtold_password.value="";
+            document.formChangePass.txtold_password.focus();
+            return false;
+        } else {
+            document.getElementById("check_old_password").innerHTML = "";
+        }
+        var pass = document.formChangePass.txtnew_password.value;
+        var pattern = new RegExp("^[a-z0-9_-]{6,18}$");
+        var result = pattern.test(pass);
+        if(!result){
+            document.getElementById("check_password_cf").innerHTML = "Weak password!";
+            document.getElementById("check_password_cf").style.color="red";
+            document.formChangePass.txtnew_password.focus();
+            return false;
+        } else {
+            document.getElementById("check_password_cf").innerHTML = "";
+        }
+        if(document.formChangePass.txtnew_password.value != document.formChangePass.txtnew_password_cf.value){
+            document.getElementById("check_password_cf").innerHTML = "Passwords do not match";
+            document.getElementById("check_password_cf").style.color="red";
+            document.formChangePass.txtnew_password.value="";
+            document.formChangePass.txtnew_password_cf.value="";
+            document.formChangePass.txtnew_password.focus();
+            return false;
+        } else {
+            document.getElementById("check_password_cf").innerHTML = "";
+        }
+        
+        return true;
     }
 </script>

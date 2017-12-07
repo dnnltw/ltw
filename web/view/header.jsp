@@ -4,10 +4,25 @@
     Author     : NguyenNgoc
 --%>
 
+<%@page import="model.Client"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!--<link rel="stylesheet" type="text/css" href="css/style.css">-->
 <!--day la header-->
+
+<%
+    Client client = (Client) session.getAttribute("user");
+    String dn = "Đăng Ký";
+    String link = "home?controller=login_signin";
+    String loginout="Đăng Nhập";
+    String link2 = "home?controller=login_signin";
+    if(client!=null){
+            dn = client.getUsername();
+            link = "home?controller=member_account";
+            loginout = "LOG OUT";
+            link2 = "LogoutServlet";
+    }
+%>
 <div class="header">
     <div class="Quangcao">
         <a href="home" target="_blank">
@@ -16,8 +31,8 @@
     </div>
     <div class="menu">
         <ul>
-            <li><a href="home?controller=login_signin">Đăng Nhập</a></li>
-            <li><a href="home?controller=login_signin">Đăng Ký</a></li>
+            <li><a href=<%=link%>><%=dn%></a></li>
+            <li><a href=<%=link2%>><%=loginout%></a></li>
             <li><a href="#" id="lienhe">Liên Hệ</a></li>
             <li><a href="#" id="tuyendung">Tuyển Dụng</a></li>
         </ul>

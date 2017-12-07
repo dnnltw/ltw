@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.User;
+import modelDAO.FilmDAO;
+import modelDAO.FilmDAOImpl;
 import modelDAO.SaleDAO;
 import modelDAO.SaleDAOImpl;
 import modelDAO.UserDAO;
@@ -104,8 +106,10 @@ public class HomeAdminServlet extends HttpServlet {
         User user = new User(0, "", username, password, 0);
         
         if(userDao.checkLoginAdmin(con, user)){
-            SaleDAO dao = new SaleDAOImpl();
-            session.setAttribute("listSale", dao.getListSale(con));
+            SaleDAO daoSale = new SaleDAOImpl();
+            FilmDAO daoFilm = new FilmDAOImpl();
+            session.setAttribute("listFilm", daoFilm.getListFilm(con));
+            session.setAttribute("listSale", daoSale.getListSale(con));
             session.setAttribute("admin_login", user);
             response.sendRedirect("admin?controller=home");
         }else {

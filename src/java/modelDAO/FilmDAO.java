@@ -5,10 +5,18 @@
  */
 package modelDAO;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import model.Film;
+
 /**
  *
  * @author NguyenNgoc
  */
 public interface FilmDAO {
+    public boolean addFilm(Connection con, Film film);
     
+    public ArrayList<Film> getListFilm(Connection con);
+    
+    public boolean updateFilm(Connection con, Film film);
 }
