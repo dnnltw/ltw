@@ -4,8 +4,11 @@
     Author     : ducvu
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Film"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- /main -->
+<%ArrayList<Film> listFilm = (ArrayList<Film>) session.getAttribute("listFilm");%>
 <div class="container">
     <!-- /breadcrumb -->
     <nav aria-label="breadcrumb" role="navigation">
@@ -56,19 +59,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <%for(int i=0 ; i<listFilm.size(); i++){%>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Name1</td>
-                                        <td>Name</td>
-                                        <td>2011/04/25</td>
-                                        <td>9k</td>
+                                        <td><%=listFilm.get(i).getId()%></td>
+                                        <td><img src="<%=listFilm.get(i).getPoster()%>"></td>
+                                        <td><%=listFilm.get(i).getName()%></td>
+                                        <td><%=listFilm.get(i).getRealeaseDate()%></td>
+                                        <td><%=listFilm.get(i).getVote()%></td>
                                         <td>
-                                            <a href="" data-toggle="modal" data-target="#edit1">Edit</a> | 
-                                            <a href="#" onclick="return window.confirm('Are you sure!')">Delete</a>
+                                            <a href="" data-toggle="modal" data-target="#edit<%=i%>">Edit</a> 
 
                                         </td>
                                         <!-- Modal edit-->
-                                <div class="modal fade" id="edit1" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal fade" id="edit<%=i%>" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
@@ -78,11 +81,12 @@
                                                 <h5>Edit Sale</h5>
                                                 <hr>
 
-                                                <form class="container" id="needs-validation1" method="post" action="#">
+                                                <form class="container" id="needs-validation1" method="post" action="edit_film" enctype="multipart/form-data">
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
+                                                            <input type="hidden" name="idEdit" value="<%=listFilm.get(i).getId()%>">
                                                             <label for="name">Name Film</label>
-                                                            <input type="text" class="form-control" id="name" name="name" placeholder="name film" required>
+                                                            <input type="text" class="form-control" id="name" name="nameEdit" value="<%=listFilm.get(i).getName()%>" placeholder="name film" required>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid name film.
                                                             </div>
@@ -90,7 +94,7 @@
                                                         <div class="col-md-6 mb-3">
                                                             <label for="country">Country</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" id="country" name="country" placeholder="country" required>
+                                                                <input type="text" class="form-control" id="country" name="countryEdit" value="<%=listFilm.get(i).getProductCountry()%>" placeholder="country" required>
                                                             </div>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid country.
@@ -100,14 +104,14 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <label for="des">Description</label>
-                                                            <textarea class="form-control" id="des" rows="6" required></textarea>
+                                                            <textarea class="form-control" id="des" name="desEdit" rows="6" required><%=listFilm.get(i).getDes()%></textarea>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid des.
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label for="releaseDate">Release Date</label>
-                                                            <input type="date" class="form-control" id="releaseDate" name="releaseDate" placeholder="Release Date" required>
+                                                            <input type="date" class="form-control" id="releaseDate" name="releaseDateEdit" value="<%=listFilm.get(i).getRealeaseDate()%>" placeholder="Release Date" required>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid Release Date.
                                                             </div>
@@ -115,7 +119,7 @@
                                                         <div class="col-md-3 mb-3">
                                                             <label for="vote">Vote</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" id="vote" name="vote" placeholder="vote" required>
+                                                                <input type="text" class="form-control" id="vote" name="voteEdit" value="<%=listFilm.get(i).getVote()%>" placeholder="vote" required>
                                                             </div>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid vote.
@@ -124,7 +128,7 @@
                                                         <div class="col-md-3 mb-3">
                                                             <label for="runningTime">Running Time</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" id="runningTime" name="runningTime" placeholder="Running Time" required>
+                                                                <input type="text" class="form-control" id="runningTime" name="runningTimeEdit" value="<%=listFilm.get(i).getRunningTime()%>" placeholder="Running Time" required>
                                                             </div>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid Running Time.
@@ -133,7 +137,7 @@
                                                         <div class="col-md-6 mb-3">
                                                             <label for="trailer">Link trailer</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" id="trailer" name="trailer" placeholder="trailer" required>
+                                                                <input type="text" class="form-control" id="trailer" name="trailerEdit" value="<%=listFilm.get(i).getTrailer()%>" placeholder="trailer" required>
                                                             </div>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid trailer.
@@ -142,7 +146,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="poster">File input</label>
-                                                        <input type="file" class="form-control-file" id="poster" name="poster"  aria-describedby="fileHelp">
+                                                        <input type="file" class="form-control-file" id="poster" name="posterEdit"  aria-describedby="fileHelp">
                                                         <small id="fileHelp" class="form-text text-muted">Select file poster.</small>
                                                     </div>
                                                     <button class="btn btn-primary" type="submit">Submit form</button>
@@ -152,6 +156,7 @@
                                     </div>
                                 </div>
                                 </tr>
+                                <%}%>
                                 </tbody>
                             </table>
                         </div>
@@ -159,7 +164,7 @@
                         <div class="collapse multi-collapse" id="add">
                             <h5>Add Film</h5>
                             <hr>
-                            <form class="container" id="needs-validation" novalidate>
+                            <form class="container" id="needs-validation" novalidate action="add_film" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="name">Name Film</label>
@@ -181,7 +186,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="des">Description</label>
-                                        <textarea class="form-control" id="des" rows="6" required></textarea>
+                                        <textarea class="form-control" id="des" rows="6" name="des" required></textarea>
                                         <div class="invalid-feedback">
                                             Please provide a valid des.
                                         </div>
@@ -226,7 +231,7 @@
                                     <input type="file" class="form-control-file" id="poster" name="poster"  aria-describedby="fileHelp">
                                     <small id="fileHelp" class="form-text text-muted">Select file poster.</small>
                                 </div>
-                                <button class="btn btn-primary" type="submit">Submit form</button>
+                                <input class="btn btn-primary" type="submit" value="Submit form">
                             </form>
                         </div>
                     </div>

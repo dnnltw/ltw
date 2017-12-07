@@ -13,12 +13,32 @@
         <servlet-class>servlet.admin.HomeAdminServlet</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>Loginservlet</servlet-name>
+        <servlet-class>servlet.Loginservlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangPassServlet</servlet-name>
+        <servlet-class>servlet.ChangPassServlet</servlet-class>
         <servlet-name>AddSaleServlet</servlet-name>
         <servlet-class>servlet.admin.AddSaleServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditSaleServlet</servlet-name>
         <servlet-class>servlet.admin.EditSaleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewFilmServlet</servlet-name>
+        <servlet-class>servlet.admin.AddNewFilmServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditFilmServlet</servlet-name>
+        <servlet-class>servlet.EditFilmServlet</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
@@ -33,12 +53,31 @@
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>Loginservlet</servlet-name>
+        <url-pattern>/Loginservlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangPassServlet</servlet-name>
+        <url-pattern>/ChangPassServlet</url-pattern>
+		
         <servlet-name>AddSaleServlet</servlet-name>
         <url-pattern>/add_sale</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditSaleServlet</servlet-name>
         <url-pattern>/edit_sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewFilmServlet</servlet-name>
+        <url-pattern>/add_film</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFilmServlet</servlet-name>
+        <url-pattern>/edit_film</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
