@@ -4,8 +4,19 @@
     Author     : ducvu
 --%>
 
+<%@page import="model.Sale"%>
+<%@page import="model.Film"%>
+<%@page import="model.Room"%>
+<%@page import="model.Schedule"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- /main -->
+<%
+    ArrayList<Schedule> listSchedule = (ArrayList<Schedule>) request.getAttribute("listSchedule");
+    ArrayList<Film> listFilm = (ArrayList<Film>) request.getAttribute("listFilm");
+    ArrayList<Room> listRoom = (ArrayList<Room>) request.getAttribute("listRoom");
+    ArrayList<Sale> listSale = (ArrayList<Sale>) request.getAttribute("listSale");
+%>
 <div class="container">
     <!-- /breadcrumb -->
     <nav aria-label="breadcrumb" role="navigation">
@@ -24,9 +35,6 @@
                     <li class="list-group-item" >
                         <a data-toggle="collapse" href=".multi-collapse" aria-expanded="false" aria-controls="list add">List Schedule</a>
                     </li>
-                    <!-- <li class="list-group-item" >
-                            <a data-toggle="collapse"  href="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Add</a>
-                    </li> -->
                     <li class="list-group-item">
                         <a data-toggle="collapse" href=".multi-collapse" aria-expanded="false" aria-controls="list add">Add Schedule</a>
                     </li>
@@ -53,18 +61,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <%
+                                        for (Schedule row : listSchedule) {
+                                    %>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Film1</td>
-                                        <td>2011/04/25 00:00:00</td>
-                                        <td>1</td>
-                                        <td>ABC</td>
+                                        <td><%= row.getId()%></td>
+                                        <td><%= row.getFilm().getName()%></td>
+                                        <td><%= row.getDate() + " " + row.getTime()%></td>
+                                        <td><%= row.getRoom().getName()%></td>
+                                        <td><%= row.getSale().getName()%></td>
                                         <td>
-                                            <a href="" data-toggle="modal" data-target="#edit1">Edit</a> | 
+                                            <a href="" data-toggle="modal" data-target="#edit<%= row.getId()%>">Edit</a> | 
                                             <a href="#" onclick="return window.confirm('Are you sure!')">Delete</a>
                                         </td>
                                         <!-- Modal edit-->
-                                <div class="modal fade" id="edit1" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal fade" id="edit<%= row.getId()%>" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-body">
@@ -74,33 +85,41 @@
                                                 <h5>Edit Schedule</h5>
                                                 <hr>
 
-                                                <form class="container" action="#" method="post" id="needs-validation1">
+                                                <form class="container" action="addEditSchedule?action=edit&id=<%= row.getId()%>" method="post" id="needs-validation1">
                                                     <div class="film" data-spy="scroll" data-offset="0" style="height: 275px; overflow-x: hidden; overflow-y: scroll;">
                                                         <!-- /film  -->
+                                                        <%
+                                                            for (Film film : listFilm) {
+                                                                String check = "";
+                                                                if (film.getId() == row.getFilm().getId()) {
+                                                                    check = "checked";
+                                                                }
+                                                        %>
                                                         <div class="col-md-3">
                                                             <div class="card">
-                                                                <img class="card-img-top" src="admin/download.svg" alt="Card image cap">
+                                                                <!--<img class="card-img-top" src="admin/download.svg" alt="Card image cap">-->
                                                                 <div class="card-block text-left mt-2">
                                                                     <label class="custom-control custom-radio">
-                                                                        <input id="film" name="film" type="radio" class="custom-control-input" required>
+                                                                        <input id="film" name="film_id" type="radio" <%= check%> value="<%= film.getId()%>" class="custom-control-input" required>
                                                                         <span class="custom-control-indicator"></span>
-                                                                        <span class="custom-control-description">Name Film</span>
+                                                                        <span class="custom-control-description"><%= film.getName()%></span>
                                                                     </label>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <% }%>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label for="date">Date</label>
-                                                            <input type="date" class="form-control" id="date" name="date" placeholder="Time end" required>
+                                                            <input type="date" class="form-control" id="date" value="<%= row.getDate()%>" name="date" placeholder="Time end" required>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid Date
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label for="time">Time</label>
-                                                            <input type="time" class="form-control" id="time" name="time" placeholder="Time" required>
+                                                            <input type="time" class="form-control" id="time" name="time" value="<%= row.getTime()%>" placeholder="Time" required>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid Time.
                                                             </div>
@@ -110,7 +129,7 @@
                                                         <div class="col-md-6 mb-3">
                                                             <label for="price">Price</label>
                                                             <div class="input-group">
-                                                                <input type="number" class="form-control" id="price" name="price" placeholder="number" aria-label="Amount (to the nearest VND)" required>
+                                                                <input type="number" class="form-control" id="price" name="price" value="<%= row.getPrice()%>" placeholder="number" aria-label="Amount (to the nearest VND)" required>
                                                                 <span class="input-group-addon">VND</span>
                                                             </div>
                                                             <div class="invalid-feedback">
@@ -120,15 +139,27 @@
                                                     </div>
                                                     <select class="custom-select d-block my-3" name="room_id" required>
                                                         <option value="">Choose Room</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                        <%
+                                                            for (Room room : listRoom) {
+                                                                String check = "";
+                                                                if (room.getId() == row.getRoom().getId()) {
+                                                                    check = "selected";
+                                                                }
+                                                        %>
+                                                        <option value="<%= room.getId()%>" <%= check%> ><%= room.getName()%></option>
+                                                        <% } %>
                                                     </select>
-                                                    <select class="custom-select d-block my-3" name="sale_id">
+                                                    <select class="custom-select d-block my-3" name="sale_id" required>
                                                         <option value="">Choose Sale</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
+                                                        <%
+                                                            for (Sale sale : listSale) {
+                                                                String check = "";
+                                                                if (sale.getId() == row.getSale().getId()) {
+                                                                    check = "selected";
+                                                                }
+                                                        %>
+                                                        <option value="<%= sale.getId()%>" <%= check%> ><%= sale.getName()%></option>
+                                                        <% } %>
                                                     </select>
                                                     <button class="btn btn-primary" type="submit">Submit form</button>
                                                 </form>
@@ -137,6 +168,7 @@
                                     </div>
                                 </div>
                                 </tr>
+                                <% } %>
                                 </tbody>
                             </table>
                         </div>
@@ -166,26 +198,29 @@
                                         </li>
                                     </ul>
 
-                                    <form class="container-fluid mt-3" method="post" action="#" id="needs-validation" novalidate>
+                                    <form class="container-fluid mt-3" method="post" action="addEditSchedule?action=add" id="needs-validation" novalidate>
                                         <div class="tab-content">
                                             <div class="tab-pane active" role="tabpanel" id="step1">
                                                 <!-- step 1 select film -->
                                                 <h5>Step 1: Select a moive to schedule</h5>
                                                 <div class="container">
                                                     <div class="film" data-spy="scroll" data-offset="0" style="height: 350px; overflow-x: hidden; overflow-y: scroll;">
-                                                        <!-- /film  -->
+                                                        <%
+                                                            for (Film film : listFilm) {
+                                                        %>
                                                         <div class="col-md-3">
                                                             <div class="card">
-                                                                <img class="card-img-top" src="admin/download.svg" alt="Card image cap">
+                                                                <!--<img class="card-img-top" src="admin/download.svg" alt="Card image cap">-->
                                                                 <div class="card-block text-left mt-2">
                                                                     <label class="custom-control custom-radio">
-                                                                        <input id="film" name="film" type="radio" class="custom-control-input" required>
+                                                                        <input id="film" name="film_id" type="radio" value="<%= film.getId()%>" class="custom-control-input" required>
                                                                         <span class="custom-control-indicator"></span>
-                                                                        <span class="custom-control-description">Name Film</span>
+                                                                        <span class="custom-control-description"><%= film.getName()%></span>
                                                                     </label>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <% }%>
                                                     </div>
                                                 </div>
                                                 <button type="button" class="btn btn-xs btn-primary mt-3 next-step">Save and continue</button>
@@ -223,16 +258,20 @@
                                                 </div>
                                                 <select class="custom-select d-block my-3" name="room_id" required>
                                                     <option value="">Choose Room</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    <%
+                                                        for (Room room : listRoom) {
+                                                    %>
+                                                    <option value="<%= room.getId()%>" ><%= room.getName()%></option>
+                                                    <% } %>
                                                 </select>
-                                                <select class="custom-select d-block my-3" name="sale_id">
+                                                <select class="custom-select d-block my-3" name="sale_id" required>
                                                     <option value="">Choose Sale</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
+                                                    <%
+                                                        for (Sale sale : listSale) {
+                                                    %>
+                                                    <option value="<%= sale.getId()%>" ><%= sale.getName()%></option>
+                                                    <% }%>
+                                                </select>            
                                                 <button type="button" class="btn btn-default prev-step">Previous</button>
                                                 <button type="button" class="btn btn-primary next-step">Save and continue</button>
                                             </div>

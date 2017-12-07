@@ -19,4 +19,6 @@ public interface ScheduleDAO {
     public ArrayList<Schedule> getListSchedule(Connection con);
     
     public boolean editSchedule(Connection con, Schedule sale);
+    
+    public boolean delelteSchedule(Connection con, Schedule sale);
 }

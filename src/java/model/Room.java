@@ -19,6 +19,11 @@ public class Room implements Serializable{
 
     public Room() {
     }
+
+    public Room(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
     
     public void in(){
         System.out.println("ID " +id);

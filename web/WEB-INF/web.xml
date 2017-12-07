@@ -13,7 +13,6 @@
         <servlet-class>servlet.admin.HomeAdminServlet</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>Loginservlet</servlet-name>
         <servlet-class>servlet.Loginservlet</servlet-class>
     </servlet>
@@ -24,6 +23,8 @@
     <servlet>
         <servlet-name>ChangPassServlet</servlet-name>
         <servlet-class>servlet.ChangPassServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AddSaleServlet</servlet-name>
         <servlet-class>servlet.admin.AddSaleServlet</servlet-class>
     </servlet>
@@ -38,7 +39,10 @@
     <servlet>
         <servlet-name>EditFilmServlet</servlet-name>
         <servlet-class>servlet.EditFilmServlet</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>AddEditScheduleServlet</servlet-name>
+        <servlet-class>servlet.admin.AddEditScheduleServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
@@ -63,7 +67,8 @@
     <servlet-mapping>
         <servlet-name>ChangPassServlet</servlet-name>
         <url-pattern>/ChangPassServlet</url-pattern>
-		
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AddSaleServlet</servlet-name>
         <url-pattern>/add_sale</url-pattern>
     </servlet-mapping>
@@ -78,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>EditFilmServlet</servlet-name>
         <url-pattern>/edit_film</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditScheduleServlet</servlet-name>
+        <url-pattern>/addEditSchedule</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

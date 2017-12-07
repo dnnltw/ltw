@@ -20,8 +20,12 @@ import javax.servlet.http.HttpSession;
 import model.User;
 import modelDAO.FilmDAO;
 import modelDAO.FilmDAOImpl;
+import modelDAO.RoomDAO;
+import modelDAO.RoomDAOImpl;
 import modelDAO.SaleDAO;
 import modelDAO.SaleDAOImpl;
+import modelDAO.ScheduleDAO;
+import modelDAO.ScheduleDAOImpl;
 import modelDAO.UserDAO;
 import modelDAO.UserDAOImpl;
 
@@ -33,6 +37,10 @@ public class HomeAdminServlet extends HttpServlet {
 
     protected Connection con = DBConnection.getConnection();
     protected UserDAO userDao = new UserDAOImpl();
+    protected SaleDAO daoSale = new SaleDAOImpl();
+    protected FilmDAO daoFilm = new FilmDAOImpl();
+    protected ScheduleDAO daoSchedule = new ScheduleDAOImpl();
+    protected RoomDAO daoRoom = new RoomDAOImpl();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -76,7 +84,10 @@ public class HomeAdminServlet extends HttpServlet {
             //schedule 
             switch(controller){
                 case "schedule":{
-                    
+                    request.setAttribute("listFilm", daoFilm.getListFilm(con));
+                    request.setAttribute("listSchedule", daoSchedule.getListSchedule(con));
+                    request.setAttribute("listSale", daoSale.getListSale(con));
+                    request.setAttribute("listRoom", daoRoom.getListInforRoom(con));
                 }; 
                 default:{
                     

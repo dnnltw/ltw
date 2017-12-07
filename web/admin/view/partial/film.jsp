@@ -62,7 +62,7 @@
                                     <%for(int i=0 ; i<listFilm.size(); i++){%>
                                     <tr>
                                         <td><%=listFilm.get(i).getId()%></td>
-                                        <td><img src="<%=listFilm.get(i).getPoster()%>"></td>
+                                        <td><img src="<%=listFilm.get(i).getPoster()%>" style="width: 50px;"></td>
                                         <td><%=listFilm.get(i).getName()%></td>
                                         <td><%=listFilm.get(i).getRealeaseDate()%></td>
                                         <td><%=listFilm.get(i).getVote()%></td>

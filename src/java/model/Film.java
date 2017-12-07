@@ -29,6 +29,11 @@ public class Film implements Serializable {
         this.poster = poster;
     }
 
+    public Film(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Film(String name, String productCountry, Date realeaseDate, int runningTime, float vote, String des, String trailer, String poster) {
         this.name = name;
         this.productCountry = productCountry;
