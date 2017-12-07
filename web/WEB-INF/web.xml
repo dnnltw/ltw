@@ -12,6 +12,18 @@
         <servlet-name>HomeAdminServlet</servlet-name>
         <servlet-class>servlet.admin.HomeAdminServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Loginservlet</servlet-name>
+        <servlet-class>servlet.Loginservlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangPassServlet</servlet-name>
+        <servlet-class>servlet.ChangPassServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
         <url-pattern>/SigninServlet</url-pattern>
@@ -23,6 +35,18 @@
     <servlet-mapping>
         <servlet-name>HomeAdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Loginservlet</servlet-name>
+        <url-pattern>/Loginservlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangPassServlet</servlet-name>
+        <url-pattern>/ChangPassServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

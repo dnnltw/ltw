@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% %>
 <link rel="stylesheet" type="text/css" href="css/login_signin.css">
 <div class="main-container">
     <div class="lc-form">
@@ -28,25 +29,27 @@
                                 <div class="lc-form-login-content">
                                     <p class="lc-login-title">Vui lòng nhập tên người dùng (email) và mật khẩu của bạn...</p>
                                     <div class="lc-login-content">
-                                        <ul class="lc-form-list">
-                                            <li class="lc-form-input-email">
-                                                <div class="input-box">
-                                                    <input type="text" name="email" id="email"  title="Địa chỉ email">
-                                                </div>
-                                            </li>
-                                            <li class="lc-form-input-pass">
-                                                <div class="input-box">
-                                                    <input type="password" name="password" id="password"  title="Password">
-                                                </div>
-                                            </li>
-                                        </ul>	
-                                        <div class="lc-form-button">
-                                            <button class="button" type="submit" title="Đăng nhập" name="send">
-                                                <span>
-                                                    <span>Đăng nhập</span>
-                                                </span>
-                                            </button>
-                                        </div>
+                                        <form action="Loginservlet" method="POST">
+                                            <ul class="lc-form-list">
+                                                <li class="lc-form-input-email">
+                                                    <div class="input-box">
+                                                        <input type="text" name="username" id="email"  title="Địa chỉ email">
+                                                    </div>
+                                                </li>
+                                                <li class="lc-form-input-pass">
+                                                    <div class="input-box">
+                                                        <input type="password" name="password" id="password"  title="Password">
+                                                    </div>
+                                                </li>
+                                            </ul>	
+                                            <div class="lc-form-button">
+                                                <button class="button" type="submit" title="Đăng nhập" name="send">
+                                                    <span>
+                                                        <span>Đăng nhập</span>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

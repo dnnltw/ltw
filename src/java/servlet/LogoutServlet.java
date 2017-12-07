@@ -7,23 +7,17 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Client;
-import modelDAO.ClientDAO;
-import modelDAO.ClientDAOImpl;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Dell
  */
-public class SigninServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +36,10 @@ public class SigninServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SigninServlet</title>");            
+            out.println("<title>Servlet LogoutServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SigninServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +57,9 @@ public class SigninServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        session.invalidate();
+        response.sendRedirect("home?controller=home");
     }
 
     /**
@@ -75,23 +71,9 @@ public class SigninServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        Client client = new Client();
-        client.setUsername(request.getParameter("username"));
-        client.setName(request.getParameter("hoten"));
-        client.setAddress(request.getParameter("address"));
-        client.setMail(request.getParameter("email"));
-        client.setPhone(request.getParameter("phone"));
-        client.setPassword(request.getParameter("pass"));
-        System.out.println(request.getParameter("pass"));
-        System.out.println(request.getParameter("cfpass"));
-        try {
-            new ClientDAOImpl().signin(client);
-            response.sendRedirect("/dnnltw/?controller=login_signin");
-        } catch (Exception ex) {
-            Logger.getLogger(SigninServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -103,6 +85,5 @@ public class SigninServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
+
 }
