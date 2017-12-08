@@ -24,6 +24,12 @@ public class Room implements Serializable{
         this.id = id;
         this.name = name;
     }
+
+    public Room(int id, String name, String type) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+    }
     
     public void in(){
         System.out.println("ID " +id);

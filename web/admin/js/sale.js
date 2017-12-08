@@ -10,4 +10,5 @@
 
 $(document).ready(function () {
     $('#example').DataTable();
+    $('#example_cinema').DataTable();
 });

@@ -44,6 +44,14 @@
         <servlet-name>AddEditScheduleServlet</servlet-name>
         <servlet-class>servlet.admin.AddEditScheduleServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddEditRoomServlet</servlet-name>
+        <servlet-class>servlet.admin.AddEditRoomServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEditCinemaServlet</servlet-name>
+        <servlet-class>servlet.admin.AddEditCinemaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
         <url-pattern>/SigninServlet</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>AddEditScheduleServlet</servlet-name>
         <url-pattern>/addEditSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditRoomServlet</servlet-name>
+        <url-pattern>/addEditRoom</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditCinemaServlet</servlet-name>
+        <url-pattern>/addEditCinema</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

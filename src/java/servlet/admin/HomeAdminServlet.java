@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.User;
+import modelDAO.CinemaDAO;
+import modelDAO.CinemaDAOImpl;
 import modelDAO.FilmDAO;
 import modelDAO.FilmDAOImpl;
 import modelDAO.RoomDAO;
@@ -41,6 +43,7 @@ public class HomeAdminServlet extends HttpServlet {
     protected FilmDAO daoFilm = new FilmDAOImpl();
     protected ScheduleDAO daoSchedule = new ScheduleDAOImpl();
     protected RoomDAO daoRoom = new RoomDAOImpl();
+    protected CinemaDAO daoCinema = new CinemaDAOImpl();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -88,6 +91,10 @@ public class HomeAdminServlet extends HttpServlet {
                     request.setAttribute("listSchedule", daoSchedule.getListSchedule(con));
                     request.setAttribute("listSale", daoSale.getListSale(con));
                     request.setAttribute("listRoom", daoRoom.getListInforRoom(con));
+                }; 
+                case "room":{
+                    request.setAttribute("listRoom", daoRoom.getListRoom(con));
+                    request.setAttribute("listCinema", daoCinema.getListCinema(con));
                 }; 
                 default:{
                     
