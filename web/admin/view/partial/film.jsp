@@ -59,7 +59,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%for(int i=0 ; i<listFilm.size(); i++){%>
+                                    <%for (int i = 0; i < listFilm.size(); i++) {%>
                                     <tr>
                                         <td><%=listFilm.get(i).getId()%></td>
                                         <td><img src="<%=listFilm.get(i).getPoster()%>" style="width: 50px;"></td>
@@ -145,6 +145,14 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
+                                                        <label for="Category">Category</label>
+                                                        <select multiple class="form-control" id="Category" name="category" required="">
+                                                            <option>Category1</option>
+                                                            <option>Category2</option>
+                                                            <option>Category3</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label for="poster">File input</label>
                                                         <input type="file" class="form-control-file" id="poster" name="posterEdit"  aria-describedby="fileHelp">
                                                         <small id="fileHelp" class="form-text text-muted">Select file poster.</small>
@@ -225,6 +233,14 @@
                                             Please provide a valid trailer.
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Category">Category</label>
+                                    <select multiple class="form-control" id="Category" name="category" required="">
+                                        <option>Category1</option>
+                                        <option>Category2</option>
+                                        <option>Category3</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="poster">File input</label>

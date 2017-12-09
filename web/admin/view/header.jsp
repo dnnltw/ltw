@@ -29,6 +29,9 @@
                     <a class="nav-link" href="admin?controller=film">Film</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="admin?controller=category">Category</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="admin?controller=room">Room & Cinema</a>
                 </li>
             </ul>

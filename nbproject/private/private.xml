@@ -6,6 +6,7 @@
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/RoomDAO.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/BillDAO.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/servlet/admin/AddSaleServlet.java</file>
+            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/servlet/admin/AddEditCinemaServlet.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/SaleDAO.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/ClientDAOImpl.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/OrderDAO.java</file>
@@ -22,8 +23,10 @@
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/servlet/admin/AddEditScheduleServlet.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/admin_schedule.html</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/index.jsp</file>
+            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/js/sale.js</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/SeatDAOImpl.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/ScheduleDAOImpl.java</file>
+            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/view/partial/sale.jsp</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/ScheduleDAO.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/servlet/SigninServlet.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/model/User.java</file>
@@ -33,7 +36,9 @@
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/OrderDAOImpl.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/UserDAO.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/view/header.jsp</file>
+            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/view/partial/room.jsp</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/FilmDAO.java</file>
+            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/servlet/admin/AddEditRoomServlet.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/UserDAOImpl.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/SeatDAO.java</file>
             <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/model/Sale.java</file>
