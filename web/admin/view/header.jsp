@@ -34,6 +34,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="admin?controller=room">Room & Cinema</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin?controller=seat">Seat</a>
+                </li>
             </ul>
             <%
                 }

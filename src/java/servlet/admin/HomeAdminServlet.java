@@ -28,6 +28,8 @@ import modelDAO.SaleDAO;
 import modelDAO.SaleDAOImpl;
 import modelDAO.ScheduleDAO;
 import modelDAO.ScheduleDAOImpl;
+import modelDAO.SeatDAO;
+import modelDAO.SeatDAOImpl;
 import modelDAO.UserDAO;
 import modelDAO.UserDAOImpl;
 
@@ -44,6 +46,7 @@ public class HomeAdminServlet extends HttpServlet {
     protected ScheduleDAO daoSchedule = new ScheduleDAOImpl();
     protected RoomDAO daoRoom = new RoomDAOImpl();
     protected CinemaDAO daoCinema = new CinemaDAOImpl();
+    protected SeatDAO daoSeat = new SeatDAOImpl();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -91,11 +94,18 @@ public class HomeAdminServlet extends HttpServlet {
                     request.setAttribute("listSchedule", daoSchedule.getListSchedule(con));
                     request.setAttribute("listSale", daoSale.getListSale(con));
                     request.setAttribute("listRoom", daoRoom.getListInforRoom(con));
-                }; 
+                    break;
+                } 
                 case "room":{
                     request.setAttribute("listRoom", daoRoom.getListRoom(con));
                     request.setAttribute("listCinema", daoCinema.getListCinema(con));
-                }; 
+                    break;
+                } 
+                case "seat":{
+                    request.setAttribute("listRoom", daoRoom.getListRoom(con));
+                    request.setAttribute("listSeat", daoSeat.getListSeat(con));
+                    break;
+                } 
                 default:{
                     
                 }

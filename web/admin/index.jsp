@@ -24,8 +24,8 @@
         <%      } else { %>
         <jsp:include page='view/partial/login.jsp' /> 
         <%      }
-        } catch (Exception e) { %>
-        <jsp:include page='view/partial/login.jsp' /> 
+        } catch (Exception e) { System.out.println("Loi404");%>
+        <jsp:include page='view/partial/404.jsp' /> 
         <%    }%>
 
 

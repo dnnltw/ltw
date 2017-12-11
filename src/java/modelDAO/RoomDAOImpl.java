@@ -23,10 +23,11 @@ public class RoomDAOImpl implements RoomDAO {
     @Override
     public boolean addRoom(Connection con, Room room) {
         try {
-            String sql = "INSERT INTO room(name, type) VALUES(?,?)";
+            String sql = "INSERT INTO room(name, type, cinema_id) VALUES(?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, room.getName());
             ps.setString(2, room.getType());
+            ps.setInt(3, room.getCinema_id());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -46,7 +47,8 @@ public class RoomDAOImpl implements RoomDAO {
                 Room room = new Room(
                         rs.getInt("id"), 
                         rs.getString("name"), 
-                        rs.getString("type"));
+                        rs.getString("type"),
+                        rs.getInt("cinema_id"));
                 result.add(room);
             }
         } catch (SQLException ex) {
@@ -59,11 +61,12 @@ public class RoomDAOImpl implements RoomDAO {
     @Override
     public boolean editRoom(Connection con, Room room) {
         try {
-            String sql = "UPDATE room SET name=?, type=? WHERE id=?";
+            String sql = "UPDATE room SET name=?, type=?, cinema_id=? WHERE id=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, room.getName());
             ps.setString(2, room.getType());
-            ps.setInt(3, room.getId());
+            ps.setInt(3, room.getCinema_id());
+            ps.setInt(4, room.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

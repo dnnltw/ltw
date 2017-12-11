@@ -52,6 +52,10 @@
         <servlet-name>AddEditCinemaServlet</servlet-name>
         <servlet-class>servlet.admin.AddEditCinemaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddEditSeatServlet</servlet-name>
+        <servlet-class>servlet.admin.AddEditSeatServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
         <url-pattern>/SigninServlet</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>AddEditCinemaServlet</servlet-name>
         <url-pattern>/addEditCinema</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditSeatServlet</servlet-name>
+        <url-pattern>/addEditSeat</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

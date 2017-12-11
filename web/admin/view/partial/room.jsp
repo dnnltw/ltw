@@ -43,7 +43,7 @@
                         </div>
 
                         <!-- col-10 -->
-                        <div class="col-xs-10">
+                        <div class="col-xs-10" style="width: 83%">
                             <div class="card">
                                 <div class="card-body">
                                     <!-- list sale-->
@@ -59,6 +59,7 @@
                                                     <th>#ID</th>
                                                     <th>Name</th>
                                                     <th>Type</th>
+                                                    <th>Cinema_id</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -68,7 +69,8 @@
                                                 <tr>
                                                     <td><%=room.getId()%></td>
                                                     <td><%=room.getName()%></td>
-                                                    <td><%=room.getType()%></td>
+                                                    <th><%=room.getType()%></th>
+                                                    <td><%=room.getCinema_id()%></td>
                                                     <td>
                                                         <a href="#" data-toggle="modal" data-target="#edit<%=room.getId()%>">Edit</a> 
                                                         <a href="#" onclick="return window.confirm('Are you sure!')">Delete</a>
@@ -112,6 +114,18 @@
                                                                     <option value="<%= t%>" <%= check%> ><%= t%></option>
                                                                     <% } %>
                                                                 </select>    
+                                                                <select class="custom-select d-block my-3" name="cinema_id" required>
+                                                                    <option value="">Choose Room</option>
+                                                                    <%
+                                                                        for (Cinema cinema : listCinema) {
+                                                                            String check = "";
+                                                                            if (room.getCinema_id() == cinema.getId()) {
+                                                                                check = "selected";
+                                                                            }
+                                                                    %>
+                                                                    <option value="<%= cinema.getId()%>" <%= check%> ><%= cinema.getName()%></option>
+                                                                    <% } %>
+                                                                </select>
                                                                 <button class="btn btn-primary" type="submit">Submit form</button>
                                                             </form>
                                                         </div>
@@ -144,7 +158,15 @@
                                                 <option value="VIP">VIP</option>
                                                 <option value="Standard" >Standard</option>
                                                 <option value="Normal" >Normal</option>
-                                            </select>     
+                                            </select>    
+                                            <select class="custom-select d-block my-3" name="cinema_id" required>
+                                                <option value="">Choose Room</option>
+                                                <%
+                                                    for (Cinema cinema : listCinema) {
+                                                %>
+                                                <option value="<%= cinema.getId()%>" ><%= cinema.getName()%></option>
+                                                <% } %>
+                                            </select>
                                             <button class="btn btn-primary" type="submit">Submit form</button>
                                         </form>
                                     </div>

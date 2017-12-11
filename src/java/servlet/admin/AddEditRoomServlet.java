@@ -85,10 +85,10 @@ public class AddEditRoomServlet extends HttpServlet {
             String action = request.getParameter("action");
             switch (action) {
                 case "add": {
-                    int id = Integer.parseInt(request.getParameter("id"));
                     String name = request.getParameter("name");
                     String type = request.getParameter("type");
-                    Room room = new Room(id, name, type);
+                    int cinema_id = Integer.parseInt(request.getParameter("cinema_id"));
+                    Room room = new Room(0, name, type,cinema_id);
 
                     if (daoRoom.addRoom(con, room)) {
                         response.sendRedirect("admin?controller=room&alert=success");
@@ -101,8 +101,8 @@ public class AddEditRoomServlet extends HttpServlet {
                     int id = Integer.parseInt(request.getParameter("id"));
                     String name = request.getParameter("name");
                     String type = request.getParameter("type");
-                    System.out.println(type);
-                    Room room = new Room(id, name, type);
+                    int cinema_id = Integer.parseInt(request.getParameter("cinema_id"));
+                    Room room = new Room(id, name, type,cinema_id);
 
                     if (daoRoom.editRoom(con, room)) {
                         response.sendRedirect("admin?controller=room&alert=success");

@@ -12,32 +12,53 @@ import java.io.Serializable;
  * @author NguyenNgoc
  */
 public class Seat implements Serializable{
+
     private int row;
     private int col;
     private String type;
-    private int idSeat;
+    private int id;
+    private Room room;
     
     public void in(){
-        System.out.println("ID " + idSeat);
+        System.out.println("ID " + id);
         System.out.println("Type " + type);
     }
 
     public Seat() {
     }
 
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Seat(int row, int col, String type, int id, Room room) {
+        this.row = row;
+        this.col = col;
+        this.type = type;
+        this.id = id;
+        this.room = room;
+    }
+
+    
+
+    
     public Seat(int col, int row, String type, int idSeat) {
         this.row = row;
         this.col = col;
         this.type = type;
-        this.idSeat = idSeat;
+        this.id = idSeat;
     }
 
-    public int getIdSeat() {
-        return idSeat;
+    public int getId() {
+        return id;
     }
 
-    public void setIdSeat(int idSeat) {
-        this.idSeat = idSeat;
+    public void setId(int idSeat) {
+        this.id = idSeat;
     }
 
     public int getRow() {
