@@ -4,11 +4,13 @@
     Author     : ducvu
 --%>
 
+<%@page import="model.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Film"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- /main -->
-<%ArrayList<Film> listFilm = (ArrayList<Film>) session.getAttribute("listFilm");%>
+<%ArrayList<Film> listFilm = (ArrayList<Film>) request.getAttribute("listFilm");
+    ArrayList<Category> listCategory = (ArrayList<Category>) request.getAttribute("listCategory");%>
 <div class="container">
     <!-- /breadcrumb -->
     <nav aria-label="breadcrumb" role="navigation">
@@ -145,14 +147,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="Category">Category</label>
-                                                        <select multiple class="form-control" id="Category" name="category" required="">
-                                                            <option>Category1</option>
-                                                            <option>Category2</option>
-                                                            <option>Category3</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <label for="poster">File input</label>
                                                         <input type="file" class="form-control-file" id="poster" name="posterEdit"  aria-describedby="fileHelp">
                                                         <small id="fileHelp" class="form-text text-muted">Select file poster.</small>
@@ -172,7 +166,7 @@
                         <div class="collapse multi-collapse" id="add">
                             <h5>Add Film</h5>
                             <hr>
-                            <form class="container" id="needs-validation" novalidate action="add_film" method="post" enctype="multipart/form-data">
+                            <form class="container" id="needs-validation" novalidate action="add_edit_film?action=add" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="name">Name Film</label>
@@ -237,9 +231,9 @@
                                 <div class="form-group">
                                     <label for="Category">Category</label>
                                     <select multiple class="form-control" id="Category" name="category" required="">
-                                        <option>Category1</option>
-                                        <option>Category2</option>
-                                        <option>Category3</option>
+                                        <%for (Category c : listCategory) {%>
+                                            <option><%=c.getName()%></option>
+                                        <%}%>
                                     </select>
                                 </div>
                                 <div class="form-group">

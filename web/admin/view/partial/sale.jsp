@@ -8,7 +8,7 @@
 <%@page import="model.Sale"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- /main -->
-<%ArrayList<Sale> listSale = (ArrayList<Sale>) session.getAttribute("listSale");%>
+<%ArrayList<Sale> listSale = (ArrayList<Sale>) request.getAttribute("listSale");%>
 <div class="container">
     <!-- /breadcrumb -->
     <nav aria-label="breadcrumb" role="navigation">
@@ -87,10 +87,9 @@
                                                 <h5>Edit Sale</h5>
                                                 <hr>
 
-                                                <form class="container" id="needs-validation" novalidate action="edit_sale" method="post">
+                                                <form class="container" id="needs-validation" novalidate action="add_edit_sale?action=edit&idEdit=<%=listSale.get(i).getId()%>" method="post">
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
-                                                            <input type="hidden" name="idEdit" value="<%=listSale.get(i).getId()%>">
                                                             <label for="nameSale">Name sale</label>
                                                             <input type="text" class="form-control" id="nameSale" name="nameEdit" value="<%=listSale.get(i).getName()%>" placeholder="name sale" required>
                                                             <div class="invalid-feedback">
@@ -148,7 +147,7 @@
                         <div class="collapse multi-collapse" id="add">
                             <h5>Add Sale</h5>
                             <hr>
-                            <form class="container" id="needs-validation" novalidate action="add_sale" method="post">
+                            <form class="container" id="needs-validation" novalidate action="add_edit_sale?action=add" method="post">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="nameSale">Name sale</label>

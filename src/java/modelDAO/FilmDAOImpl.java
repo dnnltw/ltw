@@ -5,6 +5,7 @@
  */
 package modelDAO;
 
+import control.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Category;
 import model.Film;
 
 /**
@@ -34,11 +36,28 @@ public class FilmDAOImpl implements FilmDAO{
             ps.setString(7, film.getTrailer());
             ps.setString(8, film.getPoster());
             ps.executeUpdate();
+            for(Category c: film.getCategories()){
+                addCategoryFilm(con, DBConnection.getMaxIDOfTable("film"), c.getId());
+            }
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    
+    public boolean addCategoryFilm(Connection con, int idFilm, int idCategory){
+        try {
+            String sql = "INSERT INTO category_film(filmid, categoryid) VALUES(?,?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idFilm);
+            ps.setInt(2, idCategory);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     @Override
@@ -59,6 +78,10 @@ public class FilmDAOImpl implements FilmDAO{
                         rs.getString(8), 
                         rs.getString(9));
                 result.add(a);
+            }
+            CategoryDAO daoCate = new CategoryDAOImpl();
+            for(Film f:result){
+                f.setCategories(daoCate.getListCategoryByFilm(con, f));
             }
         } catch (SQLException ex) {
             Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
