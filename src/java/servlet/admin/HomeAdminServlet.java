@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.User;
+import modelDAO.CategoryDAO;
+import modelDAO.CategoryDAOImpl;
 import modelDAO.CinemaDAO;
 import modelDAO.CinemaDAOImpl;
 import modelDAO.FilmDAO;
@@ -47,6 +49,7 @@ public class HomeAdminServlet extends HttpServlet {
     protected RoomDAO daoRoom = new RoomDAOImpl();
     protected CinemaDAO daoCinema = new CinemaDAOImpl();
     protected SeatDAO daoSeat = new SeatDAOImpl();
+    protected CategoryDAO daoCate = new CategoryDAOImpl();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -105,7 +108,20 @@ public class HomeAdminServlet extends HttpServlet {
                     request.setAttribute("listRoom", daoRoom.getListRoom(con));
                     request.setAttribute("listSeat", daoSeat.getListSeat(con));
                     break;
-                } 
+                }
+                case "sale":{
+                    request.setAttribute("listSale", daoSale.getListSale(con));
+                    break;
+                }
+                case "film":{
+                    request.setAttribute("listCategory", daoCate.getListCategory(con));
+                    request.setAttribute("listFilm", daoFilm.getListFilm(con));
+                    break;
+                }
+                case "category":{
+                    request.setAttribute("listCategory", daoCate.getListCategory(con));
+                    break;
+                }
                 default:{
                     
                 }
@@ -136,8 +152,6 @@ public class HomeAdminServlet extends HttpServlet {
         if(userDao.checkLoginAdmin(con, user)){
             SaleDAO daoSale = new SaleDAOImpl();
             FilmDAO daoFilm = new FilmDAOImpl();
-            session.setAttribute("listFilm", daoFilm.getListFilm(con));
-            session.setAttribute("listSale", daoSale.getListSale(con));
             session.setAttribute("admin_login", user);
             response.sendRedirect("admin?controller=home");
         }else {

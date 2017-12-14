@@ -4,7 +4,10 @@
     Author     : ducvu
 --%>
 
+<%@page import="model.Category"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%ArrayList<Category> listCategory = (ArrayList<Category>) request.getAttribute("listCategory"); %>
 <div class="container">
     <!-- /breadcrumb -->
     <nav aria-label="breadcrumb" role="navigation">
@@ -48,16 +51,17 @@
                                     <tr>
                                         <th>#ID</th>
                                         <th>Name</th>
-                                        <th>Number</th>
+                                        <th>Description</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
 
+                                <tbody>
+                                    <%for (Category c : listCategory) {%>
                                     <tr>
-                                        <td>id</td>
-                                        <td>name</td>
-                                        <td>Number</td>
+                                        <td><%=c.getId()%></td>
+                                        <td><%=c.getName()%></td>
+                                        <td><%=c.getDes()%></td>
                                         <td>
                                             <a href="#" data-toggle="modal" data-target="#edit1">Edit</a> 
                                             <!--<a href="#" onclick="return window.confirm('Are you sure!')">Delete</a>-->
@@ -78,21 +82,20 @@
                                                 <h5>Edit Category</h5>
                                                 <hr>
 
-                                                <form class="container" id="needs-validation" novalidate action="" method="post">
+                                                <form class="container" id="needs-validation" novalidate action="add_edit_category?action=edit&idCateEdit=<%=c.getId()%>" method="post">
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
-                                                            <input type="hidden" name="idEdit" value="">
                                                             <label for="nameSale">Name Category</label>
-                                                            <input type="text" class="form-control" id="nameSale" name="nameEdit" value="" placeholder="name sale" required>
+                                                            <input type="text" class="form-control" id="nameCategoryEdit" name="nameCategoryEdit" value="<%=c.getName()%>" placeholder="Name Category" required>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid name Category.
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
-                                                            <label for="number">Number</label>
+                                                            <label for="number">Description</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" id="number" name="numberEdit" placeholder="number" value="" aria-label="Amount % (to the nearest VND)" required>
-                                                                <span class="input-group-addon">%</span>
+                                                                <input type="text" class="form-control" id="desEdit" name="desEdit" placeholder="Des Edit" value="<%=c.getDes()%>"  required>
+                                                                
                                                             </div>
                                                             <div class="invalid-feedback">
                                                                 Please provide a valid number.
@@ -106,7 +109,7 @@
                                     </div>
                                 </div>
                                 </tr>
-
+                                    <%}%>
                                 </tbody>
                             </table>
                             <!--</form>-->
@@ -115,20 +118,19 @@
                         <div class="collapse multi-collapse" id="add">
                             <h5>Add Category</h5>
                             <hr>
-                            <form class="container" id="needs-validation" novalidate action="" method="post">
+                            <form class="container" id="needs-validation" novalidate action="add_edit_category?action=add" method="post">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="nameSale">Name sale</label>
-                                        <input type="text" class="form-control" id="nameSale" name="name" placeholder="name sale" required>
+                                        <label for="nameSale">Name Category</label>
+                                        <input type="text" class="form-control" id="nameSale" name="nameCategory" placeholder="name Category" required>
                                         <div class="invalid-feedback">
                                             Please provide a valid name sale.
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="number">Number</label>
+                                        <label for="number">Description</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="number" name="number" placeholder="number" aria-label="Amount % (to the nearest VND)" required>
-                                            <span class="input-group-addon">%</span>
+                                            <input type="text" class="form-control" id="des" name="des" placeholder="des" required>
                                         </div>
                                         <div class="invalid-feedback">
                                             Please provide a valid number.

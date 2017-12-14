@@ -5,28 +5,18 @@
  */
 package servlet.admin;
 
-import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Sale;
-import modelDAO.SaleDAO;
-import modelDAO.SaleDAOImpl;
 
 /**
  *
  * @author NguyenNgoc
  */
-public class AddSaleServlet extends HttpServlet {
+public class AddEditFilm extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,10 +35,10 @@ public class AddSaleServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddSaleServlet</title>");
+            out.println("<title>Servlet AddEditFilm</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddSaleServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddEditFilm at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -82,26 +72,26 @@ public class AddSaleServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        try {
-            String nameSale = request.getParameter("name");
-            float number = Float.parseFloat(request.getParameter("number"));
-            String des = request.getParameter("des");
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            java.sql.Date sdate = new java.sql.Date(formatter.parse(request.getParameter("sdate")).getTime());
-            java.sql.Date edate = new java.sql.Date(formatter.parse(request.getParameter("edate")).getTime());
-            Sale sale = new Sale();
-            sale.setName(nameSale); sale.setNumber(number); sale.setDes(des); sale.setSdate(sdate); sale.setEdate(edate);
-            SaleDAO dao = new SaleDAOImpl();
-            Connection con = DBConnection.getConnection();
-            if(dao.addSale(con, sale)){
-                HttpSession session = request.getSession();
-                session.setAttribute("listSale", dao.getListSale(con));
-                response.sendRedirect("admin?controller=sale");
-            }else{
-                response.sendRedirect("admin");
+
+        if (request.getParameter("action") != null) {
+            String action = request.getParameter("action");
+            switch (action) {
+                case "add": {
+                    String[] listCategory = request.getParameterValues("category");
+                    System.out.println(request.getParameter("category"));
+                    break;
+                }
+                case "edit": {
+                    
+                    break;
+                }
+                case "delete": {
+                    break;
+                }
+                default: {
+
+                }
             }
-        } catch (ParseException ex) {
-            Logger.getLogger(AddSaleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

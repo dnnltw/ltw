@@ -9,25 +9,22 @@ import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Sale;
-import modelDAO.SaleDAO;
-import modelDAO.SaleDAOImpl;
+import model.Category;
+import modelDAO.CategoryDAO;
+import modelDAO.CategoryDAOImpl;
 
 /**
  *
  * @author NguyenNgoc
  */
-public class EditSaleServlet extends HttpServlet {
+public class AddEditCategory extends HttpServlet {
 
+    protected CategoryDAO daoCa = new CategoryDAOImpl();
+    protected Connection con = DBConnection.getConnection();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,10 +42,10 @@ public class EditSaleServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditSaleServlet</title>");            
+            out.println("<title>Servlet AddEditCategory</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditSaleServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddEditCategory at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -82,30 +79,42 @@ public class EditSaleServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        try {
-//            int select = Integer.parseInt(request.getAttribute("saleSelected").toString());
-//            System.out.println(select);
-            int id = Integer.parseInt(request.getParameter("idEdit"));
-            System.out.println(id);
-            String name = request.getParameter("nameEdit");
-            System.out.println(name);
-            float number = Float.parseFloat(request.getParameter("numberEdit"));
-            String des = request.getParameter("desEdit");
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            java.sql.Date sdate = new java.sql.Date(formatter.parse(request.getParameter("sdateEdit")).getTime());
-            java.sql.Date edate = new java.sql.Date(formatter.parse(request.getParameter("edateEdit")).getTime());
-            Sale newSale = new Sale(id, name, sdate, edate, number, des);
-            Connection con = DBConnection.getConnection();
-            SaleDAO daoSale = new SaleDAOImpl();
-            if(daoSale.editSale(con, newSale)){
-                HttpSession session = request.getSession();
-                session.setAttribute("listSale", daoSale.getListSale(con));
-                response.sendRedirect("admin?controller=sale");
-            }else{
-                response.sendRedirect("admin");
+
+        if (request.getParameter("action") != null) {
+            String action = request.getParameter("action");
+            switch (action) {
+                case "add": {
+                    String name = request.getParameter("nameCategory");
+                    String des = request.getParameter("des");
+                    Category c = new Category(name, des);
+                    if(daoCa.addCategory(con, c)){
+                        request.setAttribute("listCategory", daoCa.getListCategory(con));
+                        response.sendRedirect("admin?controller=category");
+                    }else{
+                        response.sendRedirect("admin?controller=category&alert=fail");
+                    }
+                    break;
+                }
+                case "edit": {
+                    String nameEdit = request.getParameter("nameCategoryEdit");
+                    String desEdit = request.getParameter("desEdit");
+                    int id = Integer.parseInt(request.getParameter("idCateEdit"));
+                    Category c = new Category(id, nameEdit, desEdit);
+                    if(daoCa.editCategory(con, c)){
+                        request.setAttribute("listCategory", daoCa.getListCategory(con));
+                        response.sendRedirect("admin?controller=category");
+                    }else{
+                        response.sendRedirect("admin?controller=category&alert=fail");
+                    }
+                    break;
+                }
+                case "delete": {
+                    break;
+                }
+                default: {
+
+                }
             }
-        } catch (ParseException ex) {
-            Logger.getLogger(EditSaleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
