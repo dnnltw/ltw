@@ -10,7 +10,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- /main -->
 <%ArrayList<Film> listFilm = (ArrayList<Film>) request.getAttribute("listFilm");
-    ArrayList<Category> listCategory = (ArrayList<Category>) request.getAttribute("listCategory");%>
+    ArrayList<Category> listCategory = (ArrayList<Category>) request.getAttribute("listCategory");
+    session.setAttribute("listCategory", listCategory);
+%>
 <div class="container">
     <!-- /breadcrumb -->
     <nav aria-label="breadcrumb" role="navigation">
