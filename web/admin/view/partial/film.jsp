@@ -85,7 +85,7 @@
                                                 <h5>Edit Sale</h5>
                                                 <hr>
 
-                                                <form class="container" id="needs-validation1" method="post" action="edit_film" enctype="multipart/form-data">
+                                                <form class="container" id="needs-validation1" method="post" action="add_edit_film?action=edit" enctype="multipart/form-data">
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <input type="hidden" name="idEdit" value="<%=listFilm.get(i).getId()%>">
