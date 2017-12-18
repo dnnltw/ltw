@@ -86,4 +86,18 @@ public class CategoryDAOImpl implements CategoryDAO {
         return result;
     }
 
+    @Override
+    public boolean isExist(Connection con, Category c) {
+        try {
+            String sql = "SELECT * FROM category WHERE name = ? ;";
+            PreparedStatement pre = con.prepareStatement(sql);
+            pre.setString(1, c.getName());
+            ResultSet rs = pre.executeQuery();
+            return true;
+        } catch (SQLException ex) {
+//            return false;
+        }
+        return false;
+    }
+
 }

@@ -12,6 +12,7 @@
         <title>ADMIN DNN CGV</title>
         <link rel="stylesheet" href="admin/css/bootstrap.css">
         <link rel="stylesheet" href="admin/css/dataTables.bootstrap4.css">
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
         <style>
             .tb {
                 position: fixed;

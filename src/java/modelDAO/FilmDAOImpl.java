@@ -107,5 +107,43 @@ public class FilmDAOImpl implements FilmDAO{
         }
         return false;
     }
+
+    @Override
+    public boolean isExist(Connection con, Film film) {
+        try {
+            String sql = "SELECT * FROM film WHERE app_id = ? ;";
+            PreparedStatement pre = con.prepareStatement(sql);
+            pre.setInt(1, film.getApi_id());
+            ResultSet rs = pre.executeQuery();
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addFilmApi(Connection con, Film film) {
+        try {
+            String sql = "INSERT INTO film(name, productCountry, releaseDate, runningtime, vote, des, trailer, poster, api_id) VALUES(?, ?, ?, ?, ?, ?, ?,  ?,?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, film.getName());
+            ps.setString(2, film.getProductCountry());
+            ps.setDate(3, film.getRealeaseDate());
+            ps.setInt(4, film.getRunningTime());
+            ps.setFloat(5, film.getVote());
+            ps.setString(6, film.getDes());
+            ps.setString(7, film.getTrailer());
+            ps.setString(8, film.getPoster());
+            ps.setInt(9, film.getApi_id());
+            ps.executeUpdate();
+            for(Category c: film.getCategories()){
+                addCategoryFilm(con, DBConnection.getMaxIDOfTable("film"), c.getId());
+            }
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     
 }

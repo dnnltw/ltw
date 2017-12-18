@@ -16,7 +16,7 @@
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Sale</li>
+            <li class="breadcrumb-item active" aria-current="page">Film</li>
         </ol>
     </nav>
 
@@ -166,7 +166,7 @@
                         <div class="collapse multi-collapse" id="add">
                             <h5>Add Film</h5>
                             <hr>
-                            <form class="container" id="needs-validation" novalidate action="add_edit_film?action=add" method="post" enctype="multipart/form-data">
+                            <form class="container" id="needs-validation" novalidate action="add_film?action=add" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="name">Name Film</label>
@@ -230,9 +230,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Category">Category</label>
-                                    <select multiple class="form-control" id="Category" name="category" required="">
+                                    <select multiple class="form-control" id="Category" name="category" required>
                                         <%for (Category c : listCategory) {%>
-                                            <option><%=c.getName()%></option>
+                                            <option value="<%=c.getId()%>"><%=c.getName()%></option>
                                         <%}%>
                                     </select>
                                 </div>

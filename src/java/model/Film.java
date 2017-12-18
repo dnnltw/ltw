@@ -20,6 +20,7 @@ public class Film implements Serializable {
     private Date realeaseDate;
     private int runningTime;
     private float vote;
+    private int api_id;
     private String des, trailer, poster;
     private ArrayList<Category> categories;
 
@@ -36,6 +37,16 @@ public class Film implements Serializable {
         this.categories = categories;
     }
 
+    
+    public int getApi_id() {
+        return api_id;
+    }
+
+    public void setApi_id(int api_id) {
+        this.api_id = api_id;
+    }
+
+    
     public ArrayList<Category> getCategories() {
         return categories;
     }
@@ -97,6 +108,20 @@ public class Film implements Serializable {
         this.vote = vote;
         this.des = des;
         this.trailer = trailer;
+    }
+
+    public Film(int id, String name, String productCountry, Date realeaseDate, int runningTime, float vote, int api_id, String des, String trailer, String poster, ArrayList<Category> categories) {
+        this.id = id;
+        this.name = name;
+        this.productCountry = productCountry;
+        this.realeaseDate = realeaseDate;
+        this.runningTime = runningTime;
+        this.vote = vote;
+        this.api_id = api_id;
+        this.des = des;
+        this.trailer = trailer;
+        this.poster = poster;
+        this.categories = categories;
     }
 
     public Film() {
