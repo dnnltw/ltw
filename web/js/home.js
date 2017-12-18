@@ -12,7 +12,7 @@ $(document).ready(function() {
 			function createItemFilm(srcImg, hrefchitiet, filmname){
 				var divitem = createDivAtrr('div', 'class', 'item');
 				var div2 = createDivAtrr('div', 'class', 'col-xs-12 col-sm-6 col-md-3 item-res');
-				var aa = createDivAtrr('a', 'href', '#');
+				var aa = createDivAtrr('a', 'href', '');
 				var img = $(document.createElement('img')).attr({
 					src: baseUrlImg+srcImg,
 					class: 'img-responsive'
@@ -65,7 +65,7 @@ $(document).ready(function() {
                                             if(key>=8) exit;
 						$('.selection-item').append(createItemFilm(
 							value.poster_path,
-							createpPathUrl(window.location.href)+"?controller=detail_film&movies="+value.id,
+							createpPathUrl(window.location.href)+"home?controller=detail_film&movies="+value.id,
 							value.title
 						));
 					});

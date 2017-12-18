@@ -5,8 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% %>
+<%%>
 <link rel="stylesheet" type="text/css" href="css/login_signin.css">
+<style>
+    .lc-login-t {
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 10px;
+        width: 100%;
+        font-style: italic;
+    }
+</style>
 <div class="main-container">
     <div class="lc-form">
         <div class="lc-form-main">
@@ -28,6 +36,8 @@
                             <div class="lc-form-login-main">
                                 <div class="lc-form-login-content">
                                     <p class="lc-login-title">Vui lòng nhập tên người dùng (email) và mật khẩu của bạn...</p>
+                                    <p class="lc-login-t">Account Demo( Username: demo_d3m0 | Password: demo_d3m0)</p>
+
                                     <div class="lc-login-content">
                                         <form action="Loginservlet" method="POST">
                                             <ul class="lc-form-list">
@@ -51,6 +61,7 @@
                                             </div>
                                         </form>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -85,7 +96,7 @@
                                                     <input type="number" class="input-sign form-control" name="phone" id="phone" placeholder="Số điện thoại" min="0" required="">
                                                     <p id="checksdt" style="color: #737373; size: 10px;"> Example:0123xxxxxx</p>
                                                 </div>
-                                                 <div class="col-md-6 form-group">
+                                                <div class="col-md-6 form-group">
                                                     <label for="cf-password">Nhập lại Mật khẩu<span class="important">*</span></label>
                                                     <input type="password" class="input-sign form-control" name="cfpass" id="cf-password" placeholder="Nhập lại Mật khẩu" required="">
                                                     <p id="checkpass" style="color: #737373; size: 10px;">Example: myp4ssw0rd </p>
@@ -120,46 +131,46 @@
         var str = document.formSignin.phone.value;
         var patt = new RegExp("(\\+84|0)\\d{9,10}");
         var res = patt.test(str);
-        if(!res){
+        if (!res) {
             document.getElementById("checksdt").innerHTML = document.formSignin.phone.value + ' isn\'t a phone number with area code!';
-            document.getElementById("checksdt").style.color="red";
-            document.formSignin.phone.value="";
-            document.formSignin.pass.value="";
-            document.formSignin.cfpass.value="";
+            document.getElementById("checksdt").style.color = "red";
+            document.formSignin.phone.value = "";
+            document.formSignin.pass.value = "";
+            document.formSignin.cfpass.value = "";
             document.formSignin.phone.focus();
             return false;
-        } else{
-            document.getElementById("checksdt").innerHTML ="";
+        } else {
+            document.getElementById("checksdt").innerHTML = "";
         }
-        if(document.formSignin.pass.value != document.formSignin.cfpass.value){
+        if (document.formSignin.pass.value != document.formSignin.cfpass.value) {
             document.getElementById("checkpass").innerHTML = "Passwords do not match";
-            document.getElementById("checkpass").style.color="red";
-            document.formSignin.pass.value="";
-            document.formSignin.cfpass.value="";
+            document.getElementById("checkpass").style.color = "red";
+            document.formSignin.pass.value = "";
+            document.formSignin.cfpass.value = "";
             document.formSignin.pass.focus();
             return false;
         }
         var pass = document.formSignin.pass.value;
         var pattern = new RegExp("^[a-z0-9_-]{6,18}$");
         var result = pattern.test(pass);
-        if(!result){
+        if (!result) {
             document.getElementById("checkpass").innerHTML = "Weak password!";
-            document.getElementById("checkpass").style.color="red";
+            document.getElementById("checkpass").style.color = "red";
             document.formSignin.pass.focus();
             return false;
-        } 
+        }
         var user = document.formSignin.username.value;
         var patternUsername = new RegExp("^[a-z0-9_-]{3,16}$");
         var resu = patternUsername.test(user);
-        if(!resu){
+        if (!resu) {
             document.getElementById("checkuser").innerHTML = "Invalid Username! ";
-            document.getElementById("checkuser").style.color="red";
+            document.getElementById("checkuser").style.color = "red";
             document.formSignin.username.focus();
             return false;
-        }else{
-            document.getElementById("checkuser").innerHTML ="";
+        } else {
+            document.getElementById("checkuser").innerHTML = "";
         }
-        
+
         return true;
     }
 </script>
