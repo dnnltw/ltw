@@ -76,7 +76,7 @@
                         <li><a href="" title="">CGV ArtHouse</a></li>
                     </ul>
                 </li>
-                <li><a href="" title="">LỊCH CHIẾU</a></li>
+                <li><a href="home?controller=schedule" title="">LỊCH CHIẾU</a></li>
                 <li>
                     <a href="" title="">RẠP CGV</a>
                     <ul class="menu-sub">

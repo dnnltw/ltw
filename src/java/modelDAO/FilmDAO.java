@@ -14,8 +14,11 @@ import model.Film;
  * @author NguyenNgoc
  */
 public interface FilmDAO {
+    public boolean isExist(Connection con, Film film);
+    
     public boolean addFilm(Connection con, Film film);
     
+    public boolean addFilmApi(Connection con, Film film);
     public ArrayList<Film> getListFilm(Connection con);
     
     public boolean updateFilm(Connection con, Film film);

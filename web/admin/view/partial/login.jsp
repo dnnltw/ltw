@@ -9,8 +9,6 @@
     <div class="row">
         <!-- col-6  login-->
         <div class="col-md-4 offset-md-4">
-            <h5>Login</h5>
-            <hr>
             <form method="post" action="admin">
                 <div class="form-group">
                     <label class="col-form-label" for="username">Username</label>

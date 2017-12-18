@@ -15,6 +15,7 @@ import model.Film;
  * @author NguyenNgoc
  */
 public interface CategoryDAO {
+    public boolean isExist(Connection con, Category c);
 
     public boolean addCategory(Connection con, Category c);
 
