@@ -125,6 +125,7 @@ public class Film implements Serializable {
     }
 
     public Film() {
+        categories = new ArrayList<>();
     }
 
     public int getId() {
