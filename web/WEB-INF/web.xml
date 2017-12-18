@@ -13,7 +13,6 @@
         <servlet-class>servlet.admin.HomeAdminServlet</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>Loginservlet</servlet-name>
         <servlet-class>servlet.Loginservlet</servlet-class>
     </servlet>
@@ -24,12 +23,6 @@
     <servlet>
         <servlet-name>ChangPassServlet</servlet-name>
         <servlet-class>servlet.ChangPassServlet</servlet-class>
-        <servlet-name>AddSaleServlet</servlet-name>
-        <servlet-class>servlet.admin.AddSaleServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditSaleServlet</servlet-name>
-        <servlet-class>servlet.admin.EditSaleServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddNewFilmServlet</servlet-name>
@@ -37,8 +30,35 @@
     </servlet>
     <servlet>
         <servlet-name>EditFilmServlet</servlet-name>
-        <servlet-class>servlet.EditFilmServlet</servlet-class>
-
+        <servlet-class>servlet.admin.EditFilmServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEditScheduleServlet</servlet-name>
+        <servlet-class>servlet.admin.AddEditScheduleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEditRoomServlet</servlet-name>
+        <servlet-class>servlet.admin.AddEditRoomServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEditCinemaServlet</servlet-name>
+        <servlet-class>servlet.admin.AddEditCinemaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEditSeatServlet</servlet-name>
+        <servlet-class>servlet.admin.AddEditSeatServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEditSale</servlet-name>
+        <servlet-class>servlet.admin.AddEditSale</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEditCategory</servlet-name>
+        <servlet-class>servlet.admin.AddEditCategory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddEditFilm</servlet-name>
+        <servlet-class>servlet.admin.AddEditFilm</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
@@ -63,13 +83,6 @@
     <servlet-mapping>
         <servlet-name>ChangPassServlet</servlet-name>
         <url-pattern>/ChangPassServlet</url-pattern>
-		
-        <servlet-name>AddSaleServlet</servlet-name>
-        <url-pattern>/add_sale</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditSaleServlet</servlet-name>
-        <url-pattern>/edit_sale</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddNewFilmServlet</servlet-name>
@@ -78,6 +91,34 @@
     <servlet-mapping>
         <servlet-name>EditFilmServlet</servlet-name>
         <url-pattern>/edit_film</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditScheduleServlet</servlet-name>
+        <url-pattern>/addEditSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditRoomServlet</servlet-name>
+        <url-pattern>/addEditRoom</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditCinemaServlet</servlet-name>
+        <url-pattern>/addEditCinema</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditSeatServlet</servlet-name>
+        <url-pattern>/addEditSeat</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditSale</servlet-name>
+        <url-pattern>/add_edit_sale</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditCategory</servlet-name>
+        <url-pattern>/add_edit_category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEditFilm</servlet-name>
+        <url-pattern>/add_edit_film</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

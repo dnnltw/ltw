@@ -5,10 +5,79 @@
  */
 package modelDAO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Room;
+import model.Seat;
+
 /**
  *
  * @author NguyenNgoc
  */
 public class SeatDAOImpl implements SeatDAO{
+
+    @Override
+    public boolean addSeat(Connection con, Seat seat) {
+        try {
+            String sql = "INSERT INTO seat(col, row, type, room_id) VALUES(?,?,?,?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,seat.getCol());
+            ps.setInt(2, seat.getRow());
+            ps.setString(3, seat.getType());
+            ps.setInt(4, seat.getRoom().getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(SeatDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    @Override
+    public ArrayList<Seat> getListSeat(Connection con) {
+        ArrayList<Seat> result = new ArrayList<Seat>();
+        try {
+            String sql = "SELECT * FROM seat";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Room room = new Room(rs.getInt("room_id"), "");
+                Seat seat = new Seat(
+                        rs.getInt("col"), 
+                        rs.getInt("row"), 
+                        rs.getString("type"), 
+                        rs.getInt("id"), 
+                        room);
+                result.add(seat);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SeatDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean editSeat(Connection con, Seat seat) {
+        try {
+            String sql = "UPDATE seat SET col=?, row=?, type=?, room_id=? WHERE id=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,seat.getCol());
+            ps.setInt(2, seat.getRow());
+            ps.setString(3, seat.getType());
+            ps.setInt(4, seat.getRoom().getId());
+            ps.setInt(5,seat.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(SeatDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
     
 }

@@ -9,11 +9,40 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>ADMIN DNN CGV</title>
         <link rel="stylesheet" href="admin/css/bootstrap.css">
         <link rel="stylesheet" href="admin/css/dataTables.bootstrap4.css">
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+        <style>
+            .tb {
+                position: fixed;
+                top: 90px;
+            }
+        </style>
     </head>
     <body>
+        <!--alert success-->
+        <%
+            if (request.getParameter("alert") != null && request.getParameter("alert").equals("success")) {
+        %>
+        <div class="tb alert alert-success" role="alert">
+            Success!!!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>  
+        <%   }%>
+        <!--alert fail-->
+        <%
+            if (request.getParameter("alert") != null && request.getParameter("alert").equals("fail")) {
+        %>
+        <div class="tb alert alert-danger" role="alert">
+            Fail!!!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>  
+        <%   }%>
         <jsp:include page='view/header.jsp' />
 
         <%
@@ -24,8 +53,9 @@
         <%      } else { %>
         <jsp:include page='view/partial/login.jsp' /> 
         <%      }
-        } catch (Exception e) { %>
-        <jsp:include page='view/partial/login.jsp' /> 
+        } catch (Exception e) {
+            System.out.println("Loi404");%>
+        <jsp:include page='view/partial/404.jsp' /> 
         <%    }%>
 
 
@@ -54,6 +84,13 @@
                     }, false);
                 }, false);
             })();
+
+            $(document).ready(function () {
+//                $(".tb").fadeTo(2000, 500).slideUp(500, function () {
+//                    $(".tb").slideUp(500);
+//                });
+            });
+
         </script>
     </body>
 </html>

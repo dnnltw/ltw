@@ -5,10 +5,20 @@
  */
 package modelDAO;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import model.Room;
+
 /**
  *
  * @author NguyenNgoc
  */
 public interface RoomDAO {
+    public boolean addRoom(Connection con, Room room);
+
+    public ArrayList<Room> getListRoom(Connection con);
     
+    public ArrayList<Room> getListInforRoom(Connection con);
+    
+    public boolean editRoom(Connection con, Room room);
 }

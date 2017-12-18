@@ -15,9 +15,28 @@ public class Room implements Serializable{
     private int id;
     private String name;
     private String type;
+    private int cinema_id;
     private Seat[] seats;
 
     public Room() {
+    }
+
+    public Room(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Room(int id, String name, String type) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+    }
+
+    public Room(int id, String name, String type, int cinema_id) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.cinema_id = cinema_id;
     }
     
     public void in(){
@@ -36,6 +55,14 @@ public class Room implements Serializable{
         this.name = name;
         this.type = type;
         this.seats = seats;
+    }
+
+    public int getCinema_id() {
+        return cinema_id;
+    }
+
+    public void setCinema_id(int cinema_id) {
+        this.cinema_id = cinema_id;
     }
     
     public void setSizeSeats(int size){

@@ -18,10 +18,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.User;
+import modelDAO.CategoryDAO;
+import modelDAO.CategoryDAOImpl;
+import modelDAO.CinemaDAO;
+import modelDAO.CinemaDAOImpl;
 import modelDAO.FilmDAO;
 import modelDAO.FilmDAOImpl;
+import modelDAO.RoomDAO;
+import modelDAO.RoomDAOImpl;
 import modelDAO.SaleDAO;
 import modelDAO.SaleDAOImpl;
+import modelDAO.ScheduleDAO;
+import modelDAO.ScheduleDAOImpl;
+import modelDAO.SeatDAO;
+import modelDAO.SeatDAOImpl;
 import modelDAO.UserDAO;
 import modelDAO.UserDAOImpl;
 
@@ -31,6 +41,15 @@ import modelDAO.UserDAOImpl;
  */
 public class HomeAdminServlet extends HttpServlet {
 
+    protected Connection con = DBConnection.getConnection();
+    protected UserDAO userDao = new UserDAOImpl();
+    protected SaleDAO daoSale = new SaleDAOImpl();
+    protected FilmDAO daoFilm = new FilmDAOImpl();
+    protected ScheduleDAO daoSchedule = new ScheduleDAOImpl();
+    protected RoomDAO daoRoom = new RoomDAOImpl();
+    protected CinemaDAO daoCinema = new CinemaDAOImpl();
+    protected SeatDAO daoSeat = new SeatDAOImpl();
+    protected CategoryDAO daoCate = new CategoryDAOImpl();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -69,6 +88,45 @@ public class HomeAdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("controller") != null){
+            String controller = request.getParameter("controller");
+            //schedule 
+            switch(controller){
+                case "schedule":{
+                    request.setAttribute("listFilm", daoFilm.getListFilm(con));
+                    request.setAttribute("listSchedule", daoSchedule.getListSchedule(con));
+                    request.setAttribute("listSale", daoSale.getListSale(con));
+                    request.setAttribute("listRoom", daoRoom.getListInforRoom(con));
+                    break;
+                } 
+                case "room":{
+                    request.setAttribute("listRoom", daoRoom.getListRoom(con));
+                    request.setAttribute("listCinema", daoCinema.getListCinema(con));
+                    break;
+                } 
+                case "seat":{
+                    request.setAttribute("listRoom", daoRoom.getListRoom(con));
+                    request.setAttribute("listSeat", daoSeat.getListSeat(con));
+                    break;
+                }
+                case "sale":{
+                    request.setAttribute("listSale", daoSale.getListSale(con));
+                    break;
+                }
+                case "film":{
+                    request.setAttribute("listCategory", daoCate.getListCategory(con));
+                    request.setAttribute("listFilm", daoFilm.getListFilm(con));
+                    break;
+                }
+                case "category":{
+                    request.setAttribute("listCategory", daoCate.getListCategory(con));
+                    break;
+                }
+                default:{
+                    
+                }
+            }
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("admin/index.jsp");
         dispatcher.forward(request, response);
     }
@@ -89,14 +147,11 @@ public class HomeAdminServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = encryption(request.getParameter("password"));
         System.out.println(password);
-        Connection con = DBConnection.getConnection();
         User user = new User(0, "", username, password, 0);
-        UserDAO userDao = new UserDAOImpl();
+        
         if(userDao.checkLoginAdmin(con, user)){
             SaleDAO daoSale = new SaleDAOImpl();
             FilmDAO daoFilm = new FilmDAOImpl();
-            session.setAttribute("listFilm", daoFilm.getListFilm(con));
-            session.setAttribute("listSale", daoSale.getListSale(con));
             session.setAttribute("admin_login", user);
             response.sendRedirect("admin?controller=home");
         }else {

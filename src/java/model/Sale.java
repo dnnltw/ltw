@@ -22,6 +22,11 @@ public class Sale implements Serializable{
     public Sale() {
     }
 
+    public Sale(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Sale(int id, String name, Date sdate, Date edate, float number, String des) {
         this.id = id;
         this.name = name;

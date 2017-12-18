@@ -4,17 +4,19 @@
     Author     : ducvu
 --%>
 
+<%@page import="model.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Film"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- /main -->
-<%ArrayList<Film> listFilm = (ArrayList<Film>) session.getAttribute("listFilm");%>
+<%ArrayList<Film> listFilm = (ArrayList<Film>) request.getAttribute("listFilm");
+    ArrayList<Category> listCategory = (ArrayList<Category>) request.getAttribute("listCategory");%>
 <div class="container">
     <!-- /breadcrumb -->
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Sale</li>
+            <li class="breadcrumb-item active" aria-current="page">Film</li>
         </ol>
     </nav>
 
@@ -59,10 +61,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%for(int i=0 ; i<listFilm.size(); i++){%>
+                                    <%for (int i = 0; i < listFilm.size(); i++) {%>
                                     <tr>
                                         <td><%=listFilm.get(i).getId()%></td>
-                                        <td><img src="<%=listFilm.get(i).getPoster()%>"></td>
+                                        <td><img src="<%=listFilm.get(i).getPoster()%>" style="width: 50px;"></td>
                                         <td><%=listFilm.get(i).getName()%></td>
                                         <td><%=listFilm.get(i).getRealeaseDate()%></td>
                                         <td><%=listFilm.get(i).getVote()%></td>
@@ -164,7 +166,7 @@
                         <div class="collapse multi-collapse" id="add">
                             <h5>Add Film</h5>
                             <hr>
-                            <form class="container" id="needs-validation" novalidate action="add_film" method="post" enctype="multipart/form-data">
+                            <form class="container" id="needs-validation" novalidate action="add_film?action=add" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="name">Name Film</label>
@@ -225,6 +227,14 @@
                                             Please provide a valid trailer.
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Category">Category</label>
+                                    <select multiple class="form-control" id="Category" name="category" required>
+                                        <%for (Category c : listCategory) {%>
+                                            <option value="<%=c.getId()%>"><%=c.getName()%></option>
+                                        <%}%>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="poster">File input</label>

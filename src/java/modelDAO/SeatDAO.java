@@ -5,10 +5,18 @@
  */
 package modelDAO;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import model.Seat;
+
 /**
  *
  * @author NguyenNgoc
  */
 public interface SeatDAO {
+    public boolean addSeat(Connection con, Seat seat);
+
+    public ArrayList<Seat> getListSeat(Connection con);
     
+    public boolean editSeat(Connection con, Seat seat);
 }
