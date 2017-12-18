@@ -4,9 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/H:/ProjectLTM/NewLTW/NEW/ltw/src/java/servlet/admin/AddEditFilm.java</file>
+            <file>file:/H:/ProjectLTM/NewLTW/NEW/ltw/src/java/servlet/HomeServlet.java</file>
+            <file>file:/H:/ProjectLTM/NewLTW/NEW/ltw/src/java/servlet/admin/HomeAdminServlet.java</file>
             <file>file:/H:/ProjectLTM/NewLTW/NEW/ltw/web/admin/view/partial/film.jsp</file>
             <file>file:/H:/ProjectLTM/NewLTW/NEW/ltw/web/WEB-INF/web.xml</file>
-            <file>file:/H:/ProjectLTM/NewLTW/NEW/ltw/src/java/servlet/admin/AddNewFilmServlet.java</file>
             <file>file:/H:/ProjectLTM/NewLTW/NEW/ltw/src/java/servlet/admin/AddEditSale.java</file>
         </group>
     </open-files>
