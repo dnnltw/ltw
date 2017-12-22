@@ -5,26 +5,29 @@
  */
 package servlet;
 
+import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Array;
+import java.sql.Connection;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Client;
-import modelDAO.ClientDAO;
-import modelDAO.ClientDAOImpl;
+import model.Order;
+import modelDAO.OrderDAO;
+import modelDAO.OrderDAOImpl;
 
 /**
  *
  * @author Dell
  */
-public class SigninServlet extends HttpServlet {
-
+public class OrderServlet extends HttpServlet {
+    Connection con = DBConnection.getConnection();
+    OrderDAO order = new OrderDAOImpl();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,10 +45,10 @@ public class SigninServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SigninServlet</title>");            
+            out.println("<title>Servlet OrderServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SigninServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OrderServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +66,17 @@ public class SigninServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ArrayList<Order> listSS = new ArrayList<Order>();
+        ArrayList<Order> list = new ArrayList<Order>();
+        HttpSession session = request.getSession();
+        Client client = (Client) session.getAttribute("user");
+        listSS = order.getOrderSucess(con, client, 1);
+        list = order.getOrderSucess(con, client, 0);
+        session.setAttribute("sucess", listSS);
+        session.setAttribute("wait", list);
+     //   System.out.println("ss: " +listSS.size());
+        response.sendRedirect("home?controller=order_view");
+        
     }
 
     /**
@@ -75,24 +88,9 @@ public class SigninServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        Client client = new Client();
-        client.setUsername(request.getParameter("username"));
-        client.setName(request.getParameter("hoten"));
-        client.setAddress(request.getParameter("address"));
-        client.setMail(request.getParameter("email"));
-        client.setPhone(request.getParameter("phone"));
-        client.setPassword(request.getParameter("pass"));
-        System.out.println(request.getParameter("pass"));
-        System.out.println(request.getParameter("cfpass"));
-        try {
-            new ClientDAOImpl().signin(client);
-            response.sendRedirect("home/?controller=login_signin");
-        } catch (Exception ex) {
-            response.sendRedirect("home/?controller=login_signin");
-            Logger.getLogger(SigninServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -104,6 +102,5 @@ public class SigninServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
+
 }

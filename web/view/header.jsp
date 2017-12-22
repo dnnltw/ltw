@@ -92,19 +92,21 @@
                     </ul>
                 </li>
             </ul>
-            <div class="search">
-                <div class="search-left">
-                    <a href="#">
-                        <img src="img/tin-moi-uu-dai.gif">
-                    </a>
-                    <div class="navbar-collapse collapse" id="">
-                        <input type="text" class="search_mini" placeholder="enter the search">
+            <form action="SearchServlet" method="POST" >
+                <div class="search">
+                    <div class="search-left">
+                        <a href="#">
+                            <img src="img/tin-moi-uu-dai.gif">
+                        </a>
+                        <div class="navbar-collapse collapse" id="">
+                            <input type="text" class="search_mini" placeholder="enter the search" name="textsearch">
+                        </div>
+                    </div>
+                    <div class="search-right">
+                        <p><a href="#"><img src="img/mua-ve_ngay.png" alt="mua-ve-ngay"></a></p>
                     </div>
                 </div>
-                <div class="search-right">
-                    <p><a href="#"><img src="img/mua-ve_ngay.png" alt="mua-ve-ngay"></a></p>
-                </div>
-            </div>
+            </form>
         </div>
         <div class="navbar-collapse collapse" id="item1">
             <input type="text" class="form-control" placeholder="enter the search">
