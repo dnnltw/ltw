@@ -7,6 +7,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" type="text/css" href="css/login_signin.css">
+<style>
+    .lc-login-t {
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 10px;
+        width: 100%;
+        font-style: italic;
+    }
+</style>
 
 <div class="main-container">
     <div class="lc-form">
@@ -40,6 +48,8 @@
                                     <%}
                                     %>
                                     <p class="lc-login-title">Vui lòng nhập tên người dùng (email) và mật khẩu của bạn...</p>
+                                    <p class="lc-login-t">Account Demo( Username: demo_d3m0 | Password: demo_d3m0)</p>
+
                                     <div class="lc-login-content">
                                         <form action="Loginservlet" method="POST">
                                             <ul class="lc-form-list">
@@ -63,6 +73,7 @@
                                             </div>
                                         </form>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

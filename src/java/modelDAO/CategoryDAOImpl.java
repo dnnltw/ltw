@@ -93,11 +93,36 @@ public class CategoryDAOImpl implements CategoryDAO {
             PreparedStatement pre = con.prepareStatement(sql);
             pre.setString(1, c.getName());
             ResultSet rs = pre.executeQuery();
-            return true;
+            if (rs.next()){
+                int t = rs.getInt(1);
+                System.out.println("ID category:"+t);
+                return t>0;
+            }
         } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("Loi SQL Category");
 //            return false;
         }
         return false;
+    }
+
+    @Override
+    public Category getCategoryByName(Connection con, String name) {
+        Category result = new Category();
+        try {
+            String sql = "SELECT * FROM category WHERE name = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Category c = new Category(rs.getInt(1), rs.getString(2), rs.getString(3));
+                result =  (Category) c ;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return result;
     }
 
 }

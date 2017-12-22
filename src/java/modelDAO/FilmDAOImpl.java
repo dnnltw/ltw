@@ -114,14 +114,23 @@ public class FilmDAOImpl implements FilmDAO {
     @Override
     public boolean isExist(Connection con, Film film) {
         try {
-            String sql = "SELECT * FROM film WHERE app_id = ? ;";
+            String sql = "SELECT * FROM film WHERE api_id = ? ;";
             PreparedStatement pre = con.prepareStatement(sql);
             pre.setInt(1, film.getApi_id());
             ResultSet rs = pre.executeQuery();
-            return true;
+            if (rs.next()){
+                int t = rs.getInt(1);
+                System.out.println("ID film:"+t);
+                return t>0;
+            }
         } catch (SQLException ex) {
-            return false;
+            ex.printStackTrace();
+            System.out.println("Loi SQL");
+
+//            return false;
         }
+        return false;
+
     }
 
     @Override
@@ -148,6 +157,7 @@ public class FilmDAOImpl implements FilmDAO {
         }
         return false;
     }
+
 
     @Override
     public ArrayList<Film> getFilmByName(Connection con, String name) {
@@ -205,5 +215,4 @@ public class FilmDAOImpl implements FilmDAO {
         }
         return result;
     }
-
 }
