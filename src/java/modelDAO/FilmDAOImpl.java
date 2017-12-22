@@ -158,4 +158,61 @@ public class FilmDAOImpl implements FilmDAO {
         return false;
     }
 
+
+    @Override
+    public ArrayList<Film> getFilmByName(Connection con, String name) {
+        ArrayList<Film> result = new ArrayList<Film>();
+        try {
+            String sql = "SELECT * FROM film where name like ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, "%"+name+"%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Film a = new Film(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                a.setApi_id(rs.getInt(10));
+                result.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
+    public ArrayList<Film> getFilmByCategory(Connection con, String category) {
+        ArrayList<Film> result = new ArrayList<Film>();
+        try {
+            String sql = "SELECT film.* FROM film, category_film, category "
+                    + "WHERE film.id = category_film.filmid "
+                    + "AND category_film.categoryid = category.id "
+                    + "AND category.name = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, category);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Film a = new Film(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                a.setApi_id(rs.getInt(10));
+                result.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

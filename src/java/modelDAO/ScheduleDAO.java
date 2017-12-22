@@ -21,4 +21,6 @@ public interface ScheduleDAO {
     public boolean editSchedule(Connection con, Schedule sale);
     
     public boolean delelteSchedule(Connection con, Schedule sale);
+    
+    
 }

@@ -21,7 +21,7 @@
                             <ul>
                                 <li><a href="">Thông tin chung</a></li>
                                 <li><a href="">Thông tin tài khoản</a></li>
-                                <li><a href="">Đơn hàng của tôi</a></li>
+                                <li><a href="OrderServlet">Đơn hàng của tôi</a></li>
                             </ul>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
             document.getElementById("check_old_password").innerHTML = "";
         }
         var pass = document.formChangePass.txtnew_password.value;
-        var pattern = new RegExp("^[a-z0-9_-]{6,18}$");
+        var pattern = new RegExp("^[a-zA-Z0-9_-]{6,18}$");
         var result = pattern.test(pass);
         if(!result){
             document.getElementById("check_password_cf").innerHTML = "Weak password!";

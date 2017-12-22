@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%%>
+
 <link rel="stylesheet" type="text/css" href="css/login_signin.css">
 <style>
     .lc-login-t {
@@ -15,6 +15,7 @@
         font-style: italic;
     }
 </style>
+
 <div class="main-container">
     <div class="lc-form">
         <div class="lc-form-main">
@@ -34,7 +35,18 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="login">
                             <div class="lc-form-login-main">
+
                                 <div class="lc-form-login-content">
+                                    <%
+                                        String mes = "";
+                                        if (request.getParameter("ok") != null && mes.equals("0")) {
+                                            mes = request.getParameter("ok");
+                                    %>
+                                    <div class="alert alert-danger" role="alert">
+                                        Username or Password incorrect!
+                                    </div>
+                                    <%}
+                                    %>
                                     <p class="lc-login-title">Vui lòng nhập tên người dùng (email) và mật khẩu của bạn...</p>
                                     <p class="lc-login-t">Account Demo( Username: demo_d3m0 | Password: demo_d3m0)</p>
 
@@ -151,7 +163,7 @@
             return false;
         }
         var pass = document.formSignin.pass.value;
-        var pattern = new RegExp("^[a-z0-9_-]{6,18}$");
+        var pattern = new RegExp("^[a-zA-Z0-9_-]{6,18}$");
         var result = pattern.test(pass);
         if (!result) {
             document.getElementById("checkpass").innerHTML = "Weak password!";
@@ -160,7 +172,7 @@
             return false;
         }
         var user = document.formSignin.username.value;
-        var patternUsername = new RegExp("^[a-z0-9_-]{3,16}$");
+        var patternUsername = new RegExp("^[a-zA-Z0-9_-]{3,16}$");
         var resu = patternUsername.test(user);
         if (!resu) {
             document.getElementById("checkuser").innerHTML = "Invalid Username! ";

@@ -5,10 +5,15 @@
  */
 package modelDAO;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import model.Client;
+import model.Order;
+
 /**
  *
  * @author NguyenNgoc
  */
 public interface OrderDAO {
-    
+    public ArrayList<Order> getOrderSucess(Connection con, Client client, int status);
 }
