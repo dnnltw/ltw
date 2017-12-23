@@ -91,7 +91,7 @@ public class SigninServlet extends HttpServlet {
 
             response.sendRedirect("home?controller=login_signin");
         } catch (Exception ex) {
-            response.sendRedirect("home/?controller=login_signin");
+            response.sendRedirect("home?controller=login_signin&ok=0");
             Logger.getLogger(SigninServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

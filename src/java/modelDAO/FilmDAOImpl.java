@@ -159,7 +159,12 @@ public class FilmDAOImpl implements FilmDAO {
         return false;
     }
 
-
+    /**
+     *  get list film by name
+     * @param con is a connection, get connection to database
+     * @param name is a film name must search
+     * @return list film by name
+     */
     @Override
     public ArrayList<Film> getFilmByName(Connection con, String name) {
         ArrayList<Film> result = new ArrayList<Film>();
@@ -186,7 +191,12 @@ public class FilmDAOImpl implements FilmDAO {
         }
         return result;
     }
-
+    /**
+     * get list film by category
+     * @param con is a connection, get connection to database
+     * @param category is a category name must search
+     * @return list film have category 
+     */
     @Override
     public ArrayList<Film> getFilmByCategory(Connection con, String category) {
         ArrayList<Film> result = new ArrayList<Film>();
