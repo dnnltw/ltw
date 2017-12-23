@@ -231,7 +231,6 @@ public class FilmDAOImpl implements FilmDAO {
     public ArrayList<Film> getListPreFilm(Connection con) {
         ArrayList<Film> result = new ArrayList<Film>();
         try {
-            
             String sql = "SELECT * FROM film WHERE api_id = 0";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

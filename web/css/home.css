@@ -413,7 +413,7 @@ h3{
     border-radius: 5px;
     font-weight: bold;
 }
-.button .btn-detail, .cart-table .product-cart-actions .button, #co-shipping-method-form .buttons-set .button, .footer .button {
+.button, .cart-table .product-cart-actions .button, #co-shipping-method-form .buttons-set .button, .footer .button {
     background: #e71a0f;
     display: inline-block;
     padding: 4px 2px;

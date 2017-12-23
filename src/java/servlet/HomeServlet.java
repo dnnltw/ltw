@@ -5,13 +5,17 @@
  */
 package servlet;
 
+import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelDAO.FilmDAO;
+import modelDAO.FilmDAOImpl;
 
 /**
  *
@@ -54,9 +58,19 @@ public class HomeServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    Connection con  = DBConnection.getConnection();
+    FilmDAO daoFilm = new FilmDAOImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String controller = request.getParameter("controller");
+        if(controller!= null){
+            switch (controller){
+                case "pre_show":
+                    request.setAttribute("listPreFilm", daoFilm.getListPreFilm(con));
+                    break;
+            }
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
         dispatcher.forward(request, response);
     }

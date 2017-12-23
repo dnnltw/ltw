@@ -168,7 +168,7 @@
                         <div class="collapse multi-collapse" id="add">
                             <h5>Add Film</h5>
                             <hr>
-                            <form class="container" id="needs-validation" novalidate action="add_film?action=add" method="post" enctype="multipart/form-data">
+                            <form class="container" id="needs-validation" novalidate action="add_edit_film?action=add" method="post" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="name">Name Film</label>
