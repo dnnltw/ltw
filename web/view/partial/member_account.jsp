@@ -72,7 +72,7 @@
                                                     <label>Mật khẩu cũ:</label>
                                                     <span class="star">*</span>
                                                     <div class="input-box">
-                                                        <input type="text" name="txtold_password" value="" required="">
+                                                        <input type="password" name="txtold_password" value="" required="">
                                                     </div>
                                                     <p id="check_old_password"> </p>
                                                 </li>
@@ -80,7 +80,7 @@
                                                     <label>Mật khẩu mới</label>
                                                     <span class="star">*</span>
                                                     <div class="input-box">
-                                                        <input type="text" name="txtnew_password" value="" required="">
+                                                        <input type="password" name="txtnew_password" value="" required="">
                                                     </div>
                                                     <p id="check_password"> </p>
                                                 </li>
@@ -88,7 +88,7 @@
                                                     <label>Nhập lại mật khẩu mới</label>
                                                     <span class="star">*</span>
                                                     <div class="input-box">
-                                                        <input type="text" name="txtnew_password_cf" value="" required="">
+                                                        <input type="password" name="txtnew_password_cf" value="" required="">
                                                     </div>
                                                     <p id="check_password_cf"> </p>
                                                 </li>
@@ -97,7 +97,7 @@
                                         </div>
                                         
                                         <div class="button-edit">
-                                            <button type="submit" title="Mua vé" class="button">
+                                            <button type="submit" title="Lưu lại" class="button">
                                                 <span>Lưu lại</span>
                                             </button>
                                         </div>

@@ -14,13 +14,13 @@
     Client client = (Client) session.getAttribute("user");
     String dn = "Đăng Ký";
     String link = "home?controller=login_signin";
-    String loginout="Đăng Nhập";
+    String loginout = "Đăng Nhập";
     String link2 = "home?controller=login_signin";
-    if(client!=null){
-            dn = client.getUsername();
-            link = "home?controller=member_account";
-            loginout = "LOG OUT";
-            link2 = "LogoutServlet";
+    if (client != null) {
+        dn = client.getUsername();
+        link = "home?controller=member_account";
+        loginout = "LOG OUT";
+        link2 = "LogoutServlet";
     }
 %>
 <div class="header">
@@ -72,23 +72,16 @@
                     <a href="" title="">PHIM</a>
                     <ul class="menu-sub">
                         <li><a href="home?controller=now_showing" title="">Phim Đang Chiếu</a></li>
-                        <li><a href="" title="">Phim Sắp Chiếu</a></li>
-                        <li><a href="" title="">CGV ArtHouse</a></li>
+                        <li><a href="home?controller=pre_show" title="">Phim Sắp Chiếu</a></li>
                     </ul>
                 </li>
                 <li><a href="home?controller=schedule" title="">LỊCH CHIẾU</a></li>
-                <li>
-                    <a href="" title="">RẠP CGV</a>
-                    <ul class="menu-sub">
-                        <li><a href="" title="Về Rạp CGV">Về Rạp CGV</a></li>
-                        <li><a href="" title="Đặc Trưng CGV">Đặc Trưng CGV</a></li>
-                    </ul>
-                </li>
+
                 <li>
                     <a href="" title="">THÀNH VIÊN</a>
                     <ul class="menu-sub">
-                        <li><a href="" title="Thành Viên">Thành Viên</a></li>
-                        <li><a href="" title="Đăng Ký">Đăng Ký</a></li>
+                        <li><a href="<%=link%>" title="Thành Viên">Thành Viên</a></li>
+                        <li><a href="<%=link2%>" title="Đăng Ký">Đăng Ký</a></li>
                     </ul>
                 </li>
             </ul>
