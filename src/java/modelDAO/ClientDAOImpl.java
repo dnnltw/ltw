@@ -17,13 +17,17 @@ import java.util.logging.Logger;
 import model.Client;
 
 /**
- *
- * @author NguyenNgoc
+ * 
+ * 
  */
 public class ClientDAOImpl implements ClientDAO {
-
+    /**get connection to database*/
     public Connection con = new DBConnection().getConnection();
-
+    
+    /**
+     * sigin new account
+     * @param client is a account sigin 
+     */
     @Override
     public void signin(Client client){
         String sql = "INSERT INTO client(username, password, name, address, mail, phone) VALUES (?,?,?,?,?,?)";
@@ -41,32 +45,20 @@ public class ClientDAOImpl implements ClientDAO {
             ex.printStackTrace();
         }
     }
-
+    /**
+     * Check client login 
+     * @param client
+     * @return client 
+     */
+    @Override
     public Client checkLoginClient(Client client) {
         String sql = "SELECT * FROM client where username = ?";
         try {
             PreparedStatement pr = con.prepareStatement(sql);
             pr.setString(1, client.getUsername());
             ResultSet rs = pr.executeQuery();
-          //  boolean kt = rs.next();
-//            System.out.println(kt);
-//            System.out.println(client.getUsername());
+           System.out.println(client.getUsername());
             Client x = new Client();
-//            if(kt){
-//                x.setId(rs.getInt("id"));
-//                x.setUsername(rs.getString("username"));
-//                x.setPassword(rs.getString("password"));
-//                x.setName(rs.getString("name"));
-//                x.setAddress(rs.getString("address"));
-//                x.setMail(rs.getString("mail"));
-//                x.setPhone(rs.getString("phone"));
-//               
-//                if(rs.getString("password").equals(encryption(client.getPassword()))){
-//                    x.setPassword(client.getPassword());
-//                    return x;
-//                }
-//            }
-
             while(rs.next()) {
                 x.setId(rs.getInt("id"));
                 x.setUsername(rs.getString("username"));
@@ -90,7 +82,11 @@ public class ClientDAOImpl implements ClientDAO {
 
         }
     
-
+/**
+ * encryption password with md5
+ * @param str is password of client
+ * @return password after md5 encryption 
+ */
     public static String encryption(String str) {
         byte[] defaultBytes = str.getBytes();
         try {
@@ -112,7 +108,11 @@ public class ClientDAOImpl implements ClientDAO {
         }
         return str;
     }
-
+    /**
+     * Change password of client
+     * @param client is client want change password
+     * @param pass is new password
+     */
     @Override
     public void changePassClient(Client client, String pass){
         try {

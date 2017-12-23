@@ -73,8 +73,8 @@ public class OrderServlet extends HttpServlet {
         listSS = order.getOrderSucess(con, client, 1);
         list = order.getOrderSucess(con, client, 0);
         session.setAttribute("sucess", listSS);
-        session.setAttribute("wait", list);
-     //   System.out.println("ss: " +listSS.size());
+       // session.setAttribute("wait", list);
+       // System.out.println("ss: " +listSS.size());
         response.sendRedirect("home?controller=order_view");
         
     }
