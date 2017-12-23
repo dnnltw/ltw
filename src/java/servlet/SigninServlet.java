@@ -88,8 +88,10 @@ public class SigninServlet extends HttpServlet {
         System.out.println(request.getParameter("cfpass"));
         try {
             new ClientDAOImpl().signin(client);
+
             response.sendRedirect("home?controller=login_signin");
         } catch (Exception ex) {
+            response.sendRedirect("home?controller=login_signin&ok=0");
             Logger.getLogger(SigninServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

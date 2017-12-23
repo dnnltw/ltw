@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Client;
+import modelDAO.ClientDAO;
 import modelDAO.ClientDAOImpl;
 
 /**
@@ -77,16 +78,15 @@ public class Loginservlet extends HttpServlet {
         Client x = new Client();
         x.setUsername(request.getParameter("username"));
         x.setPassword(request.getParameter("password"));
-        ClientDAOImpl dao = new ClientDAOImpl();
+        ClientDAO dao = new ClientDAOImpl();
         Client d = dao.checkLoginClient(x);
-//        System.out.println(d.getUsername());
         if (d != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user",d);
-            response.sendRedirect("/dnnltw/home?controller=home");
+            
+            response.sendRedirect("home?controller=home");
         } else {
-            request.setAttribute("ok", 0);
-            response.sendRedirect("/dnnltw/home?controller=login_signin");
+            response.sendRedirect("home?controller=login_signin&ok=0");
         }
     }
 

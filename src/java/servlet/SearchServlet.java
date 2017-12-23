@@ -5,25 +5,34 @@
  */
 package servlet;
 
+import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Array;
+import java.sql.Connection;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Client;
-import modelDAO.ClientDAO;
-import modelDAO.ClientDAOImpl;
+import model.Category;
+import model.Film;
+import modelDAO.CategoryDAO;
+import modelDAO.CategoryDAOImpl;
+import modelDAO.FilmDAO;
+import modelDAO.FilmDAOImpl;
 
 /**
  *
  * @author Dell
  */
-public class ChangPassServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
 
+    Connection con = DBConnection.getConnection();
+    CategoryDAO daoCate = new CategoryDAOImpl();
+    ArrayList<Category> listCate = daoCate.getListCategory(con);
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,10 +50,10 @@ public class ChangPassServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangPassServlet</title>");            
+            out.println("<title>Servlet SearchServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangPassServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +71,15 @@ public class ChangPassServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String cate = request.getParameter("cate");
+        System.out.println(cate);
+        FilmDAO dao = new FilmDAOImpl();
+        ArrayList<Film> list = dao.getFilmByCategory(con, cate);
+        System.out.println();
+        HttpSession session = request.getSession();
+        session.setAttribute("search", list);
+        session.setAttribute("cate", listCate);
+        response.sendRedirect("home?controller=search");
     }
 
     /**
@@ -76,19 +93,15 @@ public class ChangPassServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String newpass = request.getParameter("txtnew_password");
-        HttpSession session = request.getSession();
-        Client client = (Client) session.getAttribute("user");
-        ClientDAO dao = new ClientDAOImpl();
-        try {
-            dao.changePassClient(client, newpass);
-            response.sendRedirect("home?controller=member_account");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(ChangPassServlet.class.getName()).log(Level.SEVERE, null, ex);
-        //    response.sendRedirect("home?controller=error");
-        }
+        String text = request.getParameter("textsearch");
+        System.out.println(text);
+        FilmDAO dao = new FilmDAOImpl();
+        ArrayList<Film> list = list = dao.getFilmByName(con, text);
         
+        HttpSession session = request.getSession();
+        session.setAttribute("search", list);
+        session.setAttribute("cate", listCate);
+        response.sendRedirect("home?controller=search");
     }
 
     /**

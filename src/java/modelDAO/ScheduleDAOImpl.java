@@ -63,14 +63,14 @@ public class ScheduleDAOImpl implements ScheduleDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                    Time time = rs.getTime(2);
-                    Date date = (Date) rs.getDate(3);
-                    Double price = rs.getDouble(4);
-                    Film film = new Film(rs.getInt("film_id"), rs.getString("film_name"));
-                    Room room = new Room(rs.getInt("room_id"), rs.getString("room_name"));
-                    Sale sale = new Sale(rs.getInt("sale_id"), rs.getString("sale_name"));
-                    Schedule schudule = new Schedule(rs.getInt(1), time, date, room, film, price, sale);
-                    result.add(schudule);
+                Time time = rs.getTime(2);
+                Date date = (Date) rs.getDate(3);
+                Double price = rs.getDouble(4);
+                Film film = new Film(rs.getInt("film_id"), rs.getString("film_name"));
+                Room room = new Room(rs.getInt("room_id"), rs.getString("room_name"));
+                Sale sale = new Sale(rs.getInt("sale_id"), rs.getString("sale_name"));
+                Schedule schudule = new Schedule(rs.getInt(1), time, date, room, film, price, sale);
+                result.add(schudule);
             }
         } catch (SQLException ex) {
             Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);

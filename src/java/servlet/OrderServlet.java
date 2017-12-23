@@ -5,25 +5,29 @@
  */
 package servlet;
 
+import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Array;
+import java.sql.Connection;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Client;
-import modelDAO.ClientDAO;
-import modelDAO.ClientDAOImpl;
+import model.Order;
+import modelDAO.OrderDAO;
+import modelDAO.OrderDAOImpl;
 
 /**
  *
  * @author Dell
  */
-public class ChangPassServlet extends HttpServlet {
-
+public class OrderServlet extends HttpServlet {
+    Connection con = DBConnection.getConnection();
+    OrderDAO order = new OrderDAOImpl();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,10 +45,10 @@ public class ChangPassServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangPassServlet</title>");            
+            out.println("<title>Servlet OrderServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangPassServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet OrderServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +66,17 @@ public class ChangPassServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ArrayList<Order> listSS = new ArrayList<Order>();
+        ArrayList<Order> list = new ArrayList<Order>();
+        HttpSession session = request.getSession();
+        Client client = (Client) session.getAttribute("user");
+        listSS = order.getOrderSucess(con, client, 1);
+        list = order.getOrderSucess(con, client, 0);
+        session.setAttribute("sucess", listSS);
+       // session.setAttribute("wait", list);
+       // System.out.println("ss: " +listSS.size());
+        response.sendRedirect("home?controller=order_view");
+        
     }
 
     /**
@@ -76,19 +90,7 @@ public class ChangPassServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String newpass = request.getParameter("txtnew_password");
-        HttpSession session = request.getSession();
-        Client client = (Client) session.getAttribute("user");
-        ClientDAO dao = new ClientDAOImpl();
-        try {
-            dao.changePassClient(client, newpass);
-            response.sendRedirect("home?controller=member_account");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(ChangPassServlet.class.getName()).log(Level.SEVERE, null, ex);
-        //    response.sendRedirect("home?controller=error");
-        }
-        
+        processRequest(request, response);
     }
 
     /**

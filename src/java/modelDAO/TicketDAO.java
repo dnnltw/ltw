@@ -5,6 +5,10 @@
  */
 package modelDAO;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import model.Ticket;
+
 /**
  *
  * @author NguyenNgoc
