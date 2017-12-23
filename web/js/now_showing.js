@@ -23,9 +23,9 @@ $(document).ready(function () {
         var btn = $(document.createElement('button')).attr({
             type: 'button',
             class: 'btn-mua',
-            title: 'Mua ve'
+            title: 'Mua vé'
         });
-        var span_btn = $(document.createElement('span')).text("Mua ve");
+        var span_btn = $(document.createElement('span')).text("Mua vé");
         var a = createDivAtrr('a', 'href', urlFilm);
         var img = createDivAtrr('img', 'src', baseUrlImg + urlImg);
 

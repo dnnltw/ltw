@@ -380,41 +380,25 @@ h3{
     background: none no-repeat scroll 0 0 #e71a0f;
     border-radius: 5px
 }
-/*button{
-    display: inline-block;
-    padding: 2px 2px;
-    border: 0;
-    color: #FFFFFF;
-    font-size: 13px;
-    font-weight: normal;
-    font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
-    line-height: 19px;
-    text-align: center;
-}
-.btn-booking span{
-    padding-left: 25px;
-    background-image: url(../img/bg-cate-booking.png);
+
+.btn-booking span {
+    background: url(../img/bg-btn-mua.png);
     background-repeat: no-repeat;
-    border-radius: 5px;
-    line-height: 1px;
-}
-.btn-booking{
+    padding: 3px 2px 3px 28px;
+    border: 1px solid white;
+    border-radius: 4px;
     font-weight: bold;
+    color: white;
+    text-transform: uppercase;
 }
-.buy {
-    float: right;
-}
-.fb-like {
-    float: left;
-}
-.button span{
-    float: right;
-    border: 1px solid #f07469;
-    font-weight: bold;
-    padding: 2px;
-    padding-left: 25px;
+
+.btn-booking {
+    background: #e71a0f;
+    border: none;
     border-radius: 5px;
-}*/
+    padding: 6px 2px;
+}
+
 /*end button mua vé*/
 
 /*button xem chi tiết*/

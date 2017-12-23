@@ -25,7 +25,7 @@ public class FilmDAOImpl implements FilmDAO {
     @Override
     public boolean addFilm(Connection con, Film film) {
         try {
-            String sql = "INSERT INTO film(name, productCountry, releaseDate, runningtime, vote, des, trailer, poster) VALUES(?, ?, ?, ?, ?, ?, ?,  ?)";
+            String sql = "INSERT INTO film(name, productCountry, releaseDate, runningtime, vote, des, trailer, poster, api_id) VALUES(?, ?, ?, ?, ?, ?, ?,  ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, film.getName());
             ps.setString(2, film.getProductCountry());
@@ -35,6 +35,7 @@ public class FilmDAOImpl implements FilmDAO {
             ps.setString(6, film.getDes());
             ps.setString(7, film.getTrailer());
             ps.setString(8, film.getPoster());
+            ps.setInt(9, 0);
             ps.executeUpdate();
             for (Category c : film.getCategories()) {
                 addCategoryFilm(con, DBConnection.getMaxIDOfTable("film"), c.getId());
@@ -248,6 +249,26 @@ public class FilmDAOImpl implements FilmDAO {
                         rs.getString(9));
                 a.setApi_id(rs.getInt(10));
                 result.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
+    public ArrayList<Film> getListPreFilm(Connection con) {
+        ArrayList<Film> result = new ArrayList<Film>();
+        try {
+            String sql = "SELECT * FROM film WHERE api_id = 0";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Film film = new Film(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getInt(5), rs.getFloat(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                CategoryDAO dao = new CategoryDAOImpl();
+                ArrayList<Category> categories = dao.getListCategoryByFilm(con, film);
+                film.setCategories(categories);
+                result.add(film);
             }
         } catch (SQLException ex) {
             Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
