@@ -45,23 +45,37 @@
                             <li data-target="#slide-show" data-slide-to="0" class="active"></li>
                             <li data-target="#slide-show" data-slide-to="1"></li>
                             <li data-target="#slide-show" data-slide-to="2"></li>
+                            <li data-target="#slide-show" data-slide-to="3"></li>
+                            <li data-target="#slide-show" data-slide-to="4"></li>
                         </ol>
 
                         <div class="carousel-inner">
                             <div class="item active">
-                                <a href="" title=""><img src="img/guardians_of_the_galaxy_2_980_x_448_2.png"></a>
+                                <a href="" title=""><img src="img/slideshow1.jpg"></a>
                                 <div class="carousel-caption">
                                     <!-- ... -->
                                 </div>
                             </div>
                             <div class="item">
-                                <a href="" title=""><img src="img/king_arthur_980_x_448.png"></a>
+                                <a href="" title=""><img src="img/slideshow2.jpg"></a>
                                 <div class="carousel-caption">
                                     <!-- ... -->
                                 </div>
                             </div>
                             <div class="item">
-                                <a href="" title=""><img src="img/phim_hay_thang_5__980_x_448_7.png"></a>
+                                <a href="" title=""><img src="img/slideshow3.png"></a>
+                                <div class="carousel-caption">
+                                    <!-- ... -->
+                                </div>
+                            </div>
+                            <div class="item">
+                                <a href="" title=""><img src="img/slideshow4.jpg"></a>
+                                <div class="carousel-caption">
+                                    <!-- ... -->
+                                </div>
+                            </div>
+                            <div class="item">
+                                <a href="" title=""><img src="img/slideshow5.jpg"></a>
                                 <div class="carousel-caption">
                                     <!-- ... -->
                                 </div>
@@ -138,37 +152,37 @@
 
                                     <div class="item active">
                                         <div class="col-xs-12 col-sm-6 col-md-3">
-                                            <a href="#"><img src="img/qt-240-x-201_1.jpg" class="img-responsive"></a>
+                                            <a href="#"><img src="img/footer1.jpg" class="img-responsive"></a>
                                         </div>
                                     </div>
 
                                     <div class="item">
                                         <div class="col-xs-12 col-sm-6 col-md-3">
-                                            <a href="#"><img src="img/grab_-_2_240x201.jpg" class="img-responsive"></a>
+                                            <a href="#"><img src="img/footer2.jpg" class="img-responsive"></a>
                                         </div>
                                     </div>
 
                                     <div class="item">
                                         <div class="col-xs-12 col-sm-6 col-md-3">
-                                            <a href="#"><img src="img/240-x-201_19.jpg" class="img-responsive"></a>
+                                            <a href="#"><img src="img/footer3.jpg" class="img-responsive"></a>
                                         </div>
                                     </div>
 
                                     <div class="item">
                                         <div class="col-xs-12 col-sm-6 col-md-3">
-                                            <a href="#"><img src="img/xphnqn_nguyen_xi_web_240_x_201.png" class="img-responsive"></a>
+                                            <a href="#"><img src="img/footer4.jpg" class="img-responsive"></a>
                                         </div>
                                     </div>
 
                                     <div class="item">
                                         <div class="col-xs-12 col-sm-6 col-md-3">
-                                            <a href="#"><img src="img/member_2017-240x201.jpg" class="img-responsive"></a>
+                                            <a href="#"><img src="img/footer5.jpg" class="img-responsive"></a>
                                         </div>
                                     </div>
 
                                     <div class="item">
                                         <div class="col-xs-12 col-sm-6 col-md-3">
-                                            <a href="#"><img src="img/dk-240-x-201.jpg" class="img-responsive"></a>
+                                            <a href="#"><img src="img/footer6.jpg" class="img-responsive"></a>
                                         </div>
                                     </div>
                                 </div>
