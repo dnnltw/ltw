@@ -39,14 +39,13 @@
                                 <div class="lc-form-login-content">
                                     <%
                                         String mes = "";
-                                        if (request.getParameter("ok") != null && mes.equals("0")) {
+                                        if (request.getParameter("ok") != null) {
                                             mes = request.getParameter("ok");
                                     %>
                                     <div class="alert alert-danger" role="alert">
                                         Username or Password incorrect!
                                     </div>
-                                    <%}
-                                    %>
+                                    <%} %>
                                     <p class="lc-login-title">Vui lòng nhập tên người dùng (email) và mật khẩu của bạn...</p>
                                     <p class="lc-login-t">Account Demo( Username: demo_d3m0 | Password: demo_d3m0)</p>
 

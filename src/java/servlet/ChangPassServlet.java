@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Client;
+import modelDAO.ClientDAO;
 import modelDAO.ClientDAOImpl;
 
 /**
@@ -78,14 +79,14 @@ public class ChangPassServlet extends HttpServlet {
         String newpass = request.getParameter("txtnew_password");
         HttpSession session = request.getSession();
         Client client = (Client) session.getAttribute("user");
-        ClientDAOImpl dao = new ClientDAOImpl();
+        ClientDAO dao = new ClientDAOImpl();
         try {
             dao.changePassClient(client, newpass);
             response.sendRedirect("home?controller=member_account");
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
             Logger.getLogger(ChangPassServlet.class.getName()).log(Level.SEVERE, null, ex);
-            response.sendRedirect("home?controller=error");
+        //    response.sendRedirect("home?controller=error");
         }
         
     }
