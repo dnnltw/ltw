@@ -53,21 +53,20 @@
         <servlet-class>servlet.admin.AddEditFilm</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>SeatRoomServlet</servlet-name>
         <servlet-class>servlet.api.SeatRoomServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BookTicketServlet</servlet-name>
         <servlet-class>servlet.api.BookTicketServlet</servlet-class>
-=======
+    </servlet>
+    <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>servlet.SearchServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>OrderServlet</servlet-name>
         <servlet-class>servlet.OrderServlet</servlet-class>
->>>>>>> master
     </servlet>
     <servlet-mapping>
         <servlet-name>SigninServlet</servlet-name>
