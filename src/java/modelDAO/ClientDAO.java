@@ -12,7 +12,7 @@ import model.Client;
  * @author NguyenNgoc
  */
 public interface ClientDAO {
-    public void signin(Client client) throws Exception;
-    public Client checkLoginClient(Client client) throws Exception;
-    public void changePassClient(Client client, String pass) throws Exception;
+    public void signin(Client client);
+    public Client checkLoginClient(Client client);
+    public void changePassClient(Client client, String pass);
 }

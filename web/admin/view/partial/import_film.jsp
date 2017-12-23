@@ -54,7 +54,7 @@
 
         function getListIdApi() {
             console.log("Running");
-            var urlGetList = baseUrl + "now_playing?page=50&api_key=" + api_key;
+            var urlGetList = baseUrl + "now_playing?page=35&api_key=" + api_key;
             fetch(urlGetList).then((resp) => resp.json()).then(function (data) {
                 let all = data;
                 var run = 0;
@@ -76,38 +76,45 @@
                                 var urlFilm = baseUrl + value.id + "?api_key=" + api_key;
                                 fetch(urlFilm).then((resp) => resp.json()).then(function (respond) {
                                     let film = respond;
+                                    let rerelease_date = "01-01-2000";
+                                    if (film.release_date !== "" && film.release_date === undefined) {
+                                        rerelease_date = film.release_date;
+                                    }
                                     let data = {
-                                        api_id: film.id,
-                                        name: film.original_title,
-                                        release_date: film.release_date !== "" ? film.release_date:"01-01-2000!" ,
-                                        runtime: film.runtime === null? 0:film.runtime,
-                                        vote: film.vote_average,
-                                        des: film.overview !== "" ? film.overview:"No thing!",
+                                        api_id: film.id === null ? 0 : film.id,
+                                        name: film.original_title !== "" ? film.original_title : " ",
+                                        release_date: film.release_date !== "" ? film.release_date : "01-01-2000",
+                                        runtime: film.runtime === null ? 0 : film.runtime,
+                                        vote: film.vote_average === null ? 0 : film.vote_average,
+                                        des: film.overview !== "" ? film.overview : "No thing!",
                                         trailler: " ",
-                                        poster: baseImg + film.poster_path,
-                                        category: film.genres
+                                        poster: film.poster_path === undefined ? " " : baseImg + film.poster_path,
+                                        category: film.genres ? film.genres : "[]"
                                     };
 
                                     console.log(data);
 
-                                    fetch("filmApi", {
-                                        method: 'POST',
-                                        headers: new Headers(),
-                                        body: JSON.stringify(data)
-                                    }).then((resp) => resp.json()).then(function (respond) {
-                                        $(".film_count").html(run);
-                                        $(".process_api").css("width", (run / all.total_results) * 100 + "%");
-                                        console.log(value.id + " done ");
-                                        if ($(".process_api").css("width") === $(".progress").css("width")) {
-                                            setTimeout($(".alert-success").show(), 2000);
-                                            $(".loading_api").hide();
-                                            $(".alert-warning").hide();
-                                            $(".start_api").html("Done");
-                                        }
-                                    }).catch(function (error) {
-                                        $(".alert-danger").show();
-                                        console.log(error);
-                                    });
+                                    if (film.id !== undefined) {
+                                        fetch("filmApi", {
+                                            method: 'POST',
+                                            headers: new Headers(),
+                                            body: JSON.stringify(data)
+                                        }).then((resp) => resp.json()).then(function (respond) {
+                                            $(".film_count").html(run);
+                                            $(".process_api").css("width", (run / all.total_results) * 100 + "%");
+                                            console.log(value.id + " done ");
+                                            if ($(".process_api").css("width") === $(".progress").css("width")) {
+                                                setTimeout($(".alert-success").show(), 2000);
+                                                $(".loading_api").hide();
+                                                $(".alert-warning").hide();
+                                                $(".start_api").html("Done");
+                                            }
+                                        }).catch(function (error) {
+                                            $(".alert-danger").show();
+                                            console.log(error);
+                                        });
+                                    }
+
 
 
                                 }).catch(function (error) {

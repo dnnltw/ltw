@@ -109,14 +109,14 @@ public class FilmApiServlet extends HttpServlet {
         String jsonString = IOUtils.toString(request.getInputStream());
         try {
             JSONObject json = new JSONObject(jsonString);
-            System.out.println("Film: " + json.get("runtime")+ " \n");
+            System.out.println("Film: " + json + " \n");
             ArrayList<Category> categories = new ArrayList<Category>();
             SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
             Date release_date = new Date(formatterDate.parse(json.getString("release_date")).getTime());
             Double t = json.getDouble("vote");
             Float vote = Float.parseFloat(t.toString());
             int runtime = json.getInt("runtime");
-            String des =json.getString("des");
+            String des = json.getString("des");
             Film film = new Film(
                     0,
                     json.getString("name"),
@@ -131,20 +131,25 @@ public class FilmApiServlet extends HttpServlet {
                     categories
             );
             JSONArray genres = json.getJSONArray("category");
+            
             for (int i = 0; i < genres.length(); i++) {
                 Category c = new Category(genres.getJSONObject(i).getString("name"), "");
                 if (!daoCate.isExist(con, c)) {
                     daoCate.addCategory(con, c);
+
+                    System.out.println("Add Category: " + c.getName());
                     
-                System.out.println("Add Category: " + c.getName());
-                }else {
-                System.out.println("Loi Category");
+                    categories.add(daoCate.getCategoryByName(con, c.getName()));
+                } else {
+                    System.out.println("Loi Category");
+                    
+                }
             }
-            }
+            
             if (!daoFilm.isExist(con, film)) {
                 daoFilm.addFilmApi(con, film);
                 System.out.println("Add Film: " + film.getName());
-            }else {
+            } else {
                 System.out.println("Loi Film");
             }
 

@@ -22,6 +22,8 @@ public interface CategoryDAO {
     public ArrayList<Category> getListCategory(Connection con);
 
     public boolean editCategory(Connection con, Category c);
+
+    public Category getCategoryByName(Connection con, String name);
     
     public ArrayList<Category> getListCategoryByFilm(Connection con, Film film);
 }
