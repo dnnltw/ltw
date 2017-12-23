@@ -3,28 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/index.jsp</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/CategoryDAO.java</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/js/home.js</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/view/partial/import_film.jsp</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/view/partial/login.jsp</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/CategoryDAOImpl.java</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/view/header.jsp</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/view/partial/film.jsp</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/servlet/api/FilmApiServlet.java</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/UserDAOImpl.java</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/RoomDAOImpl.java</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/control/DBConnection.java</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/js/now_showing.js</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/servlet/SigninServlet.java</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/FilmDAOImpl.java</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/view/partial/login_signin.jsp</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/modelDAO/RoomDAO.java</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/admin/css/bootstrap.css</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/web/js/detail.js</file>
-            <file>file:/C:/Users/ducvu/OneDrive/Documents/NetBeansProjects/ltw/src/java/model/Film.java</file>
-
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/modelDAO/ClientDAOImpl.java</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/servlet/Loginservlet.java</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/servlet/OrderServlet.java</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/web/view/partial/member_order.jsp</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/nbproject/build-impl.xml</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/web/view/partial/order_view.jsp</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/web/view/partial/member_account.jsp</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/modelDAO/FilmDAOImpl.java</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/modelDAO/OrderDAOImpl.java</file>
         </group>
     </open-files>
 </project-private>

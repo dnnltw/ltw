@@ -11,7 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="css/thanhvien.css">
 <%  ArrayList<Order> listSS = (ArrayList<Order>) session.getAttribute("sucess");
-    ArrayList<Order> wait = (ArrayList<Order>) session.getAttribute("wait");
+    //ArrayList<Order> wait = (ArrayList<Order>) session.getAttribute("wait");
 %>
 <div class="main-container">
     <div class="main">
