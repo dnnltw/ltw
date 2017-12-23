@@ -3,28 +3,59 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet.admin;
+package servlet.api;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Cinema;
+import model.Film;
+import model.Schedule;
+import modelDAO.CategoryDAO;
+import modelDAO.CategoryDAOImpl;
 import modelDAO.CinemaDAO;
 import modelDAO.CinemaDAOImpl;
+import modelDAO.FilmDAO;
+import modelDAO.FilmDAOImpl;
+import modelDAO.RoomDAO;
+import modelDAO.RoomDAOImpl;
+import modelDAO.SaleDAO;
+import modelDAO.SaleDAOImpl;
+import modelDAO.ScheduleDAO;
+import modelDAO.ScheduleDAOImpl;
+import modelDAO.SeatDAO;
+import modelDAO.SeatDAOImpl;
+import modelDAO.UserDAO;
+import modelDAO.UserDAOImpl;
 
 /**
  *
  * @author ducvu
  */
-public class AddEditCinemaServlet extends HttpServlet {
+public class BookTicketServlet extends HttpServlet {
 
     protected Connection con = DBConnection.getConnection();
+    protected UserDAO userDao = new UserDAOImpl();
+    protected SaleDAO daoSale = new SaleDAOImpl();
+    protected FilmDAO daoFilm = new FilmDAOImpl();
+    protected ScheduleDAO daoSchedule = new ScheduleDAOImpl();
+    protected RoomDAO daoRoom = new RoomDAOImpl();
     protected CinemaDAO daoCinema = new CinemaDAOImpl();
+    protected SeatDAO daoSeat = new SeatDAOImpl();
+    protected CategoryDAO daoCate = new CategoryDAOImpl();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,10 +73,10 @@ public class AddEditCinemaServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddEditCinemaServlet</title>");            
+            out.println("<title>Servlet BookTicketServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddEditCinemaServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BookTicketServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +94,26 @@ public class AddEditCinemaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            request.setCharacterEncoding("UTF8"); // this line solves the problem
+            response.setContentType("application/json");
+            
+            DateFormat formatter = new SimpleDateFormat("HH:mm");
+            Time time = new Time(formatter.parse(request.getParameter("time")).getTime());
+            SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date(formatterDate.parse(request.getParameter("date")).getTime());
+            
+            Film film = new Film();
+            film.setId(Integer.parseInt(request.getParameter("film")));
+            Schedule schedule = daoSchedule.getSchedule(con, film, date, time);
+            
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(BookTicketServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        PrintWriter outPrintWriter = response.getWriter();
+            Gson g = new GsonBuilder().disableHtmlEscaping().create();
+            g.toJson("done", outPrintWriter);
     }
 
     /**
@@ -77,45 +127,7 @@ public class AddEditCinemaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-
-        if (request.getParameter("action") != null) {
-            String action = request.getParameter("action");
-            switch (action) {
-                case "add": {
-                    String name = request.getParameter("name");
-                    String address = request.getParameter("address");
-                    Cinema cinema = new Cinema(0, name, address);
-
-                    if (daoCinema.addCinema(con, cinema)) {
-                        response.sendRedirect("admin?controller=room&alert=success");
-                    } else {
-                        response.sendRedirect("admin?controller=room&alert=fail");
-                    }
-                    break;
-                }
-                case "edit": {
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    String name = request.getParameter("name");
-                    String address = request.getParameter("address");
-                    Cinema cinema = new Cinema(id, name, address);
-
-                    if (daoCinema.editCinema(con, cinema)) {
-                        response.sendRedirect("admin?controller=room&alert=success");
-                    } else {
-                        response.sendRedirect("admin?controller=room&alert=fail");
-                    }
-                    break;
-                }
-                case "delete": {
-                    break;
-                }
-                default: {
-
-                }
-            }
-        }
+        processRequest(request, response);
     }
 
     /**

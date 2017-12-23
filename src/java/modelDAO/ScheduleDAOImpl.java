@@ -20,6 +20,7 @@ import model.Film;
 import model.Room;
 import model.Sale;
 import model.Schedule;
+import model.Seat;
 
 /**
  *
@@ -103,5 +104,136 @@ public class ScheduleDAOImpl implements ScheduleDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
+    @Override
+    public ArrayList<Schedule> getListScheduleByFilmDate(Connection con, Film film, Date date) {
+        ArrayList<Schedule> result = new ArrayList<Schedule>();
+        try {
+            String sql = "SELECT *,room.id as room_id, room.name as room_name FROM schedule INNER JOIN room ON schedule.room_id = room.id WHERE schedule.film_id = ? AND schedule.date = ? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, film.getId());
+            SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
+            ps.setString(2, formatterDate.format(date));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                    Time time = rs.getTime("time");
+//                    Date date1 = (Date) rs.getDate("date");
+                    Double price = rs.getDouble(4);
+//                    Film film1 = new Film(rs.getInt("film_id"), rs.getString("film_name"));
+                    Room room = new Room(rs.getInt("room_id"), rs.getString("room_name"));
+                    Sale sale = new Sale();
+                    Schedule schudule = new Schedule(rs.getInt(1), time, date, room, film, price, sale);
+                    result.add(schudule);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return result;
+    }
+
+    @Override
+    public int getNumberSeat(Connection con, int room_id) {
+        try {
+            String sql = "SELECT COUNT(room.id) as count FROM seat, room WHERE room.id = seat.room_id AND room.id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,room_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getInt("count");
+            }
+            return 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(SeatDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+
+    @Override
+    public ArrayList<Integer> getListScheduleIdFilm(Connection con, Date date) {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        try {
+            String sql = "SELECT DISTINCT schedule.film_id as film_id FROM schedule WHERE schedule.date = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
+            ps.setString(1, formatterDate.format(date));
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                    result.add(rs.getInt("film_id"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return result;
+    }
+
+    @Override
+    public Schedule getSchedule(Connection con, Film film, Date date, Time time) {
+        Schedule schedule = null;
+        try {
+            String sql = "SELECT *,room.id as room_id, room.name as room_name FROM schedule INNER JOIN room ON schedule.room_id = room.id WHERE schedule.film_id = ? AND schedule.date = ? AND schedule.time = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, film.getId());
+            SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
+            ps.setString(2, formatterDate.format(date));
+            ps.setTime(3, time);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                    Double price = rs.getDouble(4);
+                    Room room = new Room(rs.getInt("room_id"), rs.getString("room_name"));
+                    RoomDAO daoRoom = new RoomDAOImpl();
+                    Room getRoom = daoRoom.getRoom(con, room);
+                    Sale sale = new Sale();
+                    schedule = new Schedule(rs.getInt(1), time, date, getRoom, film, price, sale); 
+            }
+            return schedule;
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    @Override
+    public int getNumberSeated(Connection con, int room_id) {
+        try {
+            String sql = "SELECT COUNT(room.id) as count FROM seat,room,ticket,`order` as ordera WHERE room.id = seat.room_id AND room.id = ? AND ticket.seat_id = seat.id AND ordera.id = ticket.order_id AND ordera.status > 0";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,room_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getInt("count");
+            }
+            return 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(SeatDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+
+    @Override
+    public ArrayList<Seat> getListTicket(Connection con, Schedule schedule) {
+        ArrayList<Seat> result = new ArrayList<Seat>();
+        try {
+            String sql = "SELECT seat.* FROM seat,room,ticket,`order` as ordera WHERE ticket.schedule_id = ? AND room.id = seat.room_id AND room.id = ? AND ticket.seat_id = seat.id AND ordera.id = ticket.order_id AND ordera.status > 0";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, schedule.getId());
+            ps.setInt(2, schedule.getRoom().getId());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Room room = new Room(rs.getInt("room_id"), "");
+                Seat seat = new Seat(
+                        rs.getInt("row"), 
+                        rs.getInt("col"), 
+                        rs.getString("type"), 
+                        rs.getInt("id"), 
+                        room);
+                result.add(seat);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return result;
+    }
+
 }

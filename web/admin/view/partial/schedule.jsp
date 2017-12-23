@@ -86,7 +86,7 @@
                                                 <hr>
 
                                                 <form class="container" action="addEditSchedule?action=edit&id=<%= row.getId()%>" method="post" id="needs-validation1">
-                                                    <div class="film" data-spy="scroll" data-offset="0" style="height: 275px; overflow-x: hidden; overflow-y: scroll;">
+                                                    <div class="film row" data-spy="scroll" data-offset="0" style="height: 275px; overflow-x: hidden; overflow-y: scroll;">
                                                         <!-- /film  -->
                                                         <%
                                                             for (Film film : listFilm) {
@@ -96,7 +96,7 @@
                                                                 }
                                                         %>
                                                         <div class="col-md-3">
-                                                            <div class="card">
+                                                            <div class="card" style="height: 50px;">
                                                                 <!--<img class="card-img-top" src="admin/download.svg" alt="Card image cap">-->
                                                                 <div class="card-block text-left mt-2">
                                                                     <label class="custom-control custom-radio">
@@ -204,12 +204,12 @@
                                                 <!-- step 1 select film -->
                                                 <h5>Step 1: Select a moive to schedule</h5>
                                                 <div class="container">
-                                                    <div class="film" data-spy="scroll" data-offset="0" style="height: 350px; overflow-x: hidden; overflow-y: scroll;">
+                                                    <div class="film row" data-spy="scroll" data-offset="0" style="height: 350px; overflow-x: hidden; overflow-y: scroll;">
                                                         <%
                                                             for (Film film : listFilm) {
                                                         %>
                                                         <div class="col-md-3">
-                                                            <div class="card">
+                                                            <div class="card" style="height: 50px;">
                                                                 <!--<img class="card-img-top" src="admin/download.svg" alt="Card image cap">-->
                                                                 <div class="card-block text-left mt-2">
                                                                     <label class="custom-control custom-radio">

@@ -97,7 +97,6 @@
                                                                     int i;
                                                                     for (i = 0; i <= 12; i++) {
                                                                         String check = "";
-                                                                        i++;
                                                                         if (seat.getCol() == i) {
                                                                             check = "selected";
                                                                         }
@@ -151,7 +150,7 @@
                                                                 <%
                                                                     for (Room room : listRoom) {
                                                                         String check = "";
-                                                                        if (room.getId()== seat.getId()) {
+                                                                        if (room.getId()== seat.getRoom().getId()) {
                                                                             check = "selected";
                                                                         }
                                                                 %>

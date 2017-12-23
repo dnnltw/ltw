@@ -19,7 +19,10 @@ public interface FilmDAO {
     public boolean addFilm(Connection con, Film film);
     
     public boolean addFilmApi(Connection con, Film film);
+    
     public ArrayList<Film> getListFilm(Connection con);
+    
+    public Film getFilm(Connection con, int id);
     
     public boolean updateFilm(Connection con, Film film);
     

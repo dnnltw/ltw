@@ -80,14 +80,12 @@ public class Loginservlet extends HttpServlet {
         x.setPassword(request.getParameter("password"));
         ClientDAO dao = new ClientDAOImpl();
         Client d = dao.checkLoginClient(x);
-        
         if (d != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user",d);
             
             response.sendRedirect("home?controller=home");
         } else {
-           
             response.sendRedirect("home?controller=login_signin&ok=0");
         }
     }

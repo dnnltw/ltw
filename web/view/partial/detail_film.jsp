@@ -10,18 +10,14 @@
 
 <script src="js/detail.js"></script>
 <div class="main-container">
-
     <div class="breadcrumbs">
-        <!-- // dành cho phim và rạp -->
-        <ul>
-            <li class="home">
-                <a href="index.html"><span class="glyphicon glyphicon-home"></a>
-                <span> / </span>
-            </li>
-            <li class="product">
 
-            </li>
-        </ul>
+        <div class="container">
+            <span class="fa fa-home"></span>
+            <span class="second-level">/ Phim /</span>
+            <span class="second-level product"></span>
+        </div>
+
     </div>
 
     <div class="main">

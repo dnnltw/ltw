@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+        <script src="js/home.js"></script>
 <link rel="stylesheet" type="text/css" href="css/home.css">
 <div class="main-container">
     <div class="top-container">

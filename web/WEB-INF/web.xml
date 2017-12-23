@@ -53,6 +53,14 @@
         <servlet-class>servlet.admin.AddEditFilm</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SeatRoomServlet</servlet-name>
+        <servlet-class>servlet.api.SeatRoomServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookTicketServlet</servlet-name>
+        <servlet-class>servlet.api.BookTicketServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>servlet.SearchServlet</servlet-class>
     </servlet>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>AddEditFilm</servlet-name>
         <url-pattern>/add_edit_film</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SeatRoomServlet</servlet-name>
+        <url-pattern>/seatRoom</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookTicketServlet</servlet-name>
+        <url-pattern>/bookTicket</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>

@@ -158,6 +158,34 @@ public class FilmDAOImpl implements FilmDAO {
         return false;
     }
 
+    @Override
+    public Film getFilm(Connection con, int id) {
+        try {
+            String sql = "SELECT * FROM film WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Film result = null;
+            while (rs.next()) {
+                Film a = new Film(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                CategoryDAO daoCate = new CategoryDAOImpl();
+                a.setCategories(daoCate.getListCategoryByFilm(con, a));
+                result = (Film) a;
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
     /**
      *  get list film by name
      * @param con is a connection, get connection to database
@@ -182,6 +210,7 @@ public class FilmDAOImpl implements FilmDAO {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9));
+                
                 a.setApi_id(rs.getInt(10));
                 result.add(a);
             }

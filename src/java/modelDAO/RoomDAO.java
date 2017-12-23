@@ -18,6 +18,8 @@ public interface RoomDAO {
 
     public ArrayList<Room> getListRoom(Connection con);
     
+    public Room getRoom(Connection con, Room room);
+    
     public ArrayList<Room> getListInforRoom(Connection con);
     
     public boolean editRoom(Connection con, Room room);
