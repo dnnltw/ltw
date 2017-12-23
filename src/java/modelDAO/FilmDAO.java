@@ -26,4 +26,6 @@ public interface FilmDAO {
     public ArrayList<Film> getFilmByName(Connection con, String name);
     
     public ArrayList<Film> getFilmByCategory(Connection con, String category);
+    
+    public ArrayList<Film> getListPreFilm(Connection con);
 }
