@@ -44,6 +44,8 @@ import modelDAO.SeatDAO;
 import modelDAO.SeatDAOImpl;
 import modelDAO.UserDAO;
 import modelDAO.UserDAOImpl;
+import modelDAO.FilmDAO;
+import modelDAO.FilmDAOImpl;
 
 /**
  *
@@ -96,6 +98,7 @@ public class HomeServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -166,6 +169,10 @@ public class HomeServlet extends HttpServlet {
                     System.out.println("OKLAH");
                     break;
                 }
+                case "pre_show":{
+                    request.setAttribute("listPreFilm", daoFilm.getListPreFilm(con));
+                    break;
+                }
                 default: {
                     RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
                     dispatcher.forward(request, response);
@@ -176,7 +183,6 @@ public class HomeServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
             dispatcher.forward(request, response);
         }
-
     }
 
     /**

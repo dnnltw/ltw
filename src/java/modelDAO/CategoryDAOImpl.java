@@ -74,8 +74,9 @@ public class CategoryDAOImpl implements CategoryDAO {
         ArrayList<Category> result = new ArrayList<Category>();
         try {
             String sql = "SELECT category.id, category.name, category.description FROM category, category_film, film\n"
-                    + "WHERE category_film.filmid = film.id AND category_film.categoryid = category.id;";
+                    + "WHERE category_film.filmid = film.id AND category_film.categoryid = category.id AND film.id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, film.getId());
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 result.add(new Category(rs.getInt(1), rs.getString(2), rs.getString(3)));

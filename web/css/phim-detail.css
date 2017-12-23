@@ -88,6 +88,32 @@ span.moive-type.type-3d{
     margin-bottom: 10px;
 }
 /*nút mua*/
+
+.moive-detail-fb-booking button{
+	margin: 20px auto;
+	height: 30px;
+	display: block;
+
+}
+
+.btn-mua span {
+    background: url(../img/bg-btn-mua.png);
+    background-repeat: no-repeat;
+    padding: 3px 2px 3px 28px;
+    border: 1px solid white;
+    border-radius: 4px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+
+.btn-mua {
+	background: #e71a0f;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 2px;
+}
+
 .btn-booking{
 	background: none no-repeat scroll 0 0 #e71a0f;
     border-radius: 5px
