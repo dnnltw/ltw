@@ -3,6 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/modelDAO/ClientDAOImpl.java</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/servlet/Loginservlet.java</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/servlet/OrderServlet.java</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/web/view/partial/member_order.jsp</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/modelDAO/OrderDAO.java</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/nbproject/build-impl.xml</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/web/view/partial/order_view.jsp</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/web/view/partial/member_account.jsp</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/modelDAO/FilmDAOImpl.java</file>
+            <file>file:/D:/Ky1_nam4/Lap%20Trinh%20Web/CloneAgain/ltw/src/java/modelDAO/OrderDAOImpl.java</file>
         </group>
     </open-files>
 </project-private>
