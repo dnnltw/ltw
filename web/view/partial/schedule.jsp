@@ -4,8 +4,25 @@
     Author     : NguyenNgoc
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Map"%>
+<%@page import="model.Film"%>
+<%@page import="model.Film"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.sql.Date"%>
+<%@page import="model.Schedule"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="css/view_lichchieu_main.css">
+
+<%
+    ArrayList<Date> listDate = (ArrayList<Date>) request.getAttribute("listDate");
+    Map<Date, ArrayList<Map<Film, ArrayList<Schedule>>>> all = (Map<Date, ArrayList<Map<Film, ArrayList<Schedule>>>>) request.getAttribute("listAll");
+%>
+
 <div class="main-container">
     <div class="lc-main">
         <div class="row">
@@ -75,37 +92,63 @@
                                             <!-- Nav tabs -->
                                             <!-- tab child -->
                                             <ul class="nav nav-tabs nav-showtimes-child" role="tablist">
-                                                <li role="presentation" class="active">
-                                                    <a href="#theater1" aria-controls="theater1" role="tab" data-toggle="tab">
-                                                        <span>09</span>
-                                                        <em>Tue</em>
-                                                        <strong>26</strong>
+                                                <% if (listDate != null) { %>
+                                                <%
+                                                    String active = "active";
+                                                    SimpleDateFormat ft = new SimpleDateFormat("E");
+                                                    for (Date date : listDate) {
+                                                        int month = date.getMonth();
+                                                        int day = date.getDate();
+                                                        String thu = ft.format(date);
+                                                %>
+                                                <li role="presentation" class="<%= active%>">
+                                                    <a href="#<%= thu + day%>" aria-controls="<%= thu + day%>" role="tab" data-toggle="tab">
+                                                        <span><%= month%></span>
+                                                        <em><%= thu%></em>
+                                                        <strong><%= day%></strong>
                                                     </a>
                                                 </li>
-                                                <li role="presentation">
-                                                    <a href="#theater2" aria-controls="theater2" role="tab" data-toggle="tab">
-                                                        <span>10</span>
-                                                        <em>Wue</em>
-                                                        <strong>27</strong>
-                                                    </a>
-                                                </li>
+                                                <%  active = "";
+                                                    }%>
+                                                <%}%>
                                             </ul>
                                             <!-- end tab child -->
                                             <!-- Tab panes  showtimes film-->
                                             <div class="tab-content tabs-showtimes">
-                                                <div role="tabpanel" class="tab-pane active" id="theater1">
+                                                <%if (all != null) {%>
+                                                <%
+                                                    SimpleDateFormat ft1 = new SimpleDateFormat("E");
+                                                    String active1 = "active";
+                                                    for (Map.Entry<Date, ArrayList<Map<Film, ArrayList<Schedule>>>> entry : all.entrySet()) {
+//                                                        System.out.println("Key : " + entry.getKey()+ " Value :" + entry.getValue());
+                                                        int day = entry.getKey().getDate();
+                                                        String thu = ft1.format(entry.getKey());
+                                                        ArrayList<Map<Film, ArrayList<Schedule>>> listScheduleForFilm = (ArrayList<Map<Film, ArrayList<Schedule>>>) entry.getValue();
+
+                                                %>
+                                                <div role="tabpanel" class="tab-pane <%= active1%>" id="<%= thu + day%>">
                                                     <!-- film -->
+                                                    <%
+                                                        active1 = "";
+                                                        if (listScheduleForFilm != null) {
+                                                            for (Map<Film, ArrayList<Schedule>> lsf : listScheduleForFilm) {
+                                                                for (Map.Entry<Film, ArrayList<Schedule>> lsfentry : lsf.entrySet()) {
+//                                                                System.out.println("Key : " + lsfentry.getKey()+ " Value :" + lsfentry.getValue());
+                                                                    Film film = (Film) lsfentry.getKey();
+                                                                    ArrayList<Schedule> listSchedule = (ArrayList<Schedule>) lsfentry.getValue();
+                                                    %>
+
                                                     <div class="lc-main-showtimes-film">
                                                         <!-- title -->
                                                         <div class="lc-main-showtimes-film-header">
-                                                            <h3><a href="#" title="Kingsman : Tổ Chức Hoàng Kim">KINGSMAN : TỔ CHỨC HOÀNG KIM</a></h3>
+                                                            <h3><a href="#" title="<%= film.getName()%>"><%= film.getName()%></a></h3>
                                                         </div>
                                                         <!-- end title -->
                                                         <div class="lc-main-showtimes-film-left">
                                                             <!-- poster -->
-                                                            <div class="lc-main-showtimes-film-poster">
-                                                                <a href="#" title="Kingsman : Tổ Chức Hoàng Kim">
-                                                                    <img src="img/kingman.jpg" alt="Kingsman : Tổ Chức Hoàng Kim">
+                                                            <div class="lc-main-showtimes-film-poster"getPoster>
+                                                                <a title="<%= film.getName()%>">
+                                                                    <img src="<%= film.getPoster()%>" alt="<%= film.getName()%>">
                                                                 </a>
                                                             </div>
                                                             <!-- end poster -->
@@ -116,521 +159,34 @@
                                                             </div>
                                                             <div class="showtimes-film-all">
                                                                 <ul>
+                                                                    <%
+                                                                        for(Schedule sche: listSchedule){
+                                                                            SimpleDateFormat ftt = new SimpleDateFormat("hh:mm a");
+                                                                            String url = "home?controller=seat&film="+film.getId()+"&date="+sche.getDate()+"&time="+sche.getTime();
+                                                                    %>
                                                                     <li>
-                                                                        <a href="#">
-                                                                            <span>14:20 PM</span>
+                                                                        <a href="<%= url%>">
+                                                                            <span><%= ftt.format(sche.getTime())%></span>
                                                                             <br>
-                                                                            <span>89 ghế trống</span>
+                                                                            <span><%= sche.getRoom().getName()%></span>
                                                                         </a>
                                                                     </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>15:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>16:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>17:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>18:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>19:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>20:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>21:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>22:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>23:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
+                                                                    <% }%>
                                                                 </ul>
                                                             </div>
                                                             <div class="clear-both"></div>
-                                                            <div class="showtimes-film-tech">
-                                                                <strong>3D Phụ Đề Việt</strong>
-                                                            </div>
-                                                            <div class="showtimes-film-all">
-                                                                <ul>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>14:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>15:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>16:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>17:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>18:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>19:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>20:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>21:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>22:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>23:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="clear-both"></div>
                                                     <hr>
-                                                    <!-- end film -->
-                                                    <!-- film -->
-                                                    <div class="lc-main-showtimes-film">
-                                                        <div class="lc-main-showtimes-film-header">
-                                                            <!-- title -->
-                                                            <h3><a href="#" title="Amityville: Quỷ Dữ Thức Tỉnh">Amityville: Quỷ Dữ Thức Tỉnh</a></h3>
-                                                            <!-- end title -->
-                                                        </div>
-                                                        <div class="lc-main-showtimes-film-left">
-                                                            <!-- poster -->
-                                                            <div class="lc-main-showtimes-film-poster">
-                                                                <a href="#" title="Amityville: Quỷ Dữ Thức Tỉnh">
-                                                                    <img src="img/amityville.jpg" alt="Amityville: Quỷ Dữ Thức Tỉnh">
-                                                                </a>
-                                                            </div>
-                                                            <!-- end poster -->
-                                                        </div>
-                                                        <div class="lc-main-showtimes-film-right">
-                                                            <div class="showtimes-film-tech">
-                                                                <strong>2D Phụ Đề Việt</strong>
-                                                            </div>
-                                                            <div class="showtimes-film-all">
-                                                                <!-- time list -->
-                                                                <ul>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>14:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>15:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>16:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>17:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>18:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                                <!-- end time list -->
-                                                            </div>
-                                                            <div class="clear-both"></div>
-                                                            <div class="showtimes-film-tech">
-                                                                <strong>3D Phụ Đề Việt</strong>
-                                                            </div>
-                                                            <div class="showtimes-film-all">
-                                                                <!-- time list -->
-                                                                <ul>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>14:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>15:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                                <!-- end time list -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear-both"></div>
-                                                    <hr>
+                                                    <% }%>
+                                                    <% }%>
+                                                    <% }%>
                                                     <!-- end film -->
                                                 </div>
-                                                <div role="tabpanel" class="tab-pane" id="theater2">
-                                                    <!-- film -->
-                                                    <div class="lc-main-showtimes-film">
-                                                        <!-- title -->
-                                                        <div class="lc-main-showtimes-film-header">
-                                                            <h3><a href="#" title="Chí Phèo Ngoại Truyện">Chí Phèo Ngoại Truyện</a></h3>
-                                                        </div>
-                                                        <!-- end title -->
-                                                        <div class="lc-main-showtimes-film-left">
-                                                            <!-- poster -->
-                                                            <div class="lc-main-showtimes-film-poster">
-                                                                <a href="#" title="Chí Phèo Ngoại Truyện">
-                                                                    <img src="img/cp.jpg" alt="Chí Phèo Ngoại Truyện">
-                                                                </a>
-                                                            </div>
-                                                            <!-- end poster -->
-                                                        </div>
-                                                        <div class="lc-main-showtimes-film-right">
-                                                            <div class="showtimes-film-tech">
-                                                                <strong>2D Phụ Đề Việt</strong>
-                                                            </div>
-                                                            <div class="showtimes-film-all">
-                                                                <ul>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>14:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>15:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>16:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>17:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>18:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>19:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>20:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>21:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>22:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>23:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="clear-both"></div>
-                                                            <div class="showtimes-film-tech">
-                                                                <strong>3D Phụ Đề Việt</strong>
-                                                            </div>
-                                                            <div class="showtimes-film-all">
-                                                                <ul>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>14:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>15:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>16:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>17:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>18:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>19:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>20:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>21:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>22:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>23:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear-both"></div>
-                                                    <hr>
-                                                    <!-- end film -->
-                                                    <!-- film -->
-                                                    <div class="lc-main-showtimes-film">
-                                                        <div class="lc-main-showtimes-film-header">
-                                                            <!-- title -->
-                                                            <h3><a href="#" title="IT: Chú Hề Ma Quái">IT: Chú Hề Ma Quái</a></h3>
-                                                            <!-- end title -->
-                                                        </div>
-                                                        <div class="lc-main-showtimes-film-left">
-                                                            <!-- poster -->
-                                                            <div class="lc-main-showtimes-film-poster">
-                                                                <a href="#" title="IT: Chú Hề Ma Quái">
-                                                                    <img src="img/it.png" alt="IT: Chú Hề Ma Quái">
-                                                                </a>
-                                                            </div>
-                                                            <!-- end poster -->
-                                                        </div>
-                                                        <div class="lc-main-showtimes-film-right">
-                                                            <div class="showtimes-film-tech">
-                                                                <strong>2D Phụ Đề Việt</strong>
-                                                            </div>
-                                                            <div class="showtimes-film-all">
-                                                                <!-- time list -->
-                                                                <ul>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>14:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>15:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>16:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>17:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>18:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                                <!-- end time list -->
-                                                            </div>
-                                                            <div class="clear-both"></div>
-                                                            <div class="showtimes-film-tech">
-                                                                <strong>3D Phụ Đề Việt</strong>
-                                                            </div>
-                                                            <div class="showtimes-film-all">
-                                                                <!-- time list -->
-                                                                <ul>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>14:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <span>15:20 PM</span>
-                                                                            <br>
-                                                                            <span>89 ghế trống</span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                                <!-- end time list -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear-both"></div>
-                                                    <hr>
-                                                    <!-- end film -->
-                                                </div>
+
+                                                <% }%>
+                                                <% }%>
                                             </div>
                                             <!-- end showtimes film -->
                                         </div>

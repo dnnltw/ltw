@@ -10,9 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Room;
+import model.Seat;
 
 /**
  *
@@ -95,6 +97,35 @@ public class RoomDAOImpl implements RoomDAO {
             return null;
         }
         return result;
+    }
+
+    @Override
+    public Room getRoom(Connection con, Room room) {
+        Room room1 = new Room();
+        Vector<Seat> ee = new Vector<Seat>();
+        Seat[] result = null;
+        try {
+            String sql = "SELECT *,seat.id as seat_id,seat.type as seat_type FROM room,seat WHERE room.id = seat.room_id AND room.id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, room.getId());
+            ResultSet rs = ps.executeQuery();
+            int i=0;
+            while (rs.next()) {
+                i++;
+                room1.setId(1);
+                room1.setName(rs.getString("name"));
+                room1.setType(rs.getString("name"));
+                room1.setCinema_id(rs.getInt("cinema_id"));
+                Seat a = new Seat(rs.getInt("col"), rs.getInt("row"), rs.getString("seat_type"), rs.getInt("seat_id"));
+                ee.add(a);
+            }
+            result = new Seat[i];
+            room1.setSeats(ee.toArray(result));
+        } catch (SQLException ex) {
+            Logger.getLogger(SaleDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return room1;
     }
 
 }

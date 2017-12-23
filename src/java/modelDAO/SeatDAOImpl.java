@@ -48,8 +48,8 @@ public class SeatDAOImpl implements SeatDAO{
             while(rs.next()){
                 Room room = new Room(rs.getInt("room_id"), "");
                 Seat seat = new Seat(
-                        rs.getInt("col"), 
                         rs.getInt("row"), 
+                        rs.getInt("col"), 
                         rs.getString("type"), 
                         rs.getInt("id"), 
                         room);
@@ -78,6 +78,32 @@ public class SeatDAOImpl implements SeatDAO{
             Logger.getLogger(SeatDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+
+    @Override
+    public ArrayList<Seat> getListRowSeat(Connection con, int row, int room_id) {
+        ArrayList<Seat> result = new ArrayList<Seat>();
+        try {
+            String sql = "SELECT * FROM seat WHERE seat.room_id = ? AND seat.row = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, room_id);
+            ps.setInt(2, row);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Room room = new Room(rs.getInt("room_id"), "");
+                Seat seat = new Seat(
+                        rs.getInt("row"), 
+                        rs.getInt("col"), 
+                        rs.getString("type"), 
+                        rs.getInt("id"), 
+                        room);
+                result.add(seat);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SeatDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return result;
     }
     
 }

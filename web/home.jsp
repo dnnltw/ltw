@@ -21,7 +21,6 @@
         <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
         <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/home.js"></script>
     </head>
     <body>
         <!--day la trong index-->

@@ -4,8 +4,15 @@
     Author     : NguyenNgoc
 --%>
 
+<%@page import="model.Schedule"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="css/view_seats_main.css">
+<%
+    Schedule schedule = (Schedule) request.getAttribute("schedule");
+    int numberSeated = (Integer) request.getAttribute("numberSeated");
+    int numberSeat = (Integer) request.getAttribute("numberSeat");
+
+%>
 <div class="main-container">
     <div class="lc-main">
         <div class="row">
@@ -23,8 +30,8 @@
                         <div class="lc-main-book-ticket-site">
                             <div class="book-ticket-item">
                                 <div class="lc-main-book-ticket-site-left">
-                                    <p>CGV Ho Guom Plaza | Cinema 4 | Số ghế <span>(118/120)</span></p>
-                                    <p class="book-time">27/09/2017 | 16:15 PM - 18:50 PM</p>
+                                    <p>CGV Ho Guom Plaza | <%= schedule.getRoom().getName()%> | Số ghế <span>(<%= numberSeat - numberSeated%>/<%= numberSeat%>)</span></p>
+                                    <p class="book-time"><%= schedule.getDate()%> | <%= schedule.getTime()%></p>
                                 </div>
                                 <div class="lc-main-book-ticket-site-right">
                                     <!-- site book combo  -->
@@ -73,140 +80,6 @@
                                     <span class="screen"></span>
                                 </div>
                                 <div class="seatmap-row">
-                                    <div class="seat-row">
-                                        <div class="box-seat standard">A10</div>
-                                        <div class="box-seat standard">A9</div>
-                                        <div class="box-seat standard">A8</div>
-                                        <div class="box-seat standard">A7</div>
-                                        <div class="box-seat standard">A6</div>
-                                        <div class="box-seat standard">A5</div>
-                                        <div class="box-seat standard">A4</div>
-                                        <div class="box-seat standard">A3</div>
-                                        <div class="box-seat standard">A2</div>
-                                        <div class="box-seat standard">A1</div>
-                                    </div>
-                                    <div class="seat-row">
-                                        <div class="box-seat standard">B12</div>
-                                        <div class="box-seat standard">B11</div>
-                                        <div class="box-seat standard">B10</div>
-                                        <div class="box-seat standard">B9</div>
-                                        <div class="box-seat standard">B8</div>
-                                        <div class="box-seat standard selected">B7</div>
-                                        <div class="box-seat standard selected">B6</div>
-                                        <div class="box-seat standard selected">B5</div>
-                                        <div class="box-seat standard selected">B4</div>
-                                        <div class="box-seat standard">B3</div>
-                                        <div class="box-seat standard">B2</div>
-                                        <div class="box-seat standard">B1</div>
-                                    </div>
-                                    <div class="seat-row">
-                                        <div class="box-seat standard">C12</div>
-                                        <div class="box-seat standard">C11</div>
-                                        <div class="box-seat standard">C10</div>
-                                        <div class="box-seat standard disabled">C9</div>
-                                        <div class="box-seat standard disabled">C8</div>
-                                        <div class="box-seat standard disabled">C7</div>
-                                        <div class="box-seat standard disabled">C6</div>
-                                        <div class="box-seat standard">C5</div>
-                                        <div class="box-seat standard">C4</div>
-                                        <div class="box-seat standard">C3</div>
-                                        <div class="box-seat standard">C2</div>
-                                        <div class="box-seat standard">C1</div>
-                                    </div>
-                                    <div class="seat-row">
-                                        <div class="box-seat standard">D10</div>
-                                        <div class="box-seat standard">D9</div>
-                                        <div class="box-seat standard">D8</div>
-                                        <div class="box-seat standard">D7</div>
-                                        <div class="box-seat standard">D6</div>
-                                        <div class="box-seat standard">D5</div>
-                                        <div class="box-seat standard">D4</div>
-                                        <div class="box-seat standard">D3</div>
-                                        <div class="box-seat standard">D2</div>
-                                        <div class="box-seat standard">D1</div>
-                                    </div>
-                                    <div class="seat-row">
-                                        <div class="box-seat vip">E10</div>
-                                        <div class="box-seat vip">E9</div>
-                                        <div class="box-seat vip">E8</div>
-                                        <div class="box-seat vip">E7</div>
-                                        <div class="box-seat vip">E6</div>
-                                        <div class="box-seat vip">E5</div>
-                                        <div class="box-seat vip">E4</div>
-                                        <div class="box-seat vip">E3</div>
-                                        <div class="box-seat vip">E2</div>
-                                        <div class="box-seat vip">E1</div>
-                                    </div>
-                                    <div class="seat-row">
-                                        <div class="box-seat vip">F12</div>
-                                        <div class="box-seat vip">F11</div>
-                                        <div class="box-seat vip">F10</div>
-                                        <div class="box-seat vip">F9</div>
-                                        <div class="box-seat vip">F8</div>
-                                        <div class="box-seat vip">F7</div>
-                                        <div class="box-seat vip">F6</div>
-                                        <div class="box-seat vip">F5</div>
-                                        <div class="box-seat vip">F4</div>
-                                        <div class="box-seat vip">F3</div>
-                                        <div class="box-seat vip">F2</div>
-                                        <div class="box-seat vip">F1</div>
-                                    </div>
-                                    <div class="seat-row">
-                                        <div class="box-seat vip">G12</div>
-                                        <div class="box-seat vip">G11</div>
-                                        <div class="box-seat vip">G10</div>
-                                        <div class="box-seat vip">G9</div>
-                                        <div class="box-seat vip">G8</div>
-                                        <div class="box-seat vip">G7</div>
-                                        <div class="box-seat vip">G6</div>
-                                        <div class="box-seat vip">G5</div>
-                                        <div class="box-seat vip">G4</div>
-                                        <div class="box-seat vip">G3</div>
-                                        <div class="box-seat vip">G2</div>
-                                        <div class="box-seat vip">G1</div>
-                                    </div>
-                                    <div class="seat-row">
-                                        <div class="box-seat vip">H12</div>
-                                        <div class="box-seat vip">H11</div>
-                                        <div class="box-seat vip">H10</div>
-                                        <div class="box-seat vip">H9</div>
-                                        <div class="box-seat vip">H8</div>
-                                        <div class="box-seat vip">H7</div>
-                                        <div class="box-seat vip">H6</div>
-                                        <div class="box-seat vip">H5</div>
-                                        <div class="box-seat vip">H4</div>
-                                        <div class="box-seat vip">H3</div>
-                                        <div class="box-seat vip">H2</div>
-                                        <div class="box-seat vip">H1</div>
-                                    </div>
-                                    <div class="seat-row">
-                                        <div class="box-seat couple">L12</div>
-                                        <div class="box-seat couple">L11</div>
-                                        <div class="box-seat couple">L10</div>
-                                        <div class="box-seat couple">L9</div>
-                                        <div class="box-seat couple">L8</div>
-                                        <div class="box-seat couple">L7</div>
-                                        <div class="box-seat couple">L6</div>
-                                        <div class="box-seat couple">L5</div>
-                                        <div class="box-seat couple selected">L4</div>
-                                        <div class="box-seat couple selected">L3</div>
-                                        <div class="box-seat couple">L2</div>
-                                        <div class="box-seat couple">L1</div>
-                                    </div>
-                                    <div class="seat-row">
-                                        <div class="box-seat couple">K12</div>
-                                        <div class="box-seat couple">K11</div>
-                                        <div class="box-seat couple selected">K10</div>
-                                        <div class="box-seat couple selected">K9</div>
-                                        <div class="box-seat couple">K8</div>
-                                        <div class="box-seat couple">K7</div>
-                                        <div class="box-seat couple">K6</div>
-                                        <div class="box-seat couple">K5</div>
-                                        <div class="box-seat couple">K4</div>
-                                        <div class="box-seat couple">K3</div>
-                                        <div class="box-seat couple">K2</div>
-                                        <div class="box-seat couple">K1</div>
-                                    </div>
                                 </div>
                             </div>
                             <!-- end left seatmap  -->
@@ -248,16 +121,16 @@
                         <div class="lc-main-book-ticket-bottom">
                             <div class="lc-main-book-ticket-bottom-center">
                                 <div class="lc-main-book-ticket-bottom-prev">
-                                    <a href="#" title="">Previous</a>
+                                    <a href="home?controller=schedule" title="">Previous</a>
                                 </div>
 
                                 <div class="lc-main-book-ticket-bottom-main">
                                     <div class="lc-main-book-ticket-bottom-col col-film-first">
                                         <div class="bottom-img">
-                                            <img src="img/kingman.jpg" alt="">
+                                            <img src="<%= schedule.getFilm().getPoster()%>" alt="">
                                         </div>
                                         <div class="bottom-content-film">
-                                            <p>Kingsman: Tổ chức hoàng kim</p>
+                                            <p><%= schedule.getFilm().getName()%></p>
                                             <p><strong>2D</strong></p>
                                         </div>
                                     </div>
@@ -271,40 +144,41 @@
                                         <div class="bottom-content-session">
                                             <p>
                                                 <span>Ngày:</span>
-                                                <strong>04/9/2017</strong>
+                                                <strong><%= schedule.getDate()%></strong>
                                             </p>
                                         </div>
                                         <div class="bottom-content-session">
                                             <p>
                                                 <span>Phòng chiếu:</span>
-                                                <strong>Cinema 1</strong>
+                                                <strong><%= schedule.getRoom().getName()%></strong>
                                             </p>
                                         </div>
                                         <div class="bottom-content-session">
                                             <p>
                                                 <span>Ghế:</span>
                                             </p>
-                                            <p><strong>prime B4, B5, B6, B7, L3, L4, K10, K9</strong></p>
+                                            <strong class="prime_seat"></strong>
                                         </div>
                                     </div>
                                     <div class="lc-main-book-ticket-bottom-col col-film-third">
                                         <div class="bottom-content-price">
                                             <p>
                                                 <span>Phim:</span>
-                                                <strong>496.000,00 ₫</strong>
+                                                <strong class="subtotal"></strong>đ
                                             </p>
                                         </div>
                                         <div class="bottom-content-price">
                                             <p>
                                                 <span class="total">Tổng:</span>
-                                                <strong>496.000,00 ₫</strong>
+                                                <strong class="subtotal"></strong>đ
                                             </p>
                                         </div>
+
                                     </div>
                                 </div>
 
                                 <div class="lc-main-book-ticket-bottom-next">
-                                    <a href="#" title="">Next</a>
+                                    <a id="save" title="Submit" style="cursor: pointer;">Next</a>
                                 </div>
                             </div>
 
@@ -316,3 +190,233 @@
         </div>
     </div>
 </div>
+<div class="change_screen">
+    Change Screen
+</div>
+<style type="text/css" media="screen">
+    .change_screen {
+        position: fixed;
+        top: 45%;
+        left: 15px;
+        padding: 5px 10px;
+        border: 1px solid #000;
+        cursor: pointer;
+    }
+</style>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var getAllData = [];
+        var mode = "defaul";
+        var list_seat = {};
+        var prime = {};
+        var allData = {};
+        var row = 0;
+        function createDiv(code, className) {
+            return $(document.createElement(code)).attr('class', className);
+        }
+
+        function setClassText(clasName, text) {
+            $("." + clasName + "").text(text);
+        }
+
+        function setPrimeSeat() {
+            var prime = "";
+            var t = $('.selected');
+            $.each(t, function (key, value) {
+                if (key != 0)
+                    prime += ",";
+                prime += $(value).text();
+
+            });
+            return prime;
+        }
+
+        function setSubtotal() {
+            var total = 0;
+            var t = $('.selected');
+            $.each(t, function (key, value) {
+                total += 50000;
+            });
+            return total;
+        }
+
+
+        function setSeat(array, prime) {
+            $.each(array, function (key, value) {
+                var seat_row = createDiv("div", "seat-row " + key);
+                if (mode == 'defaul') {
+                    $('.seatmap-row').append(seat_row);
+                } else {
+                    $('.seatmap-row').prepend(seat_row);
+                }
+                var t = value.value.split(",");
+                $.each(t, function (p, k) {
+                    var r = createDiv("div", "box-seat " + value.category).text(k);
+                    r.on('click', function (e) {
+                        var t = $('.selected').length;
+                        if ($(this).hasClass('selected')) {
+                            $(e.target).toggleClass("selected");
+                            setClassText('prime_seat', setPrimeSeat());
+                            setClassText('subtotal', setSubtotal());
+                        } else {
+                            if ($(this).hasClass('disabled')) {
+                                exit();
+                            }
+                            if (t >= 8) {
+                                alert("Please select no more than 8 seats");
+                            } else {
+                                $(e.target).toggleClass("selected");
+                                setClassText('prime_seat', setPrimeSeat());
+                                setClassText('subtotal', setSubtotal());
+                            }
+                        }
+
+                    });
+                    $.each(prime.split(","), function (u, v) {
+                        if (v == k)
+                            r.addClass("disabled");
+                    });
+                    seat_row.append(r);
+                });
+            });
+        }
+        $('.box-seat').on('click', function (e) {
+            var t = $('.selected').length;
+            if ($(this).hasClass('selected')) {
+                $(e.target).toggleClass("selected");
+                setClassText('prime_seat', setPrimeSeat());
+                setClassText('subtotal', setSubtotal());
+            } else {
+                if ($(this).hasClass('disabled')) {
+                    exit();
+                }
+                if (t >= 8) {
+                    alert("Please select no more than 8 seats");
+                } else {
+                    $(e.target).toggleClass("selected");
+                    setClassText('prime_seat', setPrimeSeat());
+                    setClassText('subtotal', setSubtotal());
+                }
+            }
+
+        });
+
+        $('.change_screen').on('click', function (e) {
+            if (mode == 'defaul')
+                mode = "rotate180";
+            else {
+                mode = "defaul";
+            }
+            $('.seatmap-row').empty();
+            setSeat(list_seat, prime);
+            setClassText('prime_seat', setPrimeSeat());
+        });
+
+        function getListSeat(seatRow) {
+            var list_seat = {};
+            for (var i = 1; i <= seatRow; i++) {
+                var prime = "";
+                var category = "";
+                $.each($('.seat-row.row' + i).children(), function (key, value) {
+                    if ($(value).hasClass('standard'))
+                        category = "standard";
+                    if ($(value).hasClass('vip'))
+                        category = "vip";
+                    if ($(value).hasClass('couple'))
+                        category = "couple";
+                    if (key != 0)
+                        prime += ",";
+                    prime += $(value).text();
+                });
+                var row = {
+                    'category': category,
+                    'value': prime
+                }
+                list_seat['row' + i] = row;
+            }
+            return list_seat;
+        }
+
+        var request = $.ajax({
+            url: "seatRoom",
+            method: "GET",
+            dataType: "text",
+            data: {
+                schedule: <%= schedule.getId()%>,
+                film: <%= schedule.getFilm().getId()%>,
+                date: '<%= schedule.getDate()%>',
+                time: '<%= schedule.getTime()%>'
+            }
+        });
+
+        request.done(function (msg) {
+            var data = $.parseJSON(msg);
+            var list_seat1 = {};
+            var i = 1;
+            $.each(data.map.list_seat.myArrayList, function (key, value) {
+                var row = {
+                    'category': value.map.category.toLowerCase(),
+                    'value': value.map.value
+                };
+                list_seat1['row' + i] = row;
+                i++;
+            });
+            setSeat(list_seat1, data.map.seat_prime);
+            setClassText('prime_seat', setPrimeSeat());
+            setClassText('subtotal', setSubtotal());
+            list_seat = list_seat1;
+            prime = data.map.seat_prime;
+            row = data.map.seat_row;
+            allData = {
+                "seat_number": data.map.seat_number,
+                "seat_prime": setPrimeSeat(),
+                "list_seat": getListSeat(row)
+            };
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+
+        $("#save").on('click', function () {
+            var request = $.ajax({
+                url: "bookTicket",
+                method: "GET",
+                dataType: "text",
+                data: {
+                    schedule: <%= schedule.getId()%>,
+                    film: <%= schedule.getFilm().getId()%>,
+                    date: '<%= schedule.getDate()%>',
+                    time: '<%= schedule.getTime()%>',
+                    prime: $('.prime_seat').text()
+                }
+            });
+            request.done(function (msg) {
+                var data = $.parseJSON(msg);
+                var list_seat1 = {};
+                var i = 1;
+                $.each(data.map.list_seat.myArrayList, function (key, value) {
+                    var row = {
+                        'category': value.map.category.toLowerCase(),
+                        'value': value.map.value
+                    };
+                    list_seat1['row' + i] = row;
+                    i++;
+                });
+                setSeat(list_seat1, data.map.seat_prime);
+                setClassText('prime_seat', setPrimeSeat());
+                setClassText('subtotal', setSubtotal());
+                list_seat = list_seat1;
+                prime = data.map.seat_prime;
+                row = data.map.seat_row;
+                allData = {
+                    "seat_number": data.map.seat_number,
+                    "seat_prime": setPrimeSeat(),
+                    "list_seat": getListSeat(row)
+                };
+            });
+        });
+
+    });
+</script>
