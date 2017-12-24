@@ -70,8 +70,7 @@ public class OrderServlet extends HttpServlet {
         ArrayList<Order> list = new ArrayList<Order>();
         HttpSession session = request.getSession();
         Client client = (Client) session.getAttribute("user");
-        listSS = order.getOrderSucess(con, client, 1);
-        list = order.getOrderSucess(con, client, 0);
+        listSS = order.getOrderSucess(con, client);
         session.setAttribute("sucess", listSS);
        // session.setAttribute("wait", list);
        // System.out.println("ss: " +listSS.size());

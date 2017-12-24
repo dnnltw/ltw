@@ -21,7 +21,7 @@
                             <ul>
                                 <li><a href="">Thông tin chung</a></li>
                                 <li><a href="">Thông tin tài khoản</a></li>
-                                <li><a href="OrderServlet">Đơn hàng của tôi</a></li>
+                                <li><a href="home?controller=order_view">Đơn hàng của tôi</a></li>
                             </ul>
                         </div>
                     </div>

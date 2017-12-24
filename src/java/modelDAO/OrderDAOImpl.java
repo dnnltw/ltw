@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Client;
+import model.Film;
 import model.Order;
 import model.Room;
+import model.Schedule;
 import model.Seat;
 import model.Ticket;
 
@@ -25,47 +27,48 @@ import model.Ticket;
  * @author Dell
  */
 public class OrderDAOImpl implements OrderDAO {
+
     /**
      * get list order by client
+     *
      * @param con is a connection, get connection to database
      * @param client is a client must get list order
      * @param status is a status order such as: 1, 0
-     * @return list order 
+     * @return list order
      */
     @Override
-    public ArrayList<Order> getOrderSucess(Connection con, Client client, int status) {
+    public ArrayList<Order> getOrderSucess(Connection con, Client client) {
         ArrayList<Order> result = new ArrayList<Order>();
         try {
-            String sql = "SELECT * "
-                    + "FROM ticket.order, ticket.ticket, ticket.seat, ticket.room, ticket.schedule, ticket.film "
-                    + "WHERE ticket.order.client_id = 1 "
-                    + "AND ticket.order.id = ticket.ticket.order_id "
-                    + "AND ticket.ticket.seat_id = ticket.seat.id "
-                    + "AND ticket.seat.room_id = ticket.room.id "
-                    + "AND ticket.schedule.id = ticket.ticket.schedule_id "
-                    + "AND ticket.schedule.film_id = ticket.film.id "
-                    + "AND ticket.order.status = 1 "
-                    + "order by ticket.order.id;";
+            String sql = "SELECT `order`.*, film.name as name_film, room.name as name_room\n"
+                    + "FROM `order`, ticket, seat, room, schedule, film \n"
+                    + "WHERE `order`.client_id = ? \n"
+                    + "AND `order`.id = ticket.order_id \n"
+                    + "AND ticket.seat_id = seat.id \n"
+                    + "AND seat.room_id = room.id \n"
+                    + "AND schedule.id = ticket.schedule_id \n"
+                    + "AND schedule.film_id = film.id \n"
+                    + "GROUP BY `order`.id;";
             PreparedStatement pr = con.prepareStatement(sql);
+            pr.setInt(1, client.getId());
             ResultSet rs = pr.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Order a = new Order();
-                a.setId(rs.getInt("order.id"));
-                a.setDate(rs.getDate("order.date"));
-                a.setGrandtotal(rs.getFloat("order.grandtotal"));
+                a.setId(rs.getInt("id"));
+                a.setDate(rs.getDate("date"));
+                a.setGrandtotal(rs.getFloat("grandtotal"));
+                a.setStatus(rs.getInt("status"));
+                a.setDiscount(rs.getFloat("discount"));
+                Ticket t = new Ticket();
+                Schedule s = new Schedule();
+                Film f = new Film();
+                Room r = new Room();
+                f.setName(rs.getString("name_film"));
+                r.setName(rs.getString("name_room"));
+                s.setFilm(f); s.setRoom(r);
+                t.setSchedule(s);
                 ArrayList<Ticket> listTK = new ArrayList<Ticket>();
-                while(a.getId() == rs.getInt("order.id")){
-                    
-                    Ticket t = new Ticket();
-                    Room r = new Room();
-                    r.setName(rs.getString("room.name"));
-                    Seat s = new Seat();
-                    s.setCol(rs.getInt("seat.col"));
-                    s.setRow(rs.getInt("seat.row"));
-                    s.setRoom(r);
-                    t.setSeat(s);
-                    listTK.add(t);
-                }
+                listTK.add(t);
                 a.setListTicket(listTK);
                 result.add(a);
             }
@@ -119,7 +122,7 @@ public class OrderDAOImpl implements OrderDAO {
             PreparedStatement pr = con.prepareStatement(sql);
             pr.setInt(1, id);
             ResultSet rs = pr.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Order a = new Order();
                 a.setId(rs.getInt("id"));
                 a.setDate(rs.getDate("date"));

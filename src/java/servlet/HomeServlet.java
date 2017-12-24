@@ -171,6 +171,19 @@ public class HomeServlet extends HttpServlet {
                 }
                 case "pre_show": {
                     request.setAttribute("listPreFilm", daoFilm.getListPreFilm(con));
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+                    dispatcher.forward(request, response);
+                    System.out.println("pre film");
+                    break;
+                }
+                case "order_view": {
+                    ArrayList<Order> listSS = new ArrayList<Order>();
+                    ArrayList<Order> list = new ArrayList<Order>();
+                    Client client = (Client) session.getAttribute("user");
+                    listSS = daoOrder.getOrderSucess(con, client);
+                    request.setAttribute("sucess", listSS);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+                    dispatcher.forward(request, response);
                     break;
                 }
                 case "order_buy": {
@@ -183,7 +196,7 @@ public class HomeServlet extends HttpServlet {
                     Schedule schedule = daoSchedule.getSchedule(con, id);
                     Order order = daoOrder.getOrder(con, id_order);
                     System.out.println(client.getId());
-                    ArrayList<Seat> se = daoSchedule.getListTicket(con, schedule, client.getId(),order.getId());
+                    ArrayList<Seat> se = daoSchedule.getListTicket(con, schedule, client.getId(), order.getId());
                     for (Seat seat : se) {
                         if (seat.getRow() == j) {
                             value1 += type[seat.getRow() - 1] + seat.getCol() + ",";

@@ -10,7 +10,7 @@
 <%@page import="model.Client"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="css/thanhvien.css">
-<%  ArrayList<Order> listSS = (ArrayList<Order>) session.getAttribute("sucess");
+<%  ArrayList<Order> listSS = (ArrayList<Order>) request.getAttribute("sucess");
     //ArrayList<Order> wait = (ArrayList<Order>) session.getAttribute("wait");
 %>
 <div class="main-container">
@@ -41,32 +41,30 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Order id</th>
-                                            <th>Date</th>
-                                            <th>Grand Total</th>
-                                            <th>Film Name</th>
-                                            <th>Time</th>
-                                            <th>Room</th>
-                                            <th>Col</th>
-                                            <th>Row</th>
-                                            
-                                            <th>Action</th>
+                                            <th>#</th>
+                                            <th>Ngày</th>
+                                            <th>Tổng giá</th>
+                                            <th>Tên phim</th>
+                                            <th>Phòng chiếu</th>
+                                            <th>Trạng thái</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%for (Order item : listSS) {%>
-                                            <tr>
-                                                <td><%=item.getId()%></td>
-                                                <td><%=item.getDate()%></td>
-                                                <td><%=item.getGrandtotal()%></td>
-                                                
-                                                    
-                                                  
-                                                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                        Detail
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                        <tr>
+                                            <td><%=item.getId()%></td>
+                                            <td><%=item.getDate()%></td>
+                                            <td><%=item.getGrandtotal()%></td>
+                                            <td><%=item.getListTicket().get(0).getSchedule().getFilm().getName()%></td>
+                                            <td><%=item.getListTicket().get(0).getSchedule().getRoom().getName()%></td>   
+                                            <%if (item.getStatus() == 1) {%>
+                                                <td>Đang đặt</td>
+                                            <%} else if (item.getStatus() == 2) {%>
+                                                <td>Đã nhận</td>
+                                            <%} else {%>
+                                                <td>Đã hủy</td>
+                                            <%}%>
+                                        </tr>
                                         <%}%>
                                     </tbody>
                                 </table>
