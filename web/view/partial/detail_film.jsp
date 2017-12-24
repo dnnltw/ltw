@@ -40,11 +40,11 @@
                                     </div>
                                 </div>
                                 <div class="moive-detail-fb-booking">
-                                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span>Like 858</button>
-
-                                    <button type="button" title="Mua vé" class="button btn-booking">
+                                    <span><div class="fb-like" data-href="https://www.cgv.vn/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div></span>
+                                    
+                                    <a href="home?controller=schedule"><button type="button" title="Mua vé" class="button btn-booking">
                                         <span>MUA VÉ</span>
-                                    </button>
+                                    </button></a>
                                 </div>
                             </div>
                         </div>

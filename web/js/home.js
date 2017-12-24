@@ -30,14 +30,17 @@ $(document).ready(function() {
 					class: 'button btn-booking'
 				});
 				var span = $(document.createElement('span')).text('Mua Vé');
-
+                                var att = $(document.createElement('a')).attr({
+                                        href: 'home?controller=schedule'
+				});
 				divitem.append(div2);
 				div2.append(aa);
 				div2.append(div3);
 				div3.append(h4);
 				div3.append(a);
-				div3.append(btn);
+				div3.append(att);
 				aa.append(img);
+				att.append(btn);
 				btn.append(span);
 				
 				

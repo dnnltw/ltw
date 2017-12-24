@@ -23,7 +23,8 @@ $(document).ready(function () {
         var btn = $(document.createElement('button')).attr({
             type: 'button',
             class: 'btn-mua',
-            title: 'Mua vé'
+            title: 'Mua vé',
+            href: 'home?controller=schedule'
         });
         var span_btn = $(document.createElement('span')).text("Mua vé");
         var a = createDivAtrr('a', 'href', urlFilm);

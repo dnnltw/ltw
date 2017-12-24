@@ -90,7 +90,6 @@ span.moive-type.type-3d{
 /*nút mua*/
 
 .moive-detail-fb-booking button{
-	margin: 20px auto;
 	height: 30px;
 	display: block;
 
@@ -134,7 +133,7 @@ button{
     background-image: url(../img/bg-cate-booking.png);
     background-repeat: no-repeat;
     border-radius: 5px;
-    line-height: 1px;
+    line-height: 20px;
 }
 .btn-booking{
    font-weight: bold;
@@ -149,7 +148,6 @@ button{
     font-weight: bold;
     padding: 2px;
 	padding-left: 25px;
-	border-radius: 5px;
 }
 .product-content{
 	margin-top: 15px;

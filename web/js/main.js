@@ -101,9 +101,9 @@ function updateBtn() {
     }
 
     if (isSubscribed) {
-        pushButton.textContent = 'Disable';
+        pushButton.textContent = 'Disable Notify';
     } else {
-        pushButton.textContent = 'Enable';
+        pushButton.textContent = 'Enable Notify';
     }
 
     pushButton.disabled = false;

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $(".fb-like").attr("data-href",window.location);
 			var baseUrlImg = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2';
 			var baseUrl = 'https://api.themoviedb.org/3/movie/';
 			var api_key = '931e54c126cfca6e31b0c905d36d6614';
