@@ -174,18 +174,6 @@
                                             <a href="#"><img src="img/footer4.jpg" class="img-responsive"></a>
                                         </div>
                                     </div>
-
-                                    <div class="item">
-                                        <div class="col-xs-12 col-sm-6 col-md-3">
-                                            <a href="#"><img src="img/footer5.jpg" class="img-responsive"></a>
-                                        </div>
-                                    </div>
-
-                                    <div class="item">
-                                        <div class="col-xs-12 col-sm-6 col-md-3">
-                                            <a href="#"><img src="img/footer6.jpg" class="img-responsive"></a>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div id="slider-event-control">
