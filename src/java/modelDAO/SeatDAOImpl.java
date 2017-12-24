@@ -105,5 +105,31 @@ public class SeatDAOImpl implements SeatDAO{
         }
         return result;
     }
+
+    @Override
+    public Seat getSeat(Connection con, int row, int col) {
+        Seat a = null;
+        try {
+            String sql = "SELECT * FROM seat WHERE seat.col = ? AND seat.row = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, col);
+            ps.setInt(2, row);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Room room = new Room(rs.getInt("room_id"), "");
+                Seat seat = new Seat(
+                        rs.getInt("row"), 
+                        rs.getInt("col"), 
+                        rs.getString("type"), 
+                        rs.getInt("id"), 
+                        room);
+                a = (Seat) seat;
+            }
+            return a;
+        } catch (SQLException ex) {
+            Logger.getLogger(SeatDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
     
 }

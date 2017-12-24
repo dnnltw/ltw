@@ -21,4 +21,6 @@ public interface SeatDAO {
     public ArrayList<Seat> getListRowSeat(Connection con,int row, int room_id);
     
     public boolean editSeat(Connection con, Seat seat);
+    
+    public Seat getSeat(Connection con, int row, int col);
 }

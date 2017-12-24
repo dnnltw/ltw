@@ -16,4 +16,8 @@ import model.Order;
  */
 public interface OrderDAO {
     public ArrayList<Order> getOrderSucess(Connection con, Client client, int status);
+    
+    public boolean addOrder(Connection con, Order order);
+    public Order getOrder(Connection con, int id);
+    public int getIdMax(Connection con);
 }

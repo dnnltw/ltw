@@ -22,14 +22,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Client;
 import model.Film;
+import model.Order;
+import model.Sale;
 import model.Schedule;
+import model.Seat;
+import model.Ticket;
 import modelDAO.CategoryDAO;
 import modelDAO.CategoryDAOImpl;
 import modelDAO.CinemaDAO;
 import modelDAO.CinemaDAOImpl;
 import modelDAO.FilmDAO;
 import modelDAO.FilmDAOImpl;
+import modelDAO.OrderDAO;
+import modelDAO.OrderDAOImpl;
 import modelDAO.RoomDAO;
 import modelDAO.RoomDAOImpl;
 import modelDAO.SaleDAO;
@@ -38,8 +46,12 @@ import modelDAO.ScheduleDAO;
 import modelDAO.ScheduleDAOImpl;
 import modelDAO.SeatDAO;
 import modelDAO.SeatDAOImpl;
+import modelDAO.TicketDAO;
+import modelDAO.TicketDAOImpl;
 import modelDAO.UserDAO;
 import modelDAO.UserDAOImpl;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -56,6 +68,9 @@ public class BookTicketServlet extends HttpServlet {
     protected CinemaDAO daoCinema = new CinemaDAOImpl();
     protected SeatDAO daoSeat = new SeatDAOImpl();
     protected CategoryDAO daoCate = new CategoryDAOImpl();
+    protected OrderDAO daoOrder = new OrderDAOImpl();
+    protected TicketDAO daoTicket = new TicketDAOImpl();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -94,26 +109,58 @@ public class BookTicketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF8"); // this line solves the problem
+        response.setContentType("application/json");
+        HttpSession session = request.getSession();
+
+        JSONObject row = new JSONObject();
         try {
-            request.setCharacterEncoding("UTF8"); // this line solves the problem
-            response.setContentType("application/json");
-            
+
             DateFormat formatter = new SimpleDateFormat("HH:mm");
             Time time = new Time(formatter.parse(request.getParameter("time")).getTime());
             SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date(formatterDate.parse(request.getParameter("date")).getTime());
-            
+
             Film film = new Film();
             film.setId(Integer.parseInt(request.getParameter("film")));
             Schedule schedule = daoSchedule.getSchedule(con, film, date, time);
-            
-            
+
+            Sale sale = daoSale.getSale(con, schedule.getSale().getId());
+
+            int subtotal = Integer.parseInt(request.getParameter("subtotal"));
+
+            Client client = (Client) session.getAttribute("user");
+            System.out.println(client.getId());
+            Date today = new Date(System.currentTimeMillis());
+            Order order = new Order(0, today, 1, client, sale.getNumber() * subtotal, subtotal - sale.getNumber() * subtotal);
+
+            daoOrder.addOrder(con, order);
+            order.setId(daoOrder.getIdMax(con));
+            String prime = request.getParameter("prime");
+            String[] sea = prime.split(",");
+            String[] type = {"A", "B", "C", "D", "E", "F", "G", "H"};
+            for (int i = 0; i < sea.length; i++) {
+                for (int j = 0; j < type.length; j++) {
+                    int result = sea[i].lastIndexOf(type[j]);
+                    if (result > -1) {
+                        Seat seatt = daoSeat.getSeat(con, j + 1, Integer.parseInt(sea[i].substring(1, sea[i].length())));
+                        Ticket ticket = new Ticket(0, schedule.getPrice(), schedule, order, seatt);
+                        daoTicket.addTicket(con, ticket);
+                        break;
+                    }
+                }
+            }
+
+            row.put("schedule", schedule.getId());
+            row.put("order", order.getId());
         } catch (ParseException ex) {
+            Logger.getLogger(BookTicketServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException ex) {
             Logger.getLogger(BookTicketServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         PrintWriter outPrintWriter = response.getWriter();
-            Gson g = new GsonBuilder().disableHtmlEscaping().create();
-            g.toJson("done", outPrintWriter);
+        Gson g = new GsonBuilder().disableHtmlEscaping().create();
+        g.toJson(row, outPrintWriter);
     }
 
     /**

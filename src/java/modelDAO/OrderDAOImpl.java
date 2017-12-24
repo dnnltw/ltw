@@ -6,9 +6,11 @@
 package modelDAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,6 +68,66 @@ public class OrderDAOImpl implements OrderDAO {
                 }
                 a.setListTicket(listTK);
                 result.add(a);
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean addOrder(Connection con, Order order) {
+        try {
+            String sql = "INSERT INTO `order`(date, status, discount, grandtotal, client_id) VALUES(?,?,?,?,?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, (Date) order.getDate());
+            ps.setInt(2, order.getStatus());
+            ps.setFloat(3, order.getDiscount());
+            ps.setFloat(4, order.getGrandtotal());
+            ps.setInt(5, order.getClient().getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(SaleDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    @Override
+    public int getIdMax(Connection con) {
+        int max = 0;
+        String sql = "Select max(id) from `order`";
+        try {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            rs.beforeFirst();
+            rs.next();
+            max = rs.getInt(1);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return max;
+    }
+
+    @Override
+    public Order getOrder(Connection con, int id) {
+        Order result = null;
+        try {
+            String sql = "SELECT * FROM `order` WHERE id = ? ";
+            PreparedStatement pr = con.prepareStatement(sql);
+            pr.setInt(1, id);
+            ResultSet rs = pr.executeQuery();
+            while(rs.next()){
+                Order a = new Order();
+                a.setId(rs.getInt("id"));
+                a.setDate(rs.getDate("date"));
+                a.setGrandtotal(rs.getFloat("grandtotal"));
+                a.setDiscount(rs.getFloat("discount"));
+                ArrayList<Ticket> listTK = new ArrayList<Ticket>();
+                a.setListTicket(listTK);
+                result = (Order) a;
             }
             return result;
         } catch (SQLException ex) {
