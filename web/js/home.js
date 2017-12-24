@@ -71,8 +71,8 @@ $(document).ready(function() {
 					});
 				})
 				.catch(function(error) {
-					var err = $(document).createElement('h2').text(error.status_message);
-				    $('.moive-info').append(err);
+//					var err = $(document).createElement('h2').text(error.status_message);
+//				    $('.moive-info').append(err);
 				}); 
 			});
 			
