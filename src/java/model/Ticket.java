@@ -15,9 +15,18 @@ public class Ticket implements Serializable{
     private int id;
     private double price;
     private Schedule schedule;
+    private Order order;
     private Seat seat;
 
     public Ticket() {
+    }
+
+    public Ticket(int id, double price, Schedule schedule, Order order, Seat seat) {
+        this.id = id;
+        this.price = price;
+        this.schedule = schedule;
+        this.order = order;
+        this.seat = seat;
     }
 
     public Ticket(int id, double price, Schedule schedule, Seat seat) {
@@ -27,6 +36,15 @@ public class Ticket implements Serializable{
         this.seat = seat;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    
     public int getId() {
         return id;
     }

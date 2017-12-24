@@ -115,14 +115,14 @@ public class ScheduleDAOImpl implements ScheduleDAO {
             ps.setString(2, formatterDate.format(date));
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                    Time time = rs.getTime("time");
+                Time time = rs.getTime("time");
 //                    Date date1 = (Date) rs.getDate("date");
-                    Double price = rs.getDouble(4);
+                Double price = rs.getDouble(4);
 //                    Film film1 = new Film(rs.getInt("film_id"), rs.getString("film_name"));
-                    Room room = new Room(rs.getInt("room_id"), rs.getString("room_name"));
-                    Sale sale = new Sale();
-                    Schedule schudule = new Schedule(rs.getInt(1), time, date, room, film, price, sale);
-                    result.add(schudule);
+                Room room = new Room(rs.getInt("room_id"), rs.getString("room_name"));
+                Sale sale = new Sale();
+                Schedule schudule = new Schedule(rs.getInt(1), time, date, room, film, price, sale);
+                result.add(schudule);
             }
         } catch (SQLException ex) {
             Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -136,9 +136,9 @@ public class ScheduleDAOImpl implements ScheduleDAO {
         try {
             String sql = "SELECT COUNT(room.id) as count FROM seat, room WHERE room.id = seat.room_id AND room.id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,room_id);
+            ps.setInt(1, room_id);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 return rs.getInt("count");
             }
             return 0;
@@ -158,7 +158,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
             ps.setString(1, formatterDate.format(date));
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                    result.add(rs.getInt("film_id"));
+                result.add(rs.getInt("film_id"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,7 +171,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     public Schedule getSchedule(Connection con, Film film, Date date, Time time) {
         Schedule schedule = null;
         try {
-            String sql = "SELECT *,room.id as room_id, room.name as room_name FROM schedule INNER JOIN room ON schedule.room_id = room.id WHERE schedule.film_id = ? AND schedule.date = ? AND schedule.time = ?";
+            String sql = "SELECT *,room.id as room_id, room.name as room_name,sale.id as sale_id, sale.name as sale_name FROM schedule INNER JOIN sale ON schedule.sale_id = sale.id INNER JOIN room ON schedule.room_id = room.id WHERE schedule.film_id = ? AND schedule.date = ? AND schedule.time = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, film.getId());
             SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -179,12 +179,12 @@ public class ScheduleDAOImpl implements ScheduleDAO {
             ps.setTime(3, time);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                    Double price = rs.getDouble(4);
-                    Room room = new Room(rs.getInt("room_id"), rs.getString("room_name"));
-                    RoomDAO daoRoom = new RoomDAOImpl();
-                    Room getRoom = daoRoom.getRoom(con, room);
-                    Sale sale = new Sale();
-                    schedule = new Schedule(rs.getInt(1), time, date, getRoom, film, price, sale); 
+                Double price = rs.getDouble(4);
+                Room room = new Room(rs.getInt("room_id"), rs.getString("room_name"));
+                RoomDAO daoRoom = new RoomDAOImpl();
+                Room getRoom = daoRoom.getRoom(con, room);
+                Sale sale = new Sale(rs.getInt("sale_id"), rs.getString("sale_name"));
+                schedule = new Schedule(rs.getInt(1), time, date, getRoom, film, price, sale);
             }
             return schedule;
         } catch (SQLException ex) {
@@ -198,9 +198,9 @@ public class ScheduleDAOImpl implements ScheduleDAO {
         try {
             String sql = "SELECT COUNT(room.id) as count FROM seat,room,ticket,`order` as ordera WHERE room.id = seat.room_id AND room.id = ? AND ticket.seat_id = seat.id AND ordera.id = ticket.order_id AND ordera.status > 0";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,room_id);
+            ps.setInt(1, room_id);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 return rs.getInt("count");
             }
             return 0;
@@ -222,10 +222,71 @@ public class ScheduleDAOImpl implements ScheduleDAO {
             while (rs.next()) {
                 Room room = new Room(rs.getInt("room_id"), "");
                 Seat seat = new Seat(
-                        rs.getInt("row"), 
-                        rs.getInt("col"), 
-                        rs.getString("type"), 
-                        rs.getInt("id"), 
+                        rs.getInt("row"),
+                        rs.getInt("col"),
+                        rs.getString("type"),
+                        rs.getInt("id"),
+                        room);
+                result.add(seat);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return result;
+    }
+
+    @Override
+    public Schedule getSchedule(Connection con, int id) {
+        Schedule result = null;
+        try {
+            String sql = "SELECT schedule.id, schedule.time as schedule_time, schedule.date as schedule_date,schedule.price as schedule_price, "
+                    + "film.id as film_id, film.name as film_name, "
+                    + "room.id as room_id, room.name as room_name, "
+                    + "sale.id as sale_id, sale.name as sale_name "
+                    + " FROM schedule "
+                    + " INNER JOIN film ON schedule.film_id = film.id"
+                    + " INNER JOIN room ON schedule.room_id = room.id"
+                    + " INNER JOIN sale ON schedule.sale_id = sale.id"
+                    + " WHERE schedule.id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Time time = rs.getTime(2);
+                Date date = (Date) rs.getDate(3);
+                Double price = rs.getDouble(4);
+                Film film = new Film(rs.getInt("film_id"), rs.getString("film_name"));
+                Room room = new Room(rs.getInt("room_id"), rs.getString("room_name"));
+                Sale sale = new Sale(rs.getInt("sale_id"), rs.getString("sale_name"));
+                Schedule schudule = new Schedule(rs.getInt(1), time, date, room, film, price, sale);
+                result= (Schedule) schudule;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return result;
+    }
+
+    @Override
+    public ArrayList<Seat> getListTicket(Connection con, Schedule schedule, int client, int order) {
+        ArrayList<Seat> result = new ArrayList<Seat>();
+        try {
+            String sql = "SELECT seat.* FROM seat,room,ticket,`order` as ordera WHERE ticket.schedule_id = ? AND room.id = seat.room_id AND room.id = ? AND ticket.seat_id = seat.id AND ordera.id = ticket.order_id AND ordera.status > 0 AND ordera.client_id = ? AND ordera.id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, schedule.getId());
+            ps.setInt(2, schedule.getRoom().getId());
+            ps.setInt(3, client);
+            ps.setInt(4, order);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Room room = new Room(rs.getInt("room_id"), "");
+                Seat seat = new Seat(
+                        rs.getInt("row"),
+                        rs.getInt("col"),
+                        rs.getString("type"),
+                        rs.getInt("id"),
                         room);
                 result.add(seat);
             }

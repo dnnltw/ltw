@@ -19,5 +19,7 @@ public interface SaleDAO {
 
     public ArrayList<Sale> getListSale(Connection con);
     
+    public Sale getSale(Connection con, int id);
+    
     public boolean editSale(Connection con, Sale sale);
 }

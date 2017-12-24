@@ -26,14 +26,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Client;
 import model.Film;
+import model.Order;
 import model.Schedule;
+import model.Seat;
 import modelDAO.CategoryDAO;
 import modelDAO.CategoryDAOImpl;
 import modelDAO.CinemaDAO;
 import modelDAO.CinemaDAOImpl;
-import modelDAO.FilmDAO;
-import modelDAO.FilmDAOImpl;
 import modelDAO.RoomDAO;
 import modelDAO.RoomDAOImpl;
 import modelDAO.SaleDAO;
@@ -42,10 +43,10 @@ import modelDAO.ScheduleDAO;
 import modelDAO.ScheduleDAOImpl;
 import modelDAO.SeatDAO;
 import modelDAO.SeatDAOImpl;
-import modelDAO.UserDAO;
-import modelDAO.UserDAOImpl;
 import modelDAO.FilmDAO;
 import modelDAO.FilmDAOImpl;
+import modelDAO.OrderDAO;
+import modelDAO.OrderDAOImpl;
 
 /**
  *
@@ -54,7 +55,6 @@ import modelDAO.FilmDAOImpl;
 public class HomeServlet extends HttpServlet {
 
     protected Connection con = DBConnection.getConnection();
-    protected UserDAO userDao = new UserDAOImpl();
     protected SaleDAO daoSale = new SaleDAOImpl();
     protected FilmDAO daoFilm = new FilmDAOImpl();
     protected ScheduleDAO daoSchedule = new ScheduleDAOImpl();
@@ -62,6 +62,7 @@ public class HomeServlet extends HttpServlet {
     protected CinemaDAO daoCinema = new CinemaDAOImpl();
     protected SeatDAO daoSeat = new SeatDAOImpl();
     protected CategoryDAO daoCate = new CategoryDAOImpl();
+    protected OrderDAO daoOrder = new OrderDAOImpl();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -98,7 +99,6 @@ public class HomeServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -158,7 +158,7 @@ public class HomeServlet extends HttpServlet {
                             } catch (ParseException ex) {
                                 Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            
+
                             RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
                             dispatcher.forward(request, response);
                         }
@@ -169,11 +169,37 @@ public class HomeServlet extends HttpServlet {
                     System.out.println("OKLAH");
                     break;
                 }
-                case "pre_show":{
+                case "pre_show": {
                     request.setAttribute("listPreFilm", daoFilm.getListPreFilm(con));
                     RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
                     dispatcher.forward(request, response);
                     System.out.println("pre film");
+                    break;
+                }
+                case "order_buy": {
+                    int id = Integer.parseInt(request.getParameter("schedule"));
+                    int id_order = Integer.parseInt(request.getParameter("order"));
+                    String[] type = {"A", "B", "C", "D", "E", "F", "G", "H"};
+                    int j = 1;
+                    String value1 = "";
+                    Client client = (Client) session.getAttribute("user");
+                    Schedule schedule = daoSchedule.getSchedule(con, id);
+                    Order order = daoOrder.getOrder(con, id_order);
+                    System.out.println(client.getId());
+                    ArrayList<Seat> se = daoSchedule.getListTicket(con, schedule, client.getId(),order.getId());
+                    for (Seat seat : se) {
+                        if (seat.getRow() == j) {
+                            value1 += type[seat.getRow() - 1] + seat.getCol() + ",";
+                        } else {
+                            j = seat.getRow();
+                            value1 += type[seat.getRow() - 1] + seat.getCol() + ",";
+                        }
+                    }
+                    request.setAttribute("seat", value1);
+                    request.setAttribute("schedule", schedule);
+                    request.setAttribute("order", order);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+                    dispatcher.forward(request, response);
                     break;
                 }
                 default: {

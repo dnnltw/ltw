@@ -80,4 +80,28 @@ public class SaleDAOImpl implements SaleDAO {
         }
     }
 
+    @Override
+    public Sale getSale(Connection con, int id) {
+        Sale result = null;
+        try {
+            String sql = "SELECT * FROM sale WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Sale sale = new Sale(rs.getInt("id"), 
+                        rs.getString("name"), 
+                        rs.getDate("sdate"), 
+                        rs.getDate("edate"), 
+                        rs.getFloat("number"), 
+                        rs.getString("des"));
+                result= (Sale) sale;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SaleDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return result;
+    }
+
 }

@@ -134,7 +134,8 @@ public class SeatRoomServlet extends HttpServlet {
                     list_seat.put(row);
                     value = "";
                     category = "";
-                    i++;
+                    i=seat.getRow();
+                    value += type[seat.getRow()-1]+seat.getCol()+",";
                 }
                 
             }
@@ -150,7 +151,8 @@ public class SeatRoomServlet extends HttpServlet {
                 if (seat.getRow() == j){
                     value1 += type[seat.getRow()-1]+seat.getCol()+",";
                 }else {
-                    j++;
+                    j = seat.getRow();
+                    value1 += type[seat.getRow()-1]+seat.getCol()+",";
                 }
             }
             

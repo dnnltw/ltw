@@ -14,5 +14,5 @@ import model.Ticket;
  * @author NguyenNgoc
  */
 public interface TicketDAO {
-    
+    public boolean addTicket(Connection con, Ticket ticket);
 }

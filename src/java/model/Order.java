@@ -37,6 +37,16 @@ public class Order {
         this.grandtotal = grandtotal;
     }
 
+    public Order(int id, Date date, int status, Client client, float discount, float grandtotal) {
+        this.id = id;
+        this.date = date;
+        this.status = status;
+        this.client = client;
+        this.discount = discount;
+        this.grandtotal = grandtotal;
+    }
+
+    
     public Order(int id, Date date, int status, Client client, ArrayList<Ticket> listTicket, float discount, float grandtotal) {
         this.id = id;
         this.date = date;

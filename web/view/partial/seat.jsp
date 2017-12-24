@@ -389,32 +389,15 @@
                     film: <%= schedule.getFilm().getId()%>,
                     date: '<%= schedule.getDate()%>',
                     time: '<%= schedule.getTime()%>',
-                    prime: $('.prime_seat').text()
+                    prime: $('.prime_seat').text(),
+                    subtotal: setSubtotal()
                 }
             });
             request.done(function (msg) {
                 var data = $.parseJSON(msg);
-                var list_seat1 = {};
-                var i = 1;
-                $.each(data.map.list_seat.myArrayList, function (key, value) {
-                    var row = {
-                        'category': value.map.category.toLowerCase(),
-                        'value': value.map.value
-                    };
-                    list_seat1['row' + i] = row;
-                    i++;
-                });
-                setSeat(list_seat1, data.map.seat_prime);
-                setClassText('prime_seat', setPrimeSeat());
-                setClassText('subtotal', setSubtotal());
-                list_seat = list_seat1;
-                prime = data.map.seat_prime;
-                row = data.map.seat_row;
-                allData = {
-                    "seat_number": data.map.seat_number,
-                    "seat_prime": setPrimeSeat(),
-                    "list_seat": getListSeat(row)
-                };
+                var mapurl =" ";
+                window.open(window.location.origin+window.location.pathname+"?controller=order_buy&schedule="+data.map.schedule+"&order="+data.map.order);
+                window.open(location.reload( true ));
             });
         });
 

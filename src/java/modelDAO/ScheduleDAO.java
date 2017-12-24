@@ -23,7 +23,11 @@ public interface ScheduleDAO {
 
     public ArrayList<Schedule> getListSchedule(Connection con);
     
+    public Schedule getSchedule(Connection con, int id);
+    
     public ArrayList<Seat> getListTicket(Connection con,Schedule schedule);
+    
+    public ArrayList<Seat> getListTicket(Connection con,Schedule schedule, int client, int order);
 
     public ArrayList<Integer> getListScheduleIdFilm(Connection con, Date date);
 
