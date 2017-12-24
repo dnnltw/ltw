@@ -31,32 +31,37 @@
                 <!-- row -->
                 <div class="row">
                     <!-- col1 -->
-                    <%for (Film film : listPreFilm) {%>
-                        <div class="col-md-3 col-res">
-                            <div class="content-item-wrapper">
-                                <div class="content-item">
-                                    <a href="#"></a>
-                                    <img src="Image/<%=film.getPoster()%>" alt="<%=film.getName()%>">
+                    
+                    <%if(listPreFilm.size() == 0){%>
+                        <h2>Chưa có phim</h2>
+                    <%}else{
+                        for (Film film : listPreFilm) {%>
+                            <div class="col-md-3 col-res">
+                                <div class="content-item-wrapper">
+                                    <div class="content-item">
+                                        <a href="#"></a>
+                                        <img src="Image/<%=film.getPoster()%>" alt="<%=film.getName()%>">
 
-                                    <div class="info">
-                                        <h4><a href="#"><%=film.getName()%></a></h4>
-                                        <p>thể loại:
-                                            <%for (Category c : film.getCategories()) {%>
-                                                <span><%=c.getName()%></span>
-                                            <%}%>
-                                        </p>
+                                        <div class="info">
+                                            <h4><a href="#"><%=film.getName()%></a></h4>
+                                            <p>thể loại:
+                                                <%for (Category c : film.getCategories()) {%>
+                                                    <span><%=c.getName()%></span>
+                                                <%}%>
+                                            </p>
 
-                                        <p>thời lượng:
-                                            <span><%=film.getRunningTime()%></span>
-                                        </p>
+                                            <p>thời lượng:
+                                                <span><%=film.getRunningTime()%></span>
+                                            </p>
 
-                                        <p>Khởi chiếu:
-                                            <span><%=film.getRealeaseDate()%></span>
-                                        </p>
+                                            <p>Khởi chiếu:
+                                                <span><%=film.getRealeaseDate()%></span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <%}%>
                     <%}%>
                     <!-- end col -->
                 </div>

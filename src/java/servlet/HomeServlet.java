@@ -171,6 +171,9 @@ public class HomeServlet extends HttpServlet {
                 }
                 case "pre_show":{
                     request.setAttribute("listPreFilm", daoFilm.getListPreFilm(con));
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+                    dispatcher.forward(request, response);
+                    System.out.println("pre film");
                     break;
                 }
                 default: {
