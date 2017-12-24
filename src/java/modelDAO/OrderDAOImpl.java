@@ -48,7 +48,8 @@ public class OrderDAOImpl implements OrderDAO {
                     + "AND seat.room_id = room.id \n"
                     + "AND schedule.id = ticket.schedule_id \n"
                     + "AND schedule.film_id = film.id \n"
-                    + "GROUP BY `order`.id;";
+                    + "GROUP BY `order`.id"
+                    + "order by `order`.id desc;";
             PreparedStatement pr = con.prepareStatement(sql);
             pr.setInt(1, client.getId());
             ResultSet rs = pr.executeQuery();
